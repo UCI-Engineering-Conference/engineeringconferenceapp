@@ -1,0 +1,36 @@
+{
+  "Day 1": [
+    {
+      "name": "Registration",
+      "location": "Doheny Beach",
+      "description": "Get Badges and more",
+      "start": "8:30am",
+      "end": "9:00am"
+    },
+    {
+      "name": "Opening Ceremony",
+      "location": "Doheny Beach",
+      "description": "Guest Speaker",
+      "start": "9:00am",
+      "end": "10:30am"
+    }
+  ],
+  "Day 2": [
+    {
+      "name": "Registration",
+      "location": "Doheny Beach",
+      "description": "Get Badges and more",
+      "start": "8:30am",
+      "end": "9:00am"
+    }
+  ],
+  "Day 3": [
+    {
+      "name": "Registration",
+      "location": "Doheny Beach",
+      "description": "Get Badges and more",
+      "start": "8:30am",
+      "end": "9:00am"
+    }
+  ]
+}
