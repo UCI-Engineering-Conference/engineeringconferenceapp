@@ -1,5 +1,5 @@
-{
-  "Day 1": [
+[
+  [
     {
       "name": "Registration",
       "location": "Doheny Beach",
@@ -15,7 +15,7 @@
       "end": "10:30am"
     }
   ],
-  "Day 2": [
+  [
     {
       "name": "Registration",
       "location": "Doheny Beach",
@@ -24,7 +24,7 @@
       "end": "9:00am"
     }
   ],
-  "Day 3": [
+  [
     {
       "name": "Registration",
       "location": "Doheny Beach",
@@ -33,4 +33,4 @@
       "end": "9:00am"
     }
   ]
-}
+]

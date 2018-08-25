@@ -2,33 +2,32 @@
   <div>
     <h1>UCI ENGINEERING CONFERENCE 2019</h1>
     <p>{{ date }}</p>
-    <div>
-      <div class="nameFormInput">
-        <input type="text" v-model="user.name" v-validate="'required'" name="username">
-        <span class="alert">{{ errors.first('username') }}</span>
-      </div>
-      <div class="emailFormInput">
-        <input type="text" v-model="user.email" v-validate="'required|email'" name="email">
-        <span class="alert">{{ errors.first('email') }}</span>
-      </div>
-      <div class="phoneFormInput">
-        <input type="text" v-model="user.phone">
-      </div>
-      <button @click="postEmail">Sign Up</button>
-    </div>
 
-    <carousel :per-page="1" :loop="true" :autoplay="true" :autoplayTimeout="3000" :autoplayHoverPause="true" >
-      <slide class="slide1">
-        <h2>Our Mission</h2>
-        <p class="carousel-text">Provide students with a hands-on experience to solve contemporary problems
-          through education, collaboration, and debate while investing in sustainable solutions.</p>
-      </slide>
-      <slide class="slide2">
-        <h2>Our Vision</h2>
-        <p class="carousel-text">Engineering Conference aims to develop under-resourced communities and be universally
-          recognized for empowering students to envision their future careers as global leaders.</p>
-      </slide>
-    </carousel>
+    <button
+      type="button"
+      class="btn"
+      @click="showModal"
+    >
+      Join our Community!
+    </button>
+
+    <modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
+
+    <!--<carousel :per-page="1" :loop="true" :autoplay="true" :autoplayTimeout="3000" :autoplayHoverPause="true" >-->
+      <!--<slide class="slide1">-->
+        <!--<h2>Our Mission</h2>-->
+        <!--<p class="carousel-text">Provide students with a hands-on experience to solve contemporary problems-->
+          <!--through education, collaboration, and debate while investing in sustainable solutions.</p>-->
+      <!--</slide>-->
+      <!--<slide class="slide2">-->
+        <!--<h2>Our Vision</h2>-->
+        <!--<p class="carousel-text">Engineering Conference aims to develop under-resourced communities and be universally-->
+          <!--recognized for empowering students to envision their future careers as global leaders.</p>-->
+      <!--</slide>-->
+    <!--</carousel>-->
 
     <div class="numbers">
       <h2>Engineering Conference 2018</h2>
@@ -52,64 +51,56 @@
       </div>
     </div>
 
-    <div>
+    <section style="overflow:hidden;">
       <h2>What is an Engineering Conference?</h2>
       <p>We're so glad you asked. Here are some of the question that students normally have. But don't hesitate to  <router-link to="/sponsors">ask your own</router-link>!</p>
-      <div>
-        <ul>
+      <div class="faq-card">
+        <ul class="faq-grid">
           <li v-for="(data, index) in faqList" :key="index">
+            <img class="faq-image" :src="imgPreUrl(data.img)"/>
             <div class="faq-title">{{ data.title }}</div>
-            <div class="faq-title">{{ data.description }}</div>
+            <span class="faq-description">{{ data.description }}</span>
           </li>
         </ul>
       </div>
-    </div>
+    </section>
 
-    <div>
+    <br/>
+
+    <section>
       <h2>Interested in joining our team?</h2>
       <p>Are you creative, dedicated, and want to have a global impact?</p>
       <p>UCI Engineering Conference wants students like you!</p>
       <p>Click <router-link to="/jointheteam">Here</router-link> to see what positions are available.</p>
-    </div>
+    </section>
 
     </div>
 </template>
 
 <script>
-import { db } from '../main'
 import FAQList from '../../static/FAQList.json'
+import modal from './MailingListModal.vue'
 export default {
+  components: {
+    modal
+  },
   data () {
     return {
-      user: {
-        name: '',
-        email: '',
-        phone: '',
-        createdAt: ''
-      },
-      users: [],
+      isModalVisible: false,
       date: '00 - 00',
-      faqList: FAQList
-    }
-  },
-  firestore () {
-    return {
-      users: db.collection('mailingList')
+      faqList: FAQList,
+      imgLocation: '/static/faqpics/'
     }
   },
   methods: {
-    addUser () {
-      this.user.createdAt = new Date()
-      db.collection('mailingList').add(this.user)
+    showModal () {
+      this.isModalVisible = true
     },
-    postEmail () {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.addUser()
-        } else {
-          console.log('Not valid')
-        }
-      })
+    closeModal () {
+      this.isModalVisible = false
+    },
+    imgPreUrl (img) {
+      return this.imgLocation.concat(img)
     }
   }
 }
@@ -148,13 +139,50 @@ export default {
 }
 .horizontal-list {
   min-width: 696px;
-  list-style: none;
   padding-top: 20px;
 }
 .horizontal-list li {
   display: inline;
 }
-  .alert {
-    color: red;
-  }
+
+.faq-title {
+  font-size: 1.5em;
+  padding: 20px 0;
+}
+.faq-description {
+  font-size: 1em;
+}
+.faq-image {
+  height: 250px;
+  border: 5px solid #65D25C;
+  border-radius: 0 .5em .5em 0;
+  vertical-align: middle;
+  float:right;
+  margin-left: 10px
+}
+.faq-grid li {
+  border-left: 1em solid #65D25C;
+  border-radius: .5em;
+  background-color: #D3D3D3;
+  color: #606060;
+  margin: 10px 0;
+  text-align: right;
+  display: inline-block;
+  width: 970px;
+}
+.faq-grid li:nth-child(odd) {
+  border-left: none;
+  border-right: 1em solid #A2E49D;
+  background-color: #808080;
+  text-align:left;
+  color: #EAEAEA;
+}
+.faq-grid li:nth-child(odd) .faq-image {
+  float:left;
+  margin-left:0px;
+  margin-right: 10px;
+  border: 5px solid #A2E49D;
+  border-radius: .5em 0 0 .5em;
+}
+
 </style>

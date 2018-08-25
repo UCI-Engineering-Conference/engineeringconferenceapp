@@ -5,16 +5,34 @@
       "position": "President / Founder",
       "img": "Mazen-Nader-Alkhatib.png",
       "linkedIn": "https://www.linkedin.com/in/mazen-nader-alkhatib-41a635139/"
-    },
-    {
-      "name": "Adora Anound Tadros",
-      "position": "Vice-President / Founder",
-      "img": "Adora-Anound-Tadros.png",
-      "linkedIn": "https://www.linkedin.com/in/adora-anoud-tadros-10ba0414b/"
     }
   ],
+  "head-chair":
+  {
+    "name": "Faisal Altassan",
+    "position": "Head of Chairs Board",
+    "img": "",
+    "linkedIn": ""
+  },
   "chairs": [
-
+    {
+      "name": "Elias Funez",
+      "position": "Mechanical and Aerospace",
+      "img": "",
+      "linkedIn": ""
+    },
+    {
+      "name": "Carlos Tornell",
+      "position": "Chemical and Materials",
+      "img": "",
+      "linkedIn": ""
+    },
+    {
+      "name": "Nik Hammon",
+      "position": "Computer Science and Electrical",
+      "img": "",
+      "linkedIn": ""
+    }
   ],
   "others": [
 

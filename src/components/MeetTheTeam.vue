@@ -6,11 +6,35 @@
     <ul>
       <li v-for="(member, index) in member_data['management']" v-bind:key="index">
         <span></span>
-        <div class="management-member">
-          <img class="management-image" :src="imgPreUrl(member.img)">
-          <div class="management-info">
-            <a class="management-name" :href="member.linkedIn">{{ member.name }}</a>
-            <div class="management-position">{{ member.position }}</div>
+        <div class="member">
+          <img class="member-image" :src="imgPreUrl(member.img)">
+          <div class="member-info">
+            <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+            <div class="member-position">{{ member.position }}</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="head-chair">
+    <div class="member">
+      <img class="member-image" :src="imgPreUrl(member_data['head-chair'].img)">
+      <div class="member-info">
+        <a class="member-name" :href="member_data['head-chair'].linkedIn">{{ member_data['head-chair'].name }}</a>
+        <div class="member-position">{{ member_data['head-chair'].position }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="chairs">
+    <ul>
+      <li v-for="(member, index) in member_data['chairs']" v-bind:key="index">
+        <span></span>
+        <div class="member">
+          <img class="member-image" :src="imgPreUrl(member.img)">
+          <div class="member-info">
+            <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+            <div class="member-position">{{ member.position }}</div>
           </div>
         </div>
       </li>
@@ -38,17 +62,28 @@ export default {
 
 <style scoped>
   .management{
-    margin: 100px;
+    margin: 0 auto;
+    max-width: 400px;
+    min-width: 400px;
+    padding: 100px;
   }
   .management ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 2vh;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .management-member {
+  .head-chair{
+    margin: 0 auto;
+    max-width: 400px;
+    min-width: 400px;
+    padding: 50px;
+  }
+  .head-chair ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .member {
     margin: 10px;
     border-bottom: 10px solid #65D25C;
     background-color: #A2E49D;
@@ -56,17 +91,17 @@ export default {
     display: grid;
     grid-template-columns: 1fr 3fr;
   }
-  .management-image {
+  .member-image {
     width: 150px;
     height: 150px;
     margin: -26px;
     border-radius: 50%;
     border: 5px solid #65D25C;
   }
-  .management-info {
+  .member-info {
 
   }
-  .management-name {
+  .member-name {
     font-size: 16px;
     font-weight: bold;
     line-height: 70px;
@@ -78,7 +113,16 @@ export default {
   a:hover{
     text-decoration: underline;
   }
-  .management-position {
+  .member-position {
     font-size: 15px;
+  }
+
+  .chairs ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 1vh;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 </style>

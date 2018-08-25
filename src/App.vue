@@ -36,4 +36,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+button {
+  background: transparent;
+}
+ul {
+  list-style: none;
+}
 </style>

@@ -12,12 +12,22 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
-import { faAngleDoubleRight } from '@fortawesome/free-directional-svg-icons'
+// import { faAngleDoubleRight } from '@fortawesome/free-directional-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faEnvelope, faFacebook, faTwitter, faInstagram, faAngleDoubleRight)
+import ArrowRightBoldCircle from 'vue-material-design-icons/ArrowRightBoldCircle.vue'
+import Close from 'vue-material-design-icons/Close.vue'
+import ChevronRight from 'vue-material-design-icons/ChevronRight.vue'
+import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
+
+library.add(faEnvelope, faFacebook, faTwitter, faInstagram)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.component('arrow-right-bold-circle', ArrowRightBoldCircle)
+Vue.component('close', Close)
+Vue.component('chevron-right', ChevronRight)
+Vue.component('chevron-left', ChevronLeft)
 
 Vue.component('table-component', TableComponent)
 Vue.component('table-column', TableColumn)

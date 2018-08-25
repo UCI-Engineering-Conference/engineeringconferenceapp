@@ -1,12 +1,12 @@
 <template>
   <div>
+    <div>
+     <button class="arrow" @click="switchSchedule(-1)"><chevron-left /></button>
+     <h4>Day {{ displayDay }}</h4>
+     <button class="arrow" @click="switchSchedule(1)"><chevron-right /></button>
+    </div>
     <transition name="slide-fade" mode="out-in">
       <div id="app" class="container" v-bind:key="currentDay">
-        <div>
-          <h4><button class="arrow" @click="switchSchedule"></button>
-          {{ currentDay }}
-          <button class="arrow" @click="switchSchedule"></button></h4>
-        </div>
           <div class="timeline">
             <ul>
               <li v-for="(event, index) in timeline_data[currentDay]" v-bind:key="index">
@@ -33,23 +33,17 @@ import ECSchedule from '../../static/Schedule.json'
 export default {
   data () {
     return {
-      currentDay: 'Day 1',
+      currentDay: 0,
+      displayDay: 1,
       timeline_data: ECSchedule
     }
   },
   methods: {
-    switchSchedule () {
-      switch (this.currentDay) {
-        case 'Day 1':
-          this.currentDay = 'Day 2'
-          break
-        case 'Day 2':
-          this.currentDay = 'Day 3'
-          break
-        case 'Day 3':
-          this.currentDay = 'Day 1'
-          break
-      }
+    switchSchedule (inc) {
+      if (this.currentDay + inc < 0) this.currentDay = this.timeline_data.length - 1
+      else if (this.currentDay + inc >= this.timeline_data.length) this.currentDay = 0
+      else this.currentDay += inc
+      this.displayDay = this.currentDay + 1
     }
   }
 }
@@ -57,6 +51,14 @@ export default {
 </script>
 
 <style scoped>
+
+  h4, button {
+    display:inline-block;
+  }
+
+  button {
+    padding: 20px;
+  }
 
   /* Enter and leave animations can use different */
   /* durations and timing functions.              */
@@ -171,6 +173,4 @@ export default {
   .timeline ul li .year span:last-child {
     top: 100%;
   }
-
-
 </style>
