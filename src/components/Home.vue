@@ -1,48 +1,50 @@
 <template>
   <div>
-    <h1>UCI ENGINEERING CONFERENCE 2019</h1>
-    <p>{{ date }}</p>
+    <img style="width: 550px;" src="/static/img/thumbnail.png"/>
+    <div class="intro">
+      <h1 class="intro-line1">innovate, lead, debate</h1>
+      <h1 class="intro-line2">at ENGINEERING CONFERENCE</h1>
+      <p class="intro-line3">University of California Irvine·{{ date }}</p>
+    </div>
 
-    <button
-      type="button"
-      class="btn"
-      @click="showModal"
-    >
-      Join our Community!
-    </button>
+    <div v-if="isApplicationOpen">
+      <router-link to="/application" tag="button" style="margin:30px;width:200px;height:80px;font-size: 32px;" class="submit-button"><span>Apply Now!</span></router-link>
+    </div>
+    <div v-else>
+      <p >Applications for Engineering Conference 2019 are now closed.</p>
+
+      <p>Join our community to be the first to know about important updates.</p>
+      <button
+        type="button"
+        class="submit-button"
+        @click="showModal"
+      ><span>Sign Up</span>
+      </button>
+    </div>
 
     <modal
       v-show="isModalVisible"
       @close="closeModal"
     />
 
-    <!--<carousel :per-page="1" :loop="true" :autoplay="true" :autoplayTimeout="3000" :autoplayHoverPause="true" >-->
-      <!--<slide class="slide1">-->
-        <!--<h2>Our Mission</h2>-->
-        <!--<p class="carousel-text">Provide students with a hands-on experience to solve contemporary problems-->
-          <!--through education, collaboration, and debate while investing in sustainable solutions.</p>-->
-      <!--</slide>-->
-      <!--<slide class="slide2">-->
-        <!--<h2>Our Vision</h2>-->
-        <!--<p class="carousel-text">Engineering Conference aims to develop under-resourced communities and be universally-->
-          <!--recognized for empowering students to envision their future careers as global leaders.</p>-->
-      <!--</slide>-->
-    <!--</carousel>-->
-
     <div class="numbers">
-      <h2>Engineering Conference 2018</h2>
-      <ul class="horizontal-list">
-        <li><b>169</b> Engineers.</li>
-        <li><b>3</b> Days.</li>
-        <li><b>37</b> Students Published.</li>
-      </ul>
+      <p><b>169</b> Engineers.</p>
+      <p><b>3</b> Days.</p>
+      <p><b>37</b> Students Published.</p>
     </div>
 
-    <div>
-      <h2>Apply Now</h2>
+    <div style="overflow:hidden;display:inline-block;">
+      <div style="float:left;width:350px;padding:20px;">
+        <h2>UC Irvine's Engineering Conference is back</h2>
+        <p style="text-align: left;">Gather with hundreds of engineering students of all backgrounds to research and design for solutions for contemporary problems.</p>
+        <p style="text-align: left;">{{content.Mission}} Let us take care of the food, resources, energy, and entertainment so you can focus on the engineering.</p>
+      </div>
+      <div style="float:right; padding:90px 0px 0px 20px;">
+        <iframe width="400" height="225" src="https://www.youtube.com/embed/5EDrelKmgy4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen />
+      </div>
     </div>
 
-    <div>
+    <div class="published-papers">
       <div>
         <a href="https://escholarship.org/uc/item/5qb1r7tv">SolarFlair</a>
       </div>
@@ -51,25 +53,9 @@
       </div>
     </div>
 
-    <section style="overflow:hidden;">
-      <h2>What is an Engineering Conference?</h2>
-      <p>We're so glad you asked. Here are some of the question that students normally have. But don't hesitate to  <router-link to="/sponsors">ask your own</router-link>!</p>
-      <div class="faq-card">
-        <ul class="faq-grid">
-          <li v-for="(data, index) in faqList" :key="index">
-            <img class="faq-image" :src="imgPreUrl(data.img)"/>
-            <div class="faq-title">{{ data.title }}</div>
-            <span class="faq-description">{{ data.description }}</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <br/>
-
     <section>
       <h2>Interested in joining our team?</h2>
-      <p>Are you creative, dedicated, and want to have a global impact?</p>
+      <p>Are you <b>creative</b>, <b>dedicated</b>, and want to have a <b>global impact</b>?</p>
       <p>UCI Engineering Conference wants students like you!</p>
       <p>Click <router-link to="/jointheteam">Here</router-link> to see what positions are available.</p>
     </section>
@@ -78,8 +64,8 @@
 </template>
 
 <script>
-import FAQList from '../../static/FAQList.json'
 import modal from './MailingListModal.vue'
+import homePageContent from '../../static/HomePageContent.json'
 export default {
   components: {
     modal
@@ -87,9 +73,9 @@ export default {
   data () {
     return {
       isModalVisible: false,
-      date: '00 - 00',
-      faqList: FAQList,
-      imgLocation: '/static/faqpics/'
+      isApplicationOpen: true,
+      date: 'March 3-6, 2019',
+      content: homePageContent
     }
   },
   methods: {
@@ -98,9 +84,6 @@ export default {
     },
     closeModal () {
       this.isModalVisible = false
-    },
-    imgPreUrl (img) {
-      return this.imgLocation.concat(img)
     }
   }
 }
@@ -108,81 +91,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.slide1 {
-  color: #FFFFFF;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(/static/img/UCISchoolofEngineering.png);
-  background-repeat:   no-repeat;
-  background-position: center center;
-  background-size: cover;
-  padding-top: 100px;
-  padding-bottom: 100px;
+.intro-line1, .intro-line2, .intro-line3 {
+  padding:0;
+  margin:0;
+  color: #3D3D3D;
 }
-.slide2 {
-  color: #FFFFFF;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(/static/img/UCISchoolofEngineering.png);
-  background-repeat:   no-repeat;
-  background-position: center center;
-  background-size: cover;
-  padding-top: 100px;
-  padding-bottom: 100px;
+.intro-line1 {
+  color: #FFC61C;
 }
-.carousel-text {
-  margin: 0 50vh 0 50vh;
+.intro-line3 {
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #606060;
 }
 .numbers {
   display: table;
-  margin: 0 auto;
+  margin: 20px auto;
+  font-size: 3vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #65D25C;
+  padding: 15px;
+  color: #FFFFFF;
+  font-weight: 300;
 }
-.horizontal-list {
-  min-width: 696px;
-  padding-top: 20px;
-}
-.horizontal-list li {
-  display: inline;
-}
-
-.faq-title {
-  font-size: 1.5em;
-  padding: 20px 0;
-}
-.faq-description {
-  font-size: 1em;
-}
-.faq-image {
-  height: 250px;
-  border: 5px solid #65D25C;
-  border-radius: 0 .5em .5em 0;
-  vertical-align: middle;
-  float:right;
-  margin-left: 10px
-}
-.faq-grid li {
-  border-left: 1em solid #65D25C;
-  border-radius: .5em;
-  background-color: #D3D3D3;
-  color: #606060;
-  margin: 10px 0;
-  text-align: right;
-  display: inline-block;
-  width: 970px;
-}
-.faq-grid li:nth-child(odd) {
-  border-left: none;
-  border-right: 1em solid #A2E49D;
-  background-color: #808080;
-  text-align:left;
-  color: #EAEAEA;
-}
-.faq-grid li:nth-child(odd) .faq-image {
-  float:left;
-  margin-left:0px;
-  margin-right: 10px;
-  border: 5px solid #A2E49D;
-  border-radius: .5em 0 0 .5em;
-}
-
 </style>

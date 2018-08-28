@@ -13,6 +13,20 @@
       "description": "Guest Speaker",
       "start": "9:00am",
       "end": "10:30am"
+    },
+    {
+      "name": "Networking Break",
+      "location": "Doheny Beach",
+      "description": "Meet the students and faculty of EC",
+      "start": "10:30am",
+      "end": "11:00am"
+    },
+    {
+      "name": "Career Fair",
+      "location": "Doheny Beach",
+      "description": "Opportunity to pass on your resume to engineering companies.",
+      "start": "11:00am",
+      "end": "1:00pm"
     }
   ],
   [

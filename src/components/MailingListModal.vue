@@ -45,7 +45,7 @@ export default {
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            <button style="float:right;" class="modal-default-button" @click="$emit('close')"><close /></button>
+            <button style="float:right;" class="modal-close-button" @click="$emit('close')"><close /></button>
             <br/><br/>
             <h2>Join our Community!</h2>
           </div>
@@ -67,7 +67,7 @@ export default {
           </div>
           <div class="modal-footer">
             <div name="footer">
-              <button class="submit-button" @click="postEmail"><arrow-right-bold-circle /></button>
+              <button class="submit-button" @click="postEmail"><span>Submit</span></button>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
     color: #606060;
     border: 2px solid #D3D3D3;
   }
@@ -96,7 +96,19 @@ export default {
     padding: 10px;
   }
   .submit-button {
-    float:right;
+
+  }
+  .modal-close-button {
+    color: #606060;
+    border: none;
+    cursor: pointer;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+  }
+  .modal-close-button:hover {
+    color: red;
   }
   .modal-mask {
     position: fixed;
@@ -118,7 +130,7 @@ export default {
   .modal-container {
     width: 300px;
     margin: 0px auto;
-    padding: 20px 30px;
+    padding: 20px 30px 8px 30px;
     background-image: url(/static/img/MailModalBG.png);
     background-repeat:   no-repeat;
     background-position: center center;
@@ -126,7 +138,6 @@ export default {
     border-radius: 3px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all .3s ease;
-    font-family: Helvetica, Arial, sans-serif;
     border: 5px solid #808080;
   }
 

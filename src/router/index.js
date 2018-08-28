@@ -3,12 +3,14 @@ import Router from 'vue-router'
 
 const routerOptions = [
   { path: '/', component: 'Home' },
+  { path: '/about', component: 'About' },
   { path: '/meettheteam', component: 'MeetTheTeam' },
   { path: '/schedule', component: 'ConferenceSchedule' },
   { path: '/sponsors', component: 'Sponsors' },
   { path: '/contact', component: 'ContactUs' },
   { path: '/secretpage', component: 'SecretPage' },
   { path: '/jointheteam', component: 'JoinTheTeam' },
+  { path: '/application', component: 'Application' },
   { path: '*', component: 'Home' }
 ]
 

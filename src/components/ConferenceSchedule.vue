@@ -1,9 +1,12 @@
 <template>
   <div>
+    <div class="page-header">
+      <p>Conference Schedule</p>
+    </div>
     <div>
-     <button class="arrow" @click="switchSchedule(-1)"><chevron-left /></button>
+     <button class="arrow-left" @click="switchSchedule(-1)"></button>
      <h4>Day {{ displayDay }}</h4>
-     <button class="arrow" @click="switchSchedule(1)"><chevron-right /></button>
+     <button class="arrow-right" @click="switchSchedule(1)"></button>
     </div>
     <transition name="slide-fade" mode="out-in">
       <div id="app" class="container" v-bind:key="currentDay">
@@ -12,7 +15,7 @@
               <li v-for="(event, index) in timeline_data[currentDay]" v-bind:key="index">
                 <span></span>
                 <div class="event">
-                  <div style="font-size: 16px; font-weight: bold">{{ event.name }}</div>
+                  <div style="font-size: 16px; font-weight: 700">{{ event.name }}</div>
                   <div style="font-size: 16px">{{ event.location }}</div>
                   <div style="font-style:italic">{{ event.description }}</div>
                 </div>
@@ -54,10 +57,11 @@ export default {
 
   h4, button {
     display:inline-block;
+    vertical-align: middle;
   }
 
   button {
-    padding: 20px;
+    padding: 10px;
   }
 
   /* Enter and leave animations can use different */
@@ -80,10 +84,8 @@ export default {
     color: #FFFFFF;
   }
   .container {
-    width: 45%;
-    height: 100%;
-    margin: auto;
-    padding: 50px;
+    width: 40%;
+    margin: 0 auto;
   }
   .event {
     background-color: rgba(255, 255, 255, 0.2);
@@ -99,17 +101,24 @@ export default {
     width: 250px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
   }
-  .arrow{
+  .arrow-left, .arrow-right{
     cursor: pointer;
     margin: 10px;
-    height:20px;
-    width:20px
+    font-size: 30px;
+    border: none;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
   }
-  .arrow:hover{
-    -webkit-animation: arrow 1s linear infinite;
-    -moz-animation: arrow 1s linear infinite;
-    -o-animation: arrow 1s linear infinite;
-    animation: arrow 1s linear infinite;
+  .arrow-right:hover, .arrow-left:hover{
+    color:  #65D25C;
+  }
+  .arrow-left:before {
+    content: '\00ab';
+  }
+  .arrow-right:before {
+    content: '\00bb';
   }
   .timeline {
     margin: 5px 45px;
@@ -163,7 +172,7 @@ export default {
     position: absolute;
     font-size: 14px;
     font-weight: bold;
-    left: -90px;
+    left: -95px;
     width: 40px;
     text-align: right;
   }
@@ -172,5 +181,10 @@ export default {
   }
   .timeline ul li .year span:last-child {
     top: 100%;
+  }
+  .page-header {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url(/static/page-headers/conference-schedule.jpg);
   }
 </style>

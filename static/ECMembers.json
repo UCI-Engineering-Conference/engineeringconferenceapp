@@ -11,27 +11,27 @@
   {
     "name": "Faisal Altassan",
     "position": "Head of Chairs Board",
-    "img": "",
+    "img": "Faisal-Altassan.png",
     "linkedIn": ""
   },
   "chairs": [
     {
       "name": "Elias Funez",
       "position": "Mechanical and Aerospace",
-      "img": "",
+      "img": "Elias-Funez.png",
       "linkedIn": ""
     },
     {
       "name": "Carlos Tornell",
       "position": "Chemical and Materials",
-      "img": "",
+      "img": "Carlos-Tornell.png",
       "linkedIn": ""
     },
     {
       "name": "Nik Hammon",
       "position": "Computer Science and Electrical",
-      "img": "",
-      "linkedIn": ""
+      "img": "Nik-Hammon.png",
+      "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
     }
   ],
   "others": [

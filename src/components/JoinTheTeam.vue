@@ -1,64 +1,82 @@
 <template>
   <div>
-    <h2>Want to be a part of UCI Engineering Conference?</h2>
-    <div>
-      <ul>
+    <div class="page-header">
+      <p>Want to be a part of UCI Engineering Conference?</p>
+    </div>
+    <div style="text-align:left;">
+      <ul class="position-grid">
         <li v-for="(data, index) in positionInfo" :key="index">
-          <div class = "title">{{ data.title }}</div>
-          <div>{{ data.title }} Team Description </div>
-          <div class = "description"> {{ data.description }}</div>
-          <div>Requirements</div>
-          <ul>
-            <li v-for="(req, k) in data.requirements" :key="k">
-              <div class="requirements">{{ req }}</div>
-            </li>
-          </ul>
+          <div class="position">
+            <div class="title">{{ data.title }}</div>
+            <div class="description-title">{{ data.title }} Team Description </div>
+            <div class="description"> {{ data.description }}</div>
+            <div class="req-title">Requirements</div>
+            <ul class="requirements-list">
+              <li v-for="(req, k) in data.requirements" :key="k">
+                <div class="requirements">{{ req }}</div>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>
-
-    <div>
+{{user.major}}
+    <div class="application">
       <h2>Apply Here!</h2>
       <div class="form-input">
-        <div>
+        <div class="item-a">
           <label>First Name <b>*</b></label>
-          <input type="text" v-model="user.firstname" v-validate="'required'" name="firstName">
-          <span class="alert">{{ errors.first('firstName') }}</span>
+          <input type="text" v-model="user.firstname" v-validate="'required'" name="first name">
+          <span class="alert">{{ errors.first('first name') }}</span>
         </div>
-        <div>
+        <div class="item-b">
           <label>Last Name <b>*</b></label>
-          <input type="text" v-model="user.lastname" v-validate="'required'" name="lastName">
-          <span class="alert">{{ errors.first('lastName') }}</span>
+          <input type="text" v-model="user.lastname" v-validate="'required'" name="last name">
+          <span class="alert">{{ errors.first('last name') }}</span>
         </div>
-        <div>
+        <div class="item-c">
           <label>Email <b>*</b></label>
           <input type="text" v-model="user.email" v-validate="'required|email'" name="email">
           <span class="alert">{{ errors.first('email') }}</span>
         </div>
-        <div>
+        <div class="item-d">
           <label>Phone</label>
           <input type="text" v-model="user.phone">
         </div>
-        <div>
+        <div class="item-e">
           <label>Major</label>
           <input type="text" v-model="user.major">
         </div>
-        <div>
+        <div class="item-f">
           <label>Graduation Year <b>*</b></label>
-          <input type="text" v-model="user.graduationyear" v-validate="'required'" name="year">
-          <span class="alert">{{ errors.first('year') }}</span>
+          <input type="text" v-model="user.graduationyear" v-validate="'required'" name="graduation year">
+          <span class="alert">{{ errors.first('graduation year') }}</span>
         </div>
-        <div>
+        <div class="item-g">
           <label>LinkedIn</label>
           <input type="text" v-model="user.linkedin">
         </div>
+        <div class="item-h">
+          <label>Desired Position</label>
+          <select v-model="user.position">
+            <option disabled value="">Please select one</option>
+            <option v-for="(data, index) in positionInfo" :key="data.title">{{data.title}}</option>
+          </select>
+        </div>
+        <div class="item-i">
+          <label class="message-label">Write a few lines about why you would be a good fit for EC and the position specified. Or specify multiple positions that you would be willing to take on!</label>
+          <textarea type="text" v-model="user.message"></textarea>
+        </div>
       </div>
+      <router-link to="/" tag="button" class="submit-button" @click="postJoin" style="vertical-align: middle"><span>Submit</span></router-link>
     </div>
   </div>
 </template>
 
 <script>
 import PositionInfo from '../../static/positioninfo.json'
+
+import { db } from '../main'
 export default {
   data () {
     return {
@@ -71,8 +89,30 @@ export default {
         major: '',
         graduationyear: '',
         linkedin: '',
-        position: ''
+        position: '',
+        message: ''
       }
+    }
+  },
+  methods: {
+    addUser () {
+      this.user.createdAt = new Date()
+      db.collection('teaminterestapp').add(this.user)
+    },
+    postJoin () {
+      console.log(this.user)
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.addUser()
+        } else {
+          console.log('Not valid')
+        }
+      })
+    }
+  },
+  firestore () {
+    return {
+      users: db.collection('teaminterestapp')
     }
   }
 }
@@ -82,25 +122,128 @@ export default {
   b {
     color: red;
   }
-  .form-input {
+  input, label {
+    display: block;
     margin: auto;
+  }
+  input, textarea, select {
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    color: #606060;
+    border: 2px solid #D3D3D3;
+  }
+  input {
+    width: calc(100% - 40px);
+    text-align: center;
+  }
+  textarea {
+    width: 460px;
+    height: 100px;
+    resize: none;
+    text-align: left;
+  }
+  select {
+    width: calc(100% - 17px);
+  }
+  label {
+    color: #606060;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 6px;
+    text-align: left;
+    margin-left: 20px;
+  }
+  .message-label {
+    font-size: 16px;
+  }
+  .item-a {
+    grid-area: item-a;
+  }
+  .item-b {
+    grid-area: item-b;
+  }
+  .item-c {
+    grid-area: item-c;
+  }
+  .item-d {
+    grid-area: item-d;
+  }
+  .item-e {
+    grid-area: item-e;
+  }
+  .item-f {
+    grid-area: item-f;
+  }
+  .item-g {
+    grid-area: item-g;
+  }
+  .item-h {
+    grid-area: item-h;
+  }
+  .item-i {
+    grid-area: item-i;
+  }
+  .submit-button {
+    grid-area: item-j;
+  }
+
+  .form-input {
     display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    justify-content: space-evenly;
-    grid-row-gap: 1.5em;
+    grid-template-columns: 250px 250px;
+    grid-template-areas:
+      "item-a item-b"
+      "item-c item-c"
+      "item-d item-d"
+      "item-e item-e"
+      "item-f item-g"
+      "item-h item-h"
+      "item-i item-i"
+      "item-j item-j";
+    justify-content: center;
   }
 
-  @media only screen and (min-width:500px) {
-    .form-input {
-      grid-template-columns: 1fr 1fr;
-    }
+  .application {
+    padding:40px;
+    background-color: #A2E49D;
+    overflow: hidden;
   }
 
-  @media only screen and (min-width:790px) {
-    .form-input {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
+  .position-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
+
+  .title {
+    font-size: 1.5em;
+    padding: 0 0 10px 0;
+    color: #65D25C;
+  }
+  .description {
+    font-size: 1em;
+    padding-bottom: 2px;
+  }
+  .requirements-list {
+
+  }
+  .req-title, .description-title{
+    padding: 0 0 6px 0px;
+    color: #606060;
+  }
+  .requirements {
+    font-size: 14px;
+    padding: 0 0 4px 22px;
+    background: url('/static/img/bpoint.png') no-repeat left top;
+  }
+  .description-title, .req-title {
+    font-weight: 700;
+  }
+  .page-header {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url(/static/page-headers/join-the-team.jpg);
   }
 
 </style>

@@ -4,11 +4,51 @@
     "description": "In charge of media for engineering conference which includes all media exposure.",
     "requirements":
     [
-      "Web Developer: Preparing the conference website (html, CSS, JavaScript knowledge preferred)",
+      "Web Developer: Preparing the conference website (HTML, CSS, JavaScript knowledge preferred)",
       "Social Media Manager: Manages social media pages for the conference.",
       "Photographer/video recorder: Responsible for conference footage.",
       "Photo editor: Should have experience with Abode Illustrator and/or Photoshop.",
       "Video editor: In charge of recording the whole process of the conference to create a movie after."
+    ]
+  },
+  {
+    "title": "ADMINISTRATION",
+    "description": "In charge of all conference documentation which includes but not limited to: legal paperwork, information packages, student introductory package, chair guidelines package, committee terminology package and committee topic package.",
+    "requirements":
+    [
+      "Completed Lower-division writing courses, documentation experience preferred, upper-div writing course completion preferred."
+    ]
+  },
+  {
+    "title": "ORGANIZER",
+    "description": "In charge conference logistics including but not limited to: venue preparation and setup, attendee registration, directing attendees, organizing conference flow.",
+    "requirements":
+    [
+      "Teamwork and Leadership experience, event organizing experience preferred."
+    ]
+  },
+  {
+    "title": "OUTREACH",
+    "description": "Members of the outreach team will have various responsibilities which are directed towards contacting sponsors and preparing a sponsorship proposal, inviting keynote speakers and faculty.",
+    "requirements":
+    [
+      "Public speaking skills, comfortable contacting professionals, fundraising experience, preferred."
+    ]
+  },
+  {
+    "title": "CHAIRS BOARD",
+    "description": "In charge of researching contemporary engineering problems to provide committee topics. Each chair on the board will be one of the chairs in charge of a conference committee that will provide attendees with content and guidelines to successfully brainstorm solutions and debate. Chairs will run debate sessions using Robert’s Rules of Order.",
+    "requirements":
+    [
+      "Proficient engineering knowledge, capable of enforcing Robert’s rules of order, good communication, public speaking and leadership skills."
+    ]
+  },
+  {
+    "title": "EVENT PLANNING",
+    "description": "Members will be in charge of planning various entertainment events including the conference opening and closing ceremonies and networking break events.",
+    "requirements":
+    [
+      "Commitment, good communication skills, organization skills, comfortable with reaching out to on campus organizations."
     ]
   }
 ]
