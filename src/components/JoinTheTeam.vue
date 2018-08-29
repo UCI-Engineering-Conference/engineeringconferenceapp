@@ -60,7 +60,7 @@
           <label>Desired Position</label>
           <select v-model="user.position">
             <option disabled value="">Please select one</option>
-            <option v-for="(data, index) in positionInfo" :key="data.title">{{data.title}}</option>
+            <option v-for="(data, index) in positionInfo" :key="index">{{data.title}}</option>
           </select>
         </div>
         <div class="item-i">
@@ -68,7 +68,7 @@
           <textarea type="text" v-model="user.message"></textarea>
         </div>
       </div>
-      <router-link to="/" tag="button" class="submit-button" @click="postJoin" style="vertical-align: middle"><span>Submit</span></router-link>
+      <router-link to="/" tag="button" class="submit-button" @click="postJoin"><span>Submit</span></router-link>
     </div>
   </div>
 </template>
@@ -138,7 +138,7 @@ export default {
     text-align: center;
   }
   textarea {
-    width: 460px;
+    width: 200px;
     height: 100px;
     resize: none;
     text-align: left;
@@ -151,8 +151,7 @@ export default {
     font-size: 20px;
     font-weight: 300;
     padding: 6px;
-    text-align: left;
-    margin-left: 20px;
+    text-align: center;
   }
   .message-label {
     font-size: 16px;
@@ -190,16 +189,18 @@ export default {
 
   .form-input {
     display: grid;
-    grid-template-columns: 250px 250px;
+    grid-template-columns: 250px;
     grid-template-areas:
-      "item-a item-b"
-      "item-c item-c"
-      "item-d item-d"
-      "item-e item-e"
-      "item-f item-g"
-      "item-h item-h"
-      "item-i item-i"
-      "item-j item-j";
+      "item-a"
+      "item-b"
+      "item-c"
+      "item-d"
+      "item-e"
+      "item-f"
+      "item-g"
+      "item-h"
+      "item-i"
+      "item-j";
     justify-content: center;
   }
 
@@ -210,8 +211,9 @@ export default {
   }
 
   .position-grid {
+    margin: 30px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
   }
@@ -245,5 +247,47 @@ export default {
       linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(/static/page-headers/join-the-team.jpg);
   }
+
+@media only screen and (min-width: 520px) {
+  .form-input {
+    grid-template-columns: 250px 250px;
+    grid-template-areas:
+      "item-a item-b"
+      "item-c item-c"
+      "item-d item-d"
+      "item-e item-e"
+      "item-f item-g"
+      "item-h item-h"
+      "item-i item-i"
+      "item-j item-j";
+  }
+  input {
+    width: calc(100% - 40px);
+  }
+  textarea {
+    width: 460px;
+    height: 100px;
+    text-align: left;
+  }
+  select {
+    width: calc(100% - 17px);
+  }
+  label {
+    text-align: left;
+  }
+  .message-label {
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .position-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .position-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 
 </style>

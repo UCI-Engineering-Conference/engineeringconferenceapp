@@ -64,7 +64,6 @@ export default {
 
 <style scoped>
   .president, .head-chair{
-    width: 440px;
     margin: 0 auto;
     padding: 10px;
   }
@@ -114,6 +113,22 @@ export default {
   }
   .chairs-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+  }
+  @media only screen and (min-width: 540px) {
+    .chairs-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .president, .head-chair{
+      width: 440px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+  }
+  @media only screen and (min-width: 820px) {
+    .chairs-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 </style>

@@ -55,7 +55,7 @@ export default {
     border-radius: .5em;
     background-color: #D3D3D3;
     color: #606060;
-    margin: 10px 0;
+    margin: 30px 0;
     text-align: right;
     display: inline-block;
     width: 970px;
@@ -78,5 +78,7 @@ export default {
     background-image:
       linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(/static/page-headers/about.jpg);
+  }
+  @media only screen and (min-width: 1000px) {
   }
 </style>

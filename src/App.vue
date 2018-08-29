@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link class="nav-logo" to="/"><img style="height:100px;"src="/static/img/logo.png"/></router-link>
+      <router-link class="nav-logo" to="/"><img src="/static/img/logo.png"/></router-link>
       <div class="nav-link">
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
@@ -46,7 +46,7 @@ export default {
   position: sticky;
   top:0;
   left:0;
-  height: 100px;
+  height: 60px;
   width: auto;
   padding-bottom: 10px;
   box-shadow: 0 6px 7px -7px rgba(0,0,0,.6);
@@ -64,11 +64,12 @@ ul {
 }
 #nav .nav-link a {
   text-decoration: none;
+  font-size: 3vw;
   font-weight: 400;
-  padding: 8px;
+  padding: 3px;
   color: #3D3D3D;
   position:relative;
-  top: 60px;
+  top: 30px;
 }
 #nav .nav-link a:hover {
   cursor: pointer;
@@ -77,8 +78,9 @@ ul {
 #nav .nav-link .router-link-exact-active {
   border-bottom: 5px solid #65D25C;
 }
-#nav .nav-logo {
+#nav .nav-logo img {
   float: left;
+  height:60px;
 }
 #footer {
   background-color: #65D25C;
@@ -105,7 +107,7 @@ ul {
   color: #FFC61C;
 }
 #footer .footer-link a {
-  font-size: 24px;
+  font-size: 4.2vw;
 }
 
   .submit-button {
@@ -157,6 +159,27 @@ ul {
     background-size: cover;
     padding: 100px;
     margin-bottom: 50px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    #footer .footer-link a {
+      font-size: 24px;
+    }
+    #nav .nav-link a {
+      font-size: 18px;
+      padding: 8px;
+      top: 60px;
+    }
+    #nav .nav-logo img {
+      height:100px;
+    }
+    #nav {
+      position: sticky;
+      top:0;
+      left:0;
+      height: 100px;
+      padding-bottom: 10px;
+    }
   }
 
 </style>
