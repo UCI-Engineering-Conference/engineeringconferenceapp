@@ -20,7 +20,8 @@
       </div>
       <div class="footer-link">
         <router-link to="/contact">Contact Us</router-link>
-        <router-link to="/jointheteam">Become Part of EC</router-link>
+        <router-link class="footer-apply-link" v-if="isApplicationOpen" to="/application">Apply Now</router-link>
+        <router-link to="/jointheteam">Apply for EC</router-link>
       </div>
       <p>&copy;UCI Engineering Conference</p>
     </footer>
@@ -29,7 +30,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    isApplicationOpen () {
+      return this.$store.state.applicationOpen
+    }
+  }
 }
 </script>
 
@@ -64,19 +70,19 @@ ul {
 }
 #nav .nav-link a {
   text-decoration: none;
-  font-size: 3vw;
+  font-size: 2.9vw;
   font-weight: 400;
-  padding: 3px;
+  padding: 2px;
   color: #3D3D3D;
   position:relative;
   top: 30px;
 }
 #nav .nav-link a:hover {
   cursor: pointer;
-  border-bottom: 5px solid rgba(101, 210, 92, .7);
+  border-bottom: 3px solid rgba(101, 210, 92, .7);
 }
 #nav .nav-link .router-link-exact-active {
-  border-bottom: 5px solid #65D25C;
+  border-bottom: 3px solid #65D25C;
 }
 #nav .nav-logo img {
   float: left;
@@ -96,7 +102,7 @@ ul {
   cursor: pointer;
   text-decoration: none;
   font-size: 2em;
-  padding: 12px;
+  padding: 6px;
   color: #FFFFFF;
   -webkit-transition: all 500ms ease;
   -moz-transition: all 500ms ease;
@@ -109,56 +115,70 @@ ul {
 #footer .footer-link a {
   font-size: 4.2vw;
 }
+#footer .footer-apply-link {
+  color: #3D3D3D;
+}
 
-  .submit-button {
-    display: inline-block;
-    border-radius: 6px;
-    background-color: #FFC61C;
-    border: none;
-    border-bottom: 3px solid #E5AE0B;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 22px;
-    padding: 4px;
-    width: 120px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-  }
+.submit-button {
+  display: inline-block;
+  border-radius: 6px;
+  background-color: #FFC61C;
+  border: none;
+  border-bottom: 3px solid #E5AE0B;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 22px;
+  padding: 4px;
+  width: 120px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
 
-  .submit-button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
+.submit-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
 
-  .submit-button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
+.submit-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
 
-  .submit-button:hover span {
-    padding-right: 25px;
-  }
+.submit-button:hover span {
+  padding-right: 25px;
+}
 
-  .submit-button:hover span:after {
-    opacity: 1;
-    right: 0;
-  }
-  .page-header {
-    color: #FFFFFF;
-    font-weight: 300;
-    font-size: 30px;
-    background-repeat:   no-repeat;
-    background-position: center center;
-    background-size: cover;
-    padding: 100px;
-    margin-bottom: 50px;
+.submit-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.page-header {
+  color: #FFFFFF;
+  font-weight: 300;
+  font-size: 30px;
+  background: no-repeat center center;
+  background-size: cover;
+  padding: 100px;
+  margin-bottom: 50px;
+}
+  @media only screen and (min-width: 420px) {
+    #nav .nav-link a {
+      font-size: 3vw;
+      padding: 3px;
+    }
+    #nav .nav-link a:hover {
+      border-bottom: 5px solid rgba(101, 210, 92, .7);
+    }
+    #nav .nav-link .router-link-exact-active {
+      border-bottom: 5px solid #65D25C;
+    }
   }
 
   @media only screen and (min-width: 600px) {

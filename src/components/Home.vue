@@ -40,7 +40,7 @@
         <p>{{content.Mission}} Let us take care of the food, resources, energy, and entertainment so you can focus on the engineering.</p>
       </div>
       <div class="video-container">
-        <iframe class="resp-iframe" src="https://www.youtube.com/embed/5EDrelKmgy4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen />
+        <iframe class="resp-iframe" src="https://www.youtube.com/embed/yCOshvp6BV0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -70,10 +70,14 @@ export default {
   components: {
     modal
   },
+  computed: {
+    isApplicationOpen () {
+      return this.$store.state.applicationOpen
+    }
+  },
   data () {
     return {
       isModalVisible: false,
-      isApplicationOpen: true,
       date: 'March 3-6, 2019',
       content: homePageContent
     }

@@ -11,7 +11,7 @@
         <li v-for="(data, index) in faqList" :key="index">
           <img class="faq-image" :src="imgPreUrl(data.img)"/>
           <div class="faq-title">{{ data.title }}</div>
-          <span class="faq-description">{{ data.description }}</span>
+          <div class="faq-description">{{ data.description }}</div>
         </li>
       </ul>
     </div>
@@ -36,49 +36,86 @@ export default {
 </script>
 <style scoped>
   .faq-title {
-    font-size: 1.5em;
-    padding: 20px 0;
+    font-size: 14px;
+    padding: 5px 0;
   }
   .faq-description {
-    font-size: 1em;
+    font-size: 11px;
+    padding:10px;
   }
   .faq-image {
-    height: 250px;
+    height: 180px;
     border: 5px solid #65D25C;
-    border-radius: 0 .5em .5em 0;
-    vertical-align: middle;
-    float:right;
-    margin-left: 10px
+    border-radius: .5em .5em 0 0;
   }
   .faq-grid li {
-    border-left: 1em solid #65D25C;
+    width: 280px;
+    border-bottom: 1em solid #65D25C;
     border-radius: .5em;
     background-color: #D3D3D3;
     color: #606060;
-    margin: 30px 0;
-    text-align: right;
-    display: inline-block;
-    width: 970px;
+    margin: 20px auto;
   }
   .faq-grid li:nth-child(odd) {
-    border-left: none;
-    border-right: 1em solid #A2E49D;
     background-color: #808080;
-    text-align:left;
     color: #EAEAEA;
   }
   .faq-grid li:nth-child(odd) .faq-image {
-    float:left;
-    margin-left:0px;
-    margin-right: 10px;
     border: 5px solid #A2E49D;
-    border-radius: .5em 0 0 .5em;
   }
   .page-header {
     background-image:
       linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(/static/page-headers/about.jpg);
   }
+  @media only screen and (min-width: 660px) {
+    .faq-image {
+      height: 150px;
+      border: 5px solid #65D25C;
+      border-radius: 0 .5em .5em 0;
+      vertical-align: middle;
+      float:right;
+      margin-left: 10px
+    }
+    .faq-grid li {
+      width: 600px;
+      border-bottom: none;
+      border-left: 1em solid #65D25C;
+      border-radius: .5em;
+      background-color: #D3D3D3;
+      color: #606060;
+      margin: 30px 20px;
+      text-align: right;
+      display: inline-block;
+    }
+    .faq-grid li:nth-child(odd) {
+      border-left: none;
+      border-right: 1em solid #A2E49D;
+      background-color: #808080;
+      text-align:left;
+      color: #EAEAEA;
+    }
+    .faq-grid li:nth-child(odd) .faq-image {
+      float:left;
+      margin-left:0px;
+      margin-right: 10px;
+      border: 5px solid #A2E49D;
+      border-radius: .5em 0 0 .5em;
+    }
+  }
   @media only screen and (min-width: 1000px) {
+    .faq-title {
+      font-size: 22px;
+      padding: 10px 0;
+    }
+    .faq-description {
+      font-size: 18px;
+    }
+    .faq-image {
+      height: 250px;
+    }
+    .faq-grid li {
+      width: 970px;
+    }
   }
 </style>

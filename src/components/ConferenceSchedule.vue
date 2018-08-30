@@ -8,26 +8,30 @@
      <h4>Day {{ displayDay }}</h4>
      <button class="arrow-right" @click="switchSchedule(1)"></button>
     </div>
-    <transition name="slide-fade" mode="out-in">
-      <div id="app" class="container" v-bind:key="currentDay">
-          <div class="timeline">
-            <ul>
-              <li v-for="(event, index) in timeline_data[currentDay]" v-bind:key="index">
-                <span></span>
-                <div class="event">
-                  <div style="font-size: 16px; font-weight: 700">{{ event.name }}</div>
-                  <div style="font-size: 16px">{{ event.location }}</div>
-                  <div style="font-style:italic">{{ event.description }}</div>
-                </div>
-                <div class="year">
-                  <span>{{ event.end }}</span>
-                  <span>{{ event.start }}</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-      </div>
-    </transition>
+    <div class="timeline-wrapper">
+      <transition name="slide-fade" mode="out-in">
+        <div class="container" v-bind:key="currentDay">
+            <div class="timeline">
+              <ul>
+                <li v-for="(event, index) in timeline_data[currentDay]" v-bind:key="index">
+                    <div class="event">
+                      <span class="time">
+                        <span class="start">{{ event.start }}</span>
+                        <span class="to">to</span>
+                        <span class="end">{{ event.end }}</span>
+                      </span>
+                      <h2>{{ event.name }}</h2>
+                      <div class="event-content">
+                        <p>{{ event.location }}</p>
+                        <p style="font-style:italic">{{ event.description }}</p>
+                      </div>
+                    </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -77,30 +81,6 @@ export default {
     transform: translateX(10px);
     opacity: 0;
   }
-
-  html body {
-    background-color: #D3D3D3;
-    font-family: "Calibri", sans-serif;
-    color: #FFFFFF;
-  }
-  .container {
-    width: 40%;
-    margin: 0 auto;
-  }
-  .event {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 14px;
-    border-radius: 6px;
-    width: 250px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
-  }
-  .timeline ul li:nth-child(even) .event {
-    background-color: #A2E49D;
-    padding: 14px;
-    border-radius: 6px;
-    width: 250px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
-  }
   .arrow-left, .arrow-right{
     cursor: pointer;
     margin: 10px;
@@ -120,71 +100,145 @@ export default {
   .arrow-right:before {
     content: '\00bb';
   }
+  .timeline-wrapper {
+    background-color: #A2E49D;
+    padding-top: 10px;
+    overflow: hidden;
+  }
   .timeline {
-    margin: 5px 45px;
-  }
-  .timeline ul {
+    width: 90%;
+    margin: 20px auto;
     position: relative;
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
-  .timeline ul::before {
+  .timeline:before {
     content: '';
+    display: block;
     position: absolute;
+    left: 50%;
     top: 0;
-    left: 0;
-    width: 0px;
+    margin: 0 0 0 -3px;
+    width: 2px;
     height: 100%;
+    background: rgba(255,255,255,0.5);
   }
-  .timeline ul li {
-    position: relative;
-    margin: 50px 35px;
+  .timeline li {
     width: 100%;
+    margin: 0 0 20px 0;
+    position: relative;
   }
-  .timeline ul li > span {
+  .timeline li:after {
     content: '';
+    display: block;
+    clear: both;
+  }
+
+  .timeline li div.event {
+    width: 40%;
+    float: left;
+    margin: 5px 0 0 0;
+    border-radius: 6px;
+  }
+  .timeline li div.event span.time {
+    display: block;
+    width: 60px;
+    height: 50px;
+    padding: 5px 0;
     position: absolute;
     top: 0;
-    left: -30px;
-    width: 0px;
-    height: 100%;
-    border: 2px dashed #aaa;
+    left: 50%;
+    margin: 0 0 0 -32px;
+    font-weight: 900;
+    color: #3D3D3D;
+    background: url('/static/img/ScheduleBullet.png') no-repeat;
   }
-  .timeline ul li > span::before, .timeline ul li > span::after {
-    background-image: url('/static/favicon.png');
-    background-repeat: no-repeat;
-    -webkit-background-size: 16px;
-    background-size: 16px;
+  .timeline li div.event span.time span {
+    display: block;
+    text-align: center;
+    padding-top:2px;
+  }
+  .timeline li div.event span.time span.start {
+    font-size: 10px;
+  }
+  .timeline li div.event span.time span.to {
+    font-size: 8px;
+  }
+  .timeline li div.event span.time span.end {
+    font-size: 10px;
+  }
+  .timeline li div.event h2 {
+    padding: 15px;
+    margin: 0;
+    color: #fff;
+    font-size: 3.6vw;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+  }
+  .timeline li div.event h2:after {
     content: '';
     position: absolute;
-    width: 16px;
-    height: 16px;
-    left: -8px;
+    top: 20px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    -webkit-transform: rotate(-45deg);
   }
-  .timeline ul li > span::before {
-    top: -15px;
+  .timeline li .event-content {
+    padding: 1px;
+    margin: 0;
+    font-size: 3vw;
+    background: #FFFFFF;
+    color: #3D3D3D;
+    border-radius: 0 0 6px 6px;
   }
-  .timeline ul li > span::after {
-    top: 100%;
+
+  .timeline li:nth-child(even) div.event {
+    float: right;
   }
-  .timeline ul li .year span {
-    position: absolute;
-    font-size: 14px;
-    font-weight: bold;
-    left: -95px;
-    width: 40px;
-    text-align: right;
+  .timeline li:nth-child(even) div.event h2:after {
+    left: -5px;
   }
-  .timeline ul li .year span:first-child {
-    top: -15px;
+  .timeline li div.event h2 {
+    background: #65D25C;
   }
-  .timeline ul li .year span:last-child {
-    top: 100%;
+  .timeline li div.event h2:after {
+    background: #65D25C;
+  }
+  .timeline li:nth-child(even) div.event h2 {
+    background: #606060;
+  }
+  .timeline li:nth-child(even) div.event h2:after {
+    background: #606060;
   }
   .page-header {
     background-image:
       linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(/static/page-headers/conference-schedule.jpg);
+  }
+
+  @media only screen and (min-width: 560px) {
+    .timeline {
+      width: 80%;
+      margin: 20px auto;
+      position: relative;
+    }
+    .timeline li div.event span.time span.start {
+      font-size: 14px;
+    }
+    .timeline li div.event span.time span.to {
+      font-size: 10px;
+    }
+    .timeline li div.event span.time span.end {
+      font-size: 14px;
+    }
+    .timeline li div.event h2 {
+      padding: 15px;
+      font-size: 20px;
+    }
+    .timeline li .event-content {
+      padding: 1px;
+      font-size: 14px;
+    }
   }
 </style>
