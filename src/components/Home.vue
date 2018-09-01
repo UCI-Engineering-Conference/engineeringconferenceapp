@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img style="padding-top: 20px; width: 550px;" src="/static/img/thumbnail.png"/>
+    <img class="main-image" src="/static/img/thumbnail.png"/>
     <div class="intro">
       <h1 class="intro-line1">innovate, lead, debate</h1>
       <h1 class="intro-line2">at ENGINEERING CONFERENCE</h1>
@@ -95,13 +95,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.main-image {
+  padding-top: 20px;
+  width: 300px;
+}
 .intro-line1, .intro-line2, .intro-line3 {
   padding:0;
   margin:0;
   color: #3D3D3D;
 }
 .intro-line1 {
-  color: #FFC61C;
+  color: #FFB511;
 }
 .intro-line3 {
   text-transform: uppercase;
@@ -151,12 +155,18 @@ export default {
 .recruitment a {
   text-decoration: none;
   color: #3D3D3D;
-  font-weight: 300;
 }
 .recruitment a:hover {
   text-decoration: none;
-  color: #3D3D3D;
-  font-weight: 900;
+  transition: all 0.5s;
+  color: #FFB511;
+}
+
+@media only screen and (min-width: 600px) {
+  .main-image {
+    padding-top: 20px;
+    width: 550px;
+  }
 }
 
 @media only screen and (min-width: 845px) {

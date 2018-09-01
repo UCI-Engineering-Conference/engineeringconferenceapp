@@ -32,9 +32,32 @@
       "position": "Computer Science and Electrical",
       "img": "Nik-Hammon.png",
       "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
+    },
+    {
+      "name": "Jacob King",
+      "position": "Mechanical and Aerospace",
+      "img": "Jacob-King.png",
+      "linkedIn": ""
+    },
+    {
+      "name": "Derek Chang",
+      "position": "Chemical and Material",
+      "img": "Derek-Chang.png",
+      "linkedIn": ""
     }
   ],
   "others": [
-
+    {
+      "name": "Dominic Kemp",
+      "position": "Head of Administration",
+      "img": "Dominic-Kemp.png",
+      "linkedIn": ""
+    },
+    {
+      "name": "Youssef Gorge",
+      "position": "Head of Event Planning",
+      "img": "Youssef-Gorge.png",
+      "linkedIn": ""
+    }
   ]
 }

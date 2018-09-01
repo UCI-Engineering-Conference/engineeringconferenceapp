@@ -27,24 +27,178 @@
       "description": "Opportunity to pass on your resume to engineering companies.",
       "start": "11:00am",
       "end": "1:00pm"
+    },
+    {
+      "name": "Lunch Break",
+      "location": "Doheny Beach",
+      "description": "Enjoy a lunch provided by EC.",
+      "start": "1:00pm",
+      "end": "2:00pm"
+    },
+    {
+      "name": "Training Session I",
+      "location": "Doheny Beach",
+      "description": "Learn skills from ANSYS and get an official certification.",
+      "start": "2:00pm",
+      "end": "4:00pm"
+    },
+    {
+      "name": "Training Session II",
+      "location": "Doheny Beach",
+      "description": "Engage in a mock debate hosted by our chairs board.",
+      "start": "4:00pm",
+      "end": "6:00pm"
+    },
+    {
+      "name": "Dinner Break",
+      "location": "Doheny Beach",
+      "description": "Enjoy a dinner provided by EC.",
+      "start": "6:00pm",
+      "end": "7:00pm"
+    },
+    {
+      "name": "Lobby and Merging",
+      "location": "Doheny Beach",
+      "description": "Break into committees and meet your team.",
+      "start": "7:00pm",
+      "end": "9:00pm"
+    }
+  ],
+  [
+    {
+      "name": "Emerald Bay",
+      "location": "Doheny Beach",
+      "description": "Get Badges and more",
+      "start": "8:30am",
+      "end": "9:00am"
+    },
+    {
+      "name": "Lobbying and Merging I",
+      "location": "Doheny Beach",
+      "description": "Decide on a project and begin researching.",
+      "start": "9:05am",
+      "end": "9:50am"
+    },
+    {
+      "name": "Networking Break",
+      "location": "Doheny Beach",
+      "description": "Talk with the other delegates.",
+      "start": "10:20am",
+      "end": "10:35am"
+    },
+    {
+      "name": "Lobbying and Merging II",
+      "location": "Doheny Beach",
+      "description": "Decide on a project and begin researching.",
+      "start": "10:35am",
+      "end": "12:30pm"
+    },
+    {
+      "name": "Lunch Break",
+      "location": "Doheny Beach",
+      "description": "Enjoy a lunch provided by EC.",
+      "start": "12:30pm",
+      "end": "2:00pm"
+    },
+    {
+      "name": "Design Session I",
+      "location": "Doheny Beach",
+      "description": "Learn the fundamentals of design engineering",
+      "start": "2:00pm",
+      "end": "6:00pm"
+    },
+    {
+      "name": "Dinner Break",
+      "location": "Doheny Beach Lounge",
+      "description": "Enjoy a dinner provided by EC.",
+      "start": "6:00pm",
+      "end": "7:00pm"
+    },
+    {
+      "name": "Design Session II",
+      "location": "Doheny Beach",
+      "description": "Learn the fundamentals of design engineering",
+      "start": "7:00pm",
+      "end": "9:00pm"
     }
   ],
   [
     {
       "name": "Registration",
-      "location": "Doheny Beach",
-      "description": "Get Badges and more",
+      "location": "Hotel Lobby",
+      "description": "Get badges and more",
       "start": "8:30am",
       "end": "9:00am"
-    }
-  ],
-  [
+    },
     {
-      "name": "Registration",
-      "location": "Doheny Beach",
-      "description": "Get Badges and more",
-      "start": "8:30am",
-      "end": "9:00am"
+      "name": "Debate Session I",
+      "location": "Debate Rooms",
+      "description": "Debate against the others in your committee",
+      "start": "9:15am",
+      "end": "11:00am"
+    },
+    {
+      "name": "Voting Session",
+      "location": "Debate Rooms",
+      "description": "Vote on the teams that will be moving on.",
+      "start": "11:00am",
+      "end": "11:20am"
+    },
+    {
+      "name": "Lunch Break",
+      "location": "Hotel Conference Room",
+      "description": "Enjoy a lunch provided by the Double Tree by Hilton.",
+      "start": "11:30am",
+      "end": "12:30am"
+    },
+    {
+      "name": "Integration Session I",
+      "location": "Debate Rooms",
+      "description": "Work with the teams that progressed to design and even greater system.",
+      "start": "12:30pm",
+      "end": "3:00pm"
+    },
+    {
+      "name": "Networking Break",
+      "location": "Debate Rooms",
+      "description": "One last calm before the final debate sessions.",
+      "start": "3:00pm",
+      "end": "3:30pm"
+    },
+    {
+      "name": "Integration Session II",
+      "location": "Debate Rooms",
+      "description": "Work with the teams that progressed to design and even greater system.",
+      "start": "3:30pm",
+      "end": "5:20pm"
+    },
+    {
+      "name": "Final Debate Session",
+      "location": "Hotel Conference Room",
+      "description": "Work with the teams that progressed to design and even greater system.",
+      "start": "5:30pm",
+      "end": "6:30pm"
+    },
+    {
+      "name": "Dinner Break",
+      "location": "Hotel Conference Room",
+      "description": "Enjoy a dinner provided by the Double Tree by Hilton.",
+      "start": "6:30pm",
+      "end": "6:30pm"
+    },
+    {
+      "name": "Voting Session",
+      "location": "Hotel Conference Room",
+      "description": "All committees decide on the overall winner.",
+      "start": "7:30pm",
+      "end": "8:00pm"
+    },
+    {
+      "name": "Closing Ceremony",
+      "location": "Hotel Conference Room",
+      "description": "Reflect on your accomplishments of the past three days.",
+      "start": "8:15pm",
+      "end": "9:00pm"
     }
   ]
 ]

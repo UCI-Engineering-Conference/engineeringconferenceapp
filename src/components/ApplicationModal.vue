@@ -20,10 +20,14 @@ export default {
           <div class="modal-header">
             <router-link to="/" tag="button" style="float:right;" class="modal-close-button" @click="$emit('close')"><close /></router-link>
             <br/><br/>
-            <h2>Congratulations!</h2>
+            <slot name="header">
+              default header
+            </slot>
           </div>
           <div class="modal-body">
-           <p>You're official registered for UCI Engineering Conference! We'll be in touch with you soon regarding the status of your application.</p>
+            <slot name="body">
+              default body
+            </slot>
           </div>
         </div>
       </div>
@@ -62,12 +66,11 @@ export default {
   }
 
   .modal-container {
-    width: 300px;
+    width: 200px;
+    height: 200px;
     margin: 0px auto;
     padding: 20px 30px 8px 30px;
-    background-image: url(/static/img/MailModalBG.png);
-    background-repeat:   no-repeat;
-    background-position: center center;
+    background: url(/static/img/MailModalBG.png) no-repeat center center;
     background-size: cover;
     border-radius: 3px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
@@ -82,10 +85,6 @@ export default {
 
   .modal-body {
     margin: 20px 0;
-  }
-
-  .modal-footer {
-    padding: 30px;
   }
 
   /*
@@ -109,5 +108,11 @@ export default {
   .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+  }
+
+  @media only screen and (min-width: 400px) {
+    .modal-container {
+      width: 300px;
+    }
   }
 </style>

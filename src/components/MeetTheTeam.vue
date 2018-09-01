@@ -18,6 +18,19 @@
         </li>
       </ul>
     </div>
+    <div class="others">
+      <ul class="others-grid">
+        <li v-for="(member, index) in member_data['others']" v-bind:key="index">
+          <div class="member">
+            <img class="member-image" :src="imgPreUrl(member.img)">
+            <div class="member-info">
+              <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+              <div class="member-position">{{ member.position }}</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
     <h2>Chairs Board</h2>
     <div class="head-chair">
       <div class="member">
@@ -95,7 +108,7 @@ export default {
     transition: all 500ms ease;
   }
   a:hover{
-    color: #FFC61C;;
+    color: #FFB511;;
   }
   .member-position {
     font-size: 18px;
@@ -111,13 +124,13 @@ export default {
       linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(/static/page-headers/meet-the-team.jpg);
   }
-  .chairs-grid {
+  .chairs-grid, .others-grid {
     display: grid;
     grid-template-columns: 1fr;
     grid-row-gap: 20px;
   }
   @media only screen and (min-width: 540px) {
-    .chairs-grid {
+    .chairs-grid, .others-grid {
       grid-template-columns: 1fr 1fr;
     }
     .president, .head-chair{

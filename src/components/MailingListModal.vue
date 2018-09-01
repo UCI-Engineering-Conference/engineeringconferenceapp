@@ -4,13 +4,7 @@ export default {
   name: 'modal',
   data () {
     return {
-      user: {
-        name: '',
-        email: '',
-        phone: '',
-        createdAt: ''
-      },
-      users: []
+      user: {onMailingList: true}
     }
   },
   methods: {
@@ -19,7 +13,14 @@ export default {
     },
     addUser () {
       this.user.createdAt = new Date()
-      db.collection('mailingList').add(this.user)
+      this.clean()
+      db.collection('students').doc(this.user.email).set(this.user, { merge: true })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
     },
     postEmail () {
       this.$validator.validateAll().then((result) => {
@@ -30,11 +31,13 @@ export default {
           console.log('Not valid')
         }
       })
-    }
-  },
-  firestore () {
-    return {
-      users: db.collection('mailingList')
+    },
+    clean () {
+      for (let propName in this.user) {
+        if (this.user[propName] === '') {
+          delete this.user[propName]
+        }
+      }
     }
   }
 }
@@ -51,18 +54,19 @@ export default {
           </div>
           <div class="modal-body">
             <div class="formInput">
-              <label>Full Name</label>
-              <input type="text" v-model="user.name" v-validate="'required'" name="username">
+              <label>Full Name <b>*</b></label>
+              <input type="text" v-model="user.fullName" v-validate="'required'" name="username">
               <span class="alert">{{ errors.first('username') }}</span>
             </div>
             <div class="formInput">
-              <label>Email</label>
+              <label>Email <b>*</b></label>
               <input type="text" v-model="user.email" v-validate="'required|email'" name="email">
               <span class="alert">{{ errors.first('email') }}</span>
             </div>
             <div class="formInput">
               <label>Phone</label>
-              <input type="text" v-model="user.phone">
+              <input type="text" v-validate="{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">
+              <span class="alert">{{ errors.first('phone') }}</span>
             </div>
           </div>
           <div class="modal-footer">
@@ -76,6 +80,9 @@ export default {
   </transition>
 </template>
 <style>
+  .formInput b {
+    color: red;
+  }
   input, label {
     display: block;
     margin: auto;
@@ -95,9 +102,7 @@ export default {
   .formInput {
     padding: 10px;
   }
-  .submit-button {
 
-  }
   .modal-close-button {
     color: #606060;
     border: none;
@@ -128,12 +133,11 @@ export default {
   }
 
   .modal-container {
-    width: 300px;
+    width: 200px;
+    height: 500px;
     margin: 0px auto;
     padding: 20px 30px 8px 30px;
-    background-image: url(/static/img/MailModalBG.png);
-    background-repeat:   no-repeat;
-    background-position: center center;
+    background: url(/static/img/MailModalBG.png) no-repeat center center;
     background-size: cover;
     border-radius: 3px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
@@ -148,10 +152,6 @@ export default {
 
   .modal-body {
     margin: 20px 0;
-  }
-
-  .modal-footer {
-    padding: 30px;
   }
 
   /*
@@ -177,7 +177,13 @@ export default {
     transform: scale(1.1);
   }
 
-  .alert {
-    background:
+  @media only screen and (min-width: 400px) {
+    .modal-container {
+      width: 300px;
+    }
+
+    .modal-footer {
+      padding: 30px;
+    }
   }
 </style>

@@ -22,7 +22,8 @@
         </div>
         <div class="item-d">
           <label>Phone</label>
-          <input type="text" v-model="user.phone">
+          <input type="text" v-validate="{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">
+          <span class="alert">{{ errors.first('phone') }}</span>
         </div>
         <div class="item-e">
           <label>School <b>*</b></label>
@@ -54,14 +55,14 @@
         </div>
         <div class="item-i">
           <label class="message-label">Is there anything else you like us to know regarding your skills or accomplishments?</label>
-          <textarea type="text" v-model="user.message"></textarea>
+          <textarea v-model="user.message"></textarea>
         </div>
       </div>
 
-      <modal
-        v-show="isModalVisible"
-        @close="closeModal"
-      />
+      <modal v-show="isModalVisible" @close="closeModal">
+        <h2 slot="header">Amazing!</h2>
+        <p slot ="body">You're official registered for UCI Engineering Conference! We'll be in touch with you soon regarding the status of your application.</p>
+      </modal>
       <button class="submit-button" @click="apply"><span>Submit</span></button>
     </div>
   </div>
@@ -77,7 +78,7 @@ export default {
   },
   watch: {
     'user.school': function () {
-      this.user.major = ''
+      delete this.user.major
     }
   },
   data () {
@@ -85,23 +86,20 @@ export default {
       isModalVisible: false,
       schools: SchoolandMajorInfo['School'],
       majors: SchoolandMajorInfo['Major'],
-      user: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        phone: '',
-        major: '',
-        graduationyear: '',
-        linkedin: '',
-        school: '',
-        message: ''
-      }
+      user: {applicationSubmitted: true}
     }
   },
   methods: {
     addUser () {
       this.user.createdAt = new Date()
-      db.collection('applications').add(this.user)
+      this.clean()
+      db.collection('students').doc(this.user.email).set(this.user, { merge: true })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
     },
     apply () {
       this.$validator.validateAll().then((result) => {
@@ -113,29 +111,18 @@ export default {
         }
       })
     },
-    clearFields () {
-      this.user = {
-        firstname: '',
-        lastname: '',
-        email: '',
-        phone: '',
-        major: '',
-        graduationyear: '',
-        linkedin: '',
-        school: '',
-        message: ''
-      }
-    },
     showModal () {
       this.isModalVisible = true
     },
     closeModal () {
       this.isModalVisible = false
-    }
-  },
-  firestore () {
-    return {
-      users: db.collection('applications')
+    },
+    clean () {
+      for (let propName in this.user) {
+        if (this.user[propName] === '') {
+          delete this.user[propName]
+        }
+      }
     }
   }
 }

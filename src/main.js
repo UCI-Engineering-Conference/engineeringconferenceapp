@@ -13,7 +13,6 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
-// import { faAngleDoubleRight } from '@fortawesome/free-directional-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import ArrowRightBoldCircle from 'vue-material-design-icons/ArrowRightBoldCircle.vue'
@@ -45,14 +44,7 @@ const store = new Vuex.Store({
   }
 })
 
-const firebaseApp = firebase.initializeApp({
-  apiKey: 'AIzaSyAXlUSXffb-DekBZwqy5dLfRHrBLW3rgcA',
-  authDomain: 'engineeringconference-b41cb.firebaseapp.com',
-  databaseURL: 'https://engineeringconference-b41cb.firebaseio.com',
-  projectId: 'engineeringconference-b41cb',
-  storageBucket: 'engineeringconference-b41cb.appspot.com',
-  messagingSenderId: '1034600001201'
-})
+const firebaseApp = firebase.initializeApp(process.env.FIREBASE_CONF)
 
 export const db = firebaseApp.firestore()
 const settings = {timestampsInSnapshots: true}

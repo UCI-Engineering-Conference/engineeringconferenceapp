@@ -20,7 +20,7 @@
         </li>
       </ul>
     </div>
-{{user.major}}
+
     <div class="application">
       <h2>Apply Here!</h2>
       <div class="form-input">
@@ -41,11 +41,12 @@
         </div>
         <div class="item-d">
           <label>Phone</label>
-          <input type="text" v-model="user.phone">
+          <input type="text" v-validate="{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">
+          <span class="alert">{{ errors.first('phone') }}</span>
         </div>
         <div class="item-e">
           <label>Major</label>
-          <input type="text" v-model="user.major">
+          <input type="text" v-model="user.majorForEC">
         </div>
         <div class="item-f">
           <label>Graduation Year <b>*</b></label>
@@ -65,54 +66,69 @@
         </div>
         <div class="item-i">
           <label class="message-label">Write a few lines about why you would be a good fit for EC and the position specified. Or specify multiple positions that you would be willing to take on!</label>
-          <textarea type="text" v-model="user.message"></textarea>
+          <textarea type="text" v-model="user.messageForEC"></textarea>
         </div>
       </div>
-      <router-link to="/" tag="button" class="submit-button" @click="postJoin"><span>Submit</span></router-link>
+      <modal v-show="isModalVisible" @close="closeModal">
+        <h2 slot="header">All Done!</h2>
+        <p slot ="body">Thank you for applying to be on the EC team. Our leadership will contact you as soon as they are available to set up an interview.</p>
+      </modal>
+      <button class="submit-button" @click="postJoin"><span>Submit</span></button>
     </div>
   </div>
 </template>
 
 <script>
+import modal from './ApplicationModal.vue'
 import PositionInfo from '../../static/positioninfo.json'
 
 import { db } from '../main'
 export default {
+  components: {
+    modal
+  },
   data () {
     return {
+      isModalVisible: false,
       positionInfo: PositionInfo,
-      user: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        phone: '',
-        major: '',
-        graduationyear: '',
-        linkedin: '',
-        position: '',
-        message: ''
-      }
+      user: { teamInterest: true } // the rest is added by the form input fields
     }
   },
   methods: {
     addUser () {
       this.user.createdAt = new Date()
-      db.collection('teaminterestapp').add(this.user)
+      this.clean()
+      db.collection('students').doc(this.user.email).set(this.user, { merge: true })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
     },
     postJoin () {
       console.log(this.user)
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.addUser()
+          this.showModal()
         } else {
           console.log('Not valid')
         }
       })
-    }
-  },
-  firestore () {
-    return {
-      users: db.collection('teaminterestapp')
+    },
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
+    },
+    clean () {
+      for (let propName in this.user) {
+        if (this.user[propName] === '') {
+          delete this.user[propName]
+        }
+      }
     }
   }
 }

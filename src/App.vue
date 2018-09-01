@@ -110,7 +110,7 @@ ul {
   transition: all 500ms ease;
 }
 #footer a:hover {
-  color: #FFC61C;
+  color: #FFB511;
 }
 #footer .footer-link a {
   font-size: 4.2vw;
@@ -122,7 +122,7 @@ ul {
 .submit-button {
   display: inline-block;
   border-radius: 6px;
-  background-color: #FFC61C;
+  background-color: #FFB511;
   border: none;
   border-bottom: 3px solid #E5AE0B;
   color: #FFFFFF;
@@ -179,11 +179,15 @@ ul {
     #nav .nav-link .router-link-exact-active {
       border-bottom: 5px solid #65D25C;
     }
+    #footer .footer-icon a {
+      font-size: 2.8em;
+      padding: 12px;
+    }
   }
 
   @media only screen and (min-width: 600px) {
     #footer .footer-link a {
-      font-size: 24px;
+      font-size: 32px;
     }
     #nav .nav-link a {
       font-size: 18px;

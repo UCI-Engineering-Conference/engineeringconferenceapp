@@ -171,7 +171,6 @@ export default {
     color: #fff;
     font-size: 3.6vw;
     text-transform: uppercase;
-    letter-spacing: -1px;
     border-radius: 6px 6px 0 0;
     position: relative;
   }
