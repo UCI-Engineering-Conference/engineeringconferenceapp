@@ -36,6 +36,9 @@ export default {
     grid-template-columns: 1fr;
     grid-row-gap: 40px;
   }
+  .sponsor-image {
+    max-width: 80%;
+  }
   .page-header {
     background-image:
       linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),

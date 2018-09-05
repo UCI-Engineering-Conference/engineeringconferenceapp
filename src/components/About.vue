@@ -35,6 +35,13 @@ export default {
 }
 </script>
 <style scoped>
+  p a {
+    text-decoration: none;
+    color: #FFB511;
+  }
+  p a:hover {
+    text-decoration: underline;
+  }
   .faq-title {
     font-size: 14px;
     padding: 5px 0;

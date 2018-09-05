@@ -78,7 +78,7 @@ export default {
   },
   watch: {
     'user.school': function () {
-      delete this.user.major
+      this.user.major = ''
     }
   },
   data () {
@@ -86,7 +86,7 @@ export default {
       isModalVisible: false,
       schools: SchoolandMajorInfo['School'],
       majors: SchoolandMajorInfo['Major'],
-      user: {applicationSubmitted: true}
+      user: {applicationSubmitted: true, school: ''}
     }
   },
   methods: {

@@ -82,21 +82,21 @@ export default {
   }
   .member {
     margin: 10px;
-    border-bottom: 10px solid #65D25C;
+    border-bottom: 4px solid #65D25C;
     background-color: #A2E49D;
     border-radius: 10px;
   }
   .member-image {
-    width: 150px;
-    height: 150px;
+    width: 60px;
+    height: 60px;
     margin: -26px 0px 0px 0px;
     border-radius: 50%;
-    border: 5px solid #65D25C;
+    border: 3px solid #65D25C;
   }
   .member-name {
-    font-size: 26px;
+    font-size: 10px;
     font-weight: 700;
-    line-height: 70px;
+    line-height: 20px;
     color: #606060;
   }
   a{
@@ -111,7 +111,7 @@ export default {
     color: #FFB511;;
   }
   .member-position {
-    font-size: 18px;
+    font-size: 5px;
     font-weight: 300;
     color: #606060;
   }
@@ -125,14 +125,37 @@ export default {
       url(/static/page-headers/meet-the-team.jpg);
   }
   .chairs-grid, .others-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-row-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  ul li {
+    flex-basis: 100px;
+    margin: 10px 0;
+  }
+  @media only screen and (min-width: 420px) {
+    .member {
+      border-bottom: 10px solid #65D25C;
+    }
+    .member-image {
+      width: 150px;
+      height: 150px;
+      border: 5px solid #65D25C;
+    }
+    .member-name {
+      font-size: 26px;
+      line-height: 70px;
+    }
+    .member-position {
+      font-size: 18px;
+    }
+    ul li {
+      flex-basis: 300px;
+      margin: 10px 0;
+    }
   }
   @media only screen and (min-width: 540px) {
-    .chairs-grid, .others-grid {
-      grid-template-columns: 1fr 1fr;
-    }
     .president, .head-chair{
       width: 440px;
       margin: 0 auto;
@@ -140,8 +163,9 @@ export default {
     }
   }
   @media only screen and (min-width: 820px) {
-    .chairs-grid {
-      grid-template-columns: 1fr 1fr 1fr;
+    ul li {
+      flex-basis: 350px;
+      margin: 10px 0;
     }
   }
 </style>

@@ -52,6 +52,12 @@
         <!--<a href="https://escholarship.org/uc/item/5rc1q3xr">Connect the Zots</a>-->
       <!--</div>-->
     <!--</div>-->
+    <div class="philanthropy">
+      <h2>Our Vision</h2>
+      <p>{{ content.Vision }} Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
+      <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to build a distribution system in Maventibao, Madagascar to make water more accessible. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a> </p>
+      <img class="philanthropy-img" src = '/static/img/Corazon1.jpg' />
+    </div>
 
     <div class="recruitment">
       <h2>Interested in joining our team?</h2>
@@ -113,7 +119,6 @@ export default {
   color: #606060;
 }
 .numbers {
-  display: table;
   margin: 20px auto;
   font-size: 5vw;
   display: grid;
@@ -150,16 +155,42 @@ export default {
   margin: 0px;
   overflow: hidden;
   padding: 20px;
+  font-size: 9px;
 }
 
-.recruitment a {
-  text-decoration: none;
-  color: #3D3D3D;
+.recruitment p {
+  padding: 0px;
+  margin: 1px;
 }
-.recruitment a:hover {
+
+a {
+  cursor: pointer;
   text-decoration: none;
-  transition: all 0.5s;
   color: #FFB511;
+}
+a:hover {
+  text-decoration: underline;
+}
+.philanthropy {
+  margin: 20px 10%;
+}
+.philanthropy-img {
+  max-width: 80%;
+  transform: scaleY(-1) scaleX(-1);
+  border: 5px solid #606060;
+  border-radius: .5em;
+}
+
+@media only screen and (min-width: 420px) {
+  .recruitment {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .philanthropy-img {
+    max-width: 50%;
+  }
 }
 
 @media only screen and (min-width: 600px) {

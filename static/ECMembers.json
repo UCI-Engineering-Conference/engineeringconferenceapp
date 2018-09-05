@@ -12,20 +12,20 @@
     "name": "Faisal Altassan",
     "position": "Head of Chairs Board",
     "img": "Faisal-Altassan.png",
-    "linkedIn": ""
+    "linkedIn": "https://www.linkedin.com/in/faisal-altassan-b56606b6/"
   },
   "chairs": [
     {
       "name": "Elias Funez",
       "position": "Mechanical and Aerospace",
       "img": "Elias-Funez.png",
-      "linkedIn": ""
+      "linkedIn": "https://www.linkedin.com/in/elias-funez-a60801159/"
     },
     {
       "name": "Carlos Tornell",
       "position": "Chemical and Materials",
       "img": "Carlos-Tornell.png",
-      "linkedIn": ""
+      "linkedIn": "https://www.linkedin.com/in/carlos-tornell-65a0b2113/"
     },
     {
       "name": "Nik Hammon",
@@ -37,7 +37,7 @@
       "name": "Jacob King",
       "position": "Mechanical and Aerospace",
       "img": "Jacob-King.png",
-      "linkedIn": ""
+      "linkedIn": "https://www.linkedin.com/in/jacob-michael-king-337947ab/"
     },
     {
       "name": "Derek Chang",

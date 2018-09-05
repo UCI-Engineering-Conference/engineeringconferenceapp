@@ -19,9 +19,13 @@
         <a href="https://instagram.com/EConferenceUCI"><font-awesome-icon :icon="['fab', 'instagram']" /></a>
       </div>
       <div class="footer-link">
-        <router-link to="/contact">Contact Us</router-link>
-        <router-link class="footer-apply-link" v-if="isApplicationOpen" to="/application">Apply Now</router-link>
-        <router-link to="/jointheteam">Apply for EC</router-link>
+        <div class="footer-apply-link" v-if="isApplicationOpen">
+          <router-link to="/application">Apply Now</router-link>
+        </div>
+        <div class="other-footer-links">
+          <router-link to="/contact">Contact Us</router-link>
+          <router-link to="/jointheteam">Join the Team</router-link>
+        </div>
       </div>
       <p>&copy;UCI Engineering Conference</p>
     </footer>
@@ -49,7 +53,7 @@ export default {
   background-color: #FFFFFF;
 }
 #nav {
-  position: sticky;
+  position: relative;
   top:0;
   left:0;
   height: 60px;
@@ -63,6 +67,10 @@ export default {
 
 button {
   background: transparent;
+}
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 ul {
   list-style: none;
@@ -93,11 +101,6 @@ ul {
   padding: 20px;
   color: #FFFFFF;
 }
-
-.footer-icon {
-  padding: 8px;
-  margin-bottom: 26px;
-}
 #footer a {
   cursor: pointer;
   text-decoration: none;
@@ -109,16 +112,21 @@ ul {
   -o-transition: all 500ms ease;
   transition: all 500ms ease;
 }
+
+.footer-icon {
+  padding: 8px;
+}
+#footer .footer-link .other-footer-links a{
+  font-size: 3.2vw;
+  padding: 8px;
+}
+#footer .footer-link .footer-apply-link a {
+  font-size: 4.8vw;
+  font-weight: 900;
+}
 #footer a:hover {
   color: #FFB511;
 }
-#footer .footer-link a {
-  font-size: 4.2vw;
-}
-#footer .footer-apply-link {
-  color: #3D3D3D;
-}
-
 .submit-button {
   display: inline-block;
   border-radius: 6px;
@@ -162,11 +170,11 @@ ul {
 .page-header {
   color: #FFFFFF;
   font-weight: 300;
-  font-size: 30px;
+  font-size: 20px;
   background: no-repeat center center;
   background-size: cover;
-  padding: 100px;
-  margin-bottom: 50px;
+  padding: 30px;
+  margin-bottom: 20px;
 }
   @media only screen and (min-width: 420px) {
     #nav .nav-link a {
@@ -183,10 +191,18 @@ ul {
       font-size: 2.8em;
       padding: 12px;
     }
+    .page-header {
+      font-size: 30px;
+      padding: 100px;
+      margin-bottom: 50px;
+    }
   }
 
   @media only screen and (min-width: 600px) {
-    #footer .footer-link a {
+    #footer .footer-link .other-footer-links a {
+       font-size: 18px;
+     }
+    #footer .footer-link .footer-apply-link a {
       font-size: 32px;
     }
     #nav .nav-link a {
@@ -198,11 +214,7 @@ ul {
       height:100px;
     }
     #nav {
-      position: sticky;
-      top:0;
-      left:0;
       height: 100px;
-      padding-bottom: 10px;
     }
   }
 
