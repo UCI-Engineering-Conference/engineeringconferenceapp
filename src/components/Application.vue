@@ -17,7 +17,7 @@
         </div>
         <div class="item-c">
           <label>Email <b>*</b></label>
-          <input type="text" v-model="user.email" v-validate="'required|email'" name="email">
+          <input type="text" v-model="user.email" v-validate="'required|email|is_uci_email'" name="email">
           <span class="alert">{{ errors.first('email') }}</span>
         </div>
         <div class="item-d">
@@ -57,12 +57,24 @@
           <label class="message-label">Is there anything else you like us to know regarding your skills or accomplishments?</label>
           <textarea v-model="user.message"></textarea>
         </div>
+        <div class="item-j">
+          <label class="checkbox" style="display: inline; vertical-align: middle">
+            <input disabled v-model="agreed" type="checkbox" name="terms" />
+            I agree to the <a @click="showTermsModal">Terms and Conditions</a>.
+          </label>
+        </div>
       </div>
+      <termsModal
+        v-show="isTermsModalVisible"
+        @close="closeTermsModal"
+        @accept="acceptTermsModal"
+      />
 
       <modal v-show="isModalVisible" @close="closeModal">
         <h2 slot="header">Amazing!</h2>
         <p slot ="body">You're official registered for UCI Engineering Conference! We'll be in touch with you soon regarding the status of your application.</p>
       </modal>
+
       <button class="submit-button" @click="apply"><span>Submit</span></button>
     </div>
   </div>
@@ -70,11 +82,13 @@
 
 <script>
 import modal from './ApplicationModal.vue'
+import termsModal from './TermsModal.vue'
 import SchoolandMajorInfo from '../../static/SchoolAndMajor.json'
 import { db } from '../main'
 export default {
   components: {
-    modal
+    modal,
+    termsModal
   },
   watch: {
     'user.school': function () {
@@ -84,6 +98,8 @@ export default {
   data () {
     return {
       isModalVisible: false,
+      isTermsModalVisible: false,
+      agreed: false,
       schools: SchoolandMajorInfo['School'],
       majors: SchoolandMajorInfo['Major'],
       user: {applicationSubmitted: true, school: ''}
@@ -103,7 +119,7 @@ export default {
     },
     apply () {
       this.$validator.validateAll().then((result) => {
-        if (result) {
+        if (result && this.agreed) {
           this.addUser()
           this.showModal()
         } else {
@@ -117,12 +133,15 @@ export default {
     closeModal () {
       this.isModalVisible = false
     },
-    clean () {
-      for (let propName in this.user) {
-        if (this.user[propName] === '') {
-          delete this.user[propName]
-        }
-      }
+    showTermsModal () {
+      this.isTermsModalVisible = true
+    },
+    closeTermsModal () {
+      this.isTermsModalVisible = false
+    },
+    acceptTermsModal () {
+      this.isTermsModalVisible = false
+      this.agreed = true
     }
   }
 }
@@ -131,6 +150,14 @@ export default {
 <style scoped>
   b {
     color: red;
+  }
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #FFB511;
+  }
+  a:hover {
+    text-decoration: underline;
   }
   input, label {
     display: block;
@@ -163,6 +190,21 @@ export default {
     padding: 6px;
     text-align: center;
   }
+  .item-j label {
+    display: block;
+    padding: 0px;
+    font-size: 13px;
+  }
+  .item-j .checkbox input {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    position: relative;
+    top: 19px;
+    left: 11px;
+    *overflow: hidden;
+  }
   .message-label {
     font-size: 16px;
   }
@@ -193,8 +235,12 @@ export default {
   .item-i {
     grid-area: item-i;
   }
-  .submit-button {
+  .item-j {
     grid-area: item-j;
+    margin-bottom: 18px;
+  }
+  .submit-button {
+    grid-area: item-k;
   }
   .form-input {
     display: grid;
@@ -209,7 +255,8 @@ export default {
       "item-g"
       "item-h"
       "item-i"
-      "item-j";
+      "item-j"
+      "item-k";
     justify-content: center;
   }
   .application {
@@ -233,7 +280,8 @@ export default {
       "item-f item-g"
       "item-h item-h"
       "item-i item-i"
-      "item-j item-j";
+      "item-j item-j"
+      "item-k item-k";
   }
   input {
     width: calc(100% - 40px);
@@ -251,6 +299,13 @@ export default {
   }
   .message-label {
     font-size: 16px;
+  }
+  .item-j label {
+    font-size: 20px;
+  }
+  .item-j .checkbox input {
+    top: 21px;
+    left: 80px;
   }
 }
 </style>

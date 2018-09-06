@@ -43,16 +43,16 @@ export default {
 }
 </script>
 <template>
-  <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <div class="modal-header">
+  <transition name="modalm">
+    <div class="modalm-mask">
+      <div class="modalm-wrapper">
+        <div class="modalm-container">
+          <div class="modalm-header">
             <button style="float:right;" class="modal-close-button" @click="$emit('close')"><close /></button>
             <br/><br/>
             <h2>Join our Community!</h2>
           </div>
-          <div class="modal-body">
+          <div class="modalm-body">
             <div class="formInput">
               <label>Full Name <b>*</b></label>
               <input type="text" v-model="user.fullName" v-validate="'required'" name="username">
@@ -60,7 +60,7 @@ export default {
             </div>
             <div class="formInput">
               <label>Email <b>*</b></label>
-              <input type="text" v-model="user.email" v-validate="'required|email'" name="email">
+              <input type="text" v-model="user.email" v-validate="'required|email|is_uci_email'" name="email">
               <span class="alert">{{ errors.first('email') }}</span>
             </div>
             <div class="formInput">
@@ -69,7 +69,7 @@ export default {
               <span class="alert">{{ errors.first('phone') }}</span>
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modalm-footer">
             <div name="footer">
               <button class="submit-button" @click="postEmail"><span>Submit</span></button>
             </div>
@@ -115,7 +115,7 @@ export default {
   .modal-close-button:hover {
     color: red;
   }
-  .modal-mask {
+  .modalm-mask {
     position: fixed;
     z-index: 9998;
     top: 0;
@@ -127,14 +127,15 @@ export default {
     transition: opacity .3s ease;
   }
 
-  .modal-wrapper {
+  .modalm-wrapper {
     display: table-cell;
     vertical-align: middle;
   }
 
-  .modal-container {
+  .modalm-container {
     width: 200px;
-    height: 500px;
+    max-height: 400px;
+    overflow-y: auto;
     margin: 0px auto;
     padding: 20px 30px 8px 30px;
     background: url(/static/img/MailModalBG.png) no-repeat center center;
@@ -145,13 +146,17 @@ export default {
     border: 5px solid #808080;
   }
 
-  .modal-header h2 {
+  .modalm-header h2 {
     margin-top: 0;
     color: #65D25C;
   }
 
-  .modal-body {
+  .modalm-body {
     margin: 20px 0;
+  }
+
+  .modalm-footer {
+    padding-bottom: 30px;
   }
 
   /*
@@ -171,19 +176,17 @@ export default {
     opacity: 0;
   }
 
-  .modal-enter .modal-container,
-  .modal-leave-active .modal-container {
+  .modal-enter .modalm-container,
+  .modal-leave-active .modalm-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
 
   @media only screen and (min-width: 400px) {
-    .modal-container {
+    .modalm-container {
       width: 300px;
+      max-height: 500px;
     }
 
-    .modal-footer {
-      padding: 30px;
-    }
   }
 </style>

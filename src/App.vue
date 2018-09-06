@@ -33,12 +33,27 @@
 </template>
 
 <script>
+import VeeValidate from 'vee-validate'
+
 export default {
   name: 'App',
   computed: {
     isApplicationOpen () {
       return this.$store.state.applicationOpen
     }
+  },
+  created: function () {
+    VeeValidate.Validator.extend('is_uci_email', {
+      // Custom validation message
+      getMessage: (field) => `The ${field} must be an @uci.edu email.`,
+      // Custom validation rule
+      validate: (value) => new Promise(resolve => {
+        const reg = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(uci)\.edu$/
+        resolve({
+          valid: value && reg.test(value)
+        })
+      })
+    })
   }
 }
 </script>

@@ -28,16 +28,16 @@
     />
 
     <div class="numbers">
-      <p><b>169</b> Engineers.</p>
-      <p><b>3</b> Days.</p>
-      <p><b>37</b> Students Published.</p>
+      <p><b>{{content.Attended}}</b> Engineers.</p>
+      <p><b>{{content.Days}}</b> Days.</p>
+      <p><b>{{content.Published}}</b> Students Published.</p>
     </div>
 
     <div class="video-section">
       <div class="video-header">
         <h2>UC Irvine's Engineering Conference is back</h2>
         <p>Gather with hundreds of engineering students of all backgrounds to research and design for solutions for contemporary problems.</p>
-        <p>{{content.Mission}} Let us take care of the food, resources, energy, and entertainment so you can focus on the engineering.</p>
+        <p>Our mission at EC is <i>{{content.Mission}}</i> Let us take care of the food, resources, energy, and entertainment so you can focus on the engineering.</p>
       </div>
       <div class="video-container">
         <iframe class="resp-iframe" src="https://www.youtube.com/embed/yCOshvp6BV0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -54,7 +54,7 @@
     <!--</div>-->
     <div class="philanthropy">
       <h2>Our Vision</h2>
-      <p>{{ content.Vision }} Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
+      <p><i>{{ content.Vision }}</i> Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
       <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to build a distribution system in Maventibao, Madagascar to make water more accessible. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a> </p>
       <img class="philanthropy-img" src = '/static/img/Corazon1.jpg' />
     </div>

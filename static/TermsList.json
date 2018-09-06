@@ -1,0 +1,67 @@
+[
+  {
+    "title": "Eligibility",
+    "conditions":
+    [
+      "Must be a currently enrolled UCI student.",
+      "Must have a minimum GPA of 2.0."
+    ]
+  },
+  {
+    "title": "Conference Conduct",
+    "conditions":
+    [
+      "Participants must dress in business attire during the conference. If participant’s attire does not meet standards, they will be asked to leave and come back with proper clothing.",
+      "Cell phones are to be kept away during the debate sessions.",
+      "Any form of harassment or discrimination will not be tolerated. Any participant found guilty of this will be immediately expelled from the conference.[DK1]"
+    ]
+  },
+  {
+    "title": "Liability",
+    "conditions":
+    [
+      "All participants are responsible for any damages to the venue/facility that they may cause during the conference.",
+      "UCI Engineering Conference is not liable for any injuries or accidents",
+      "UCI Engineering Conference is not liable for any theft during the span of the conference."
+    ]
+  },
+  {
+    "title": "Privacy",
+    "conditions":
+    [
+      "There will be photography and videography during the duration of the conference.",
+      "Basic Information in registration process will be used for statistical reasons."
+    ]
+  },
+  {
+    "title": "Smoking, Alcohol, and Drug Policy",
+    "conditions":
+    [
+      "Participants are expected to follow UCI’s policy of non-smoking policy.",
+      "Open containers of alcohol are prohibited on UCI and conference venue grounds.",
+      "UCI Engineering Conference prohibits the unlawful possession of drugs/controlled substances on conference grounds."
+    ]
+  },
+  {
+    "title": "Expulsion from Conference",
+    "conditions":
+    [
+      "If found violating Terms and Conditions, participants are subject to expulsion from the conference."
+    ]
+  },
+  {
+    "title": "Plagiarism",
+    "conditions":
+    [
+      "Work that is not the participant’s own (i.e. paraphrased work, uncited documents, verbatim) will put them in danger of expulsion."
+    ]
+  },
+  {
+    "title": "Intellectual Property",
+    "conditions":
+    [
+      "UCI Engineering Conference claims copyright to all information on engineeringconferenceuci.com, which is not limited to, logo design, mission statement, vision statement, documents designs, etc.",
+      "All ideas and designs developed by participants during the conference may be claimed for personal use outside of the conference."
+    ]
+  }
+]

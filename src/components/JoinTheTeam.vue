@@ -36,7 +36,7 @@
         </div>
         <div class="item-c">
           <label>Email <b>*</b></label>
-          <input type="text" v-model="user.email" v-validate="'required|email'" name="email">
+          <input type="text" v-model="user.email" v-validate="'required|email|is_uci_email'" name="email">
           <span class="alert">{{ errors.first('email') }}</span>
         </div>
         <div class="item-d">
@@ -148,6 +148,9 @@ export default {
     font-weight: 700;
     color: #606060;
     border: 2px solid #D3D3D3;
+  }
+  select option {
+    background: #FFFFFF;
   }
   input {
     width: calc(100% - 40px);
