@@ -37,6 +37,19 @@
     <table-column show="createdAt" label="Date"></table-column>
   </table-component>
 
+  <h2>Messages</h2>
+  <table-component
+    :data="messages"
+    sort-by="createdAt"
+    sort-order="asc"
+  >
+    <table-column show="email" label="Email"></table-column>
+    <table-column show="firstname" label="First Name"></table-column>
+    <table-column show="lastname" label="Last Name"></table-column>
+    <table-column show="message" label="Message For EC"></table-column>
+    <table-column show="createdAt" label="Date"></table-column>
+  </table-component>
+
 </div>
 </template>
 
@@ -46,6 +59,7 @@ export default {
   data () {
     return {
       students: [],
+      messages: [],
       numberOfApps: 0,
       numberOfMAE: 0,
       numberOfEECS: 0,
@@ -60,7 +74,6 @@ export default {
       this.numberOfEECS = 0
       this.numberOfCE = 0
       this.numberOfCHEM = 0
-      console.log(this.students)
       this.students.forEach(function (student) {
         if (student.applicationSubmitted) {
           this.numberOfApps++
@@ -74,7 +87,8 @@ export default {
   },
   firestore () {
     return {
-      students: db.collection('students')
+      students: db.collection('students'),
+      messages: db.collection('messages')
     }
   }
 }

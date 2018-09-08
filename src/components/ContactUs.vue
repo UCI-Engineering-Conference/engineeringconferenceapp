@@ -51,18 +51,13 @@ export default {
         email: '',
         message: '',
         createdAt: ''
-      },
-      users: []
-    }
-  },
-  firestore () {
-    return {
-      users: db.collection('messages')
+      }
     }
   },
   methods: {
     addUser () {
       this.user.createdAt = new Date()
+      this.clean()
       db.collection('messages').add(this.user)
     },
     postMessage () {
@@ -80,6 +75,13 @@ export default {
     },
     closeModal () {
       this.isModalVisible = false
+    },
+    clean () {
+      for (let propName in this.user) {
+        if (this.user[propName] === '') {
+          delete this.user[propName]
+        }
+      }
     }
   }
 }

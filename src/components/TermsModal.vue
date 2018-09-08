@@ -24,7 +24,7 @@
           </div>
           <div class="modalt-footer">
             <div name="footer">
-              <button class="submit-button" @click="$emit('accept')"><span>Accept</span></button>
+              <button class="submit-button" @click="$emit('close')"><span>Accept</span></button>
             </div>
           </div>
         </div>

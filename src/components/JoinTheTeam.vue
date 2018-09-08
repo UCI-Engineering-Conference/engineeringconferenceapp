@@ -267,7 +267,7 @@ export default {
       url(/static/page-headers/join-the-team.jpg);
   }
 
-@media only screen and (min-width: 520px) {
+@media only screen and (min-width: 420px) {
   .form-input {
     grid-template-columns: 250px 250px;
     grid-template-areas:

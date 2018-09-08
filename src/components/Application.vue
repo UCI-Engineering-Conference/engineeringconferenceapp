@@ -57,17 +57,10 @@
           <label class="message-label">Is there anything else you like us to know regarding your skills or accomplishments?</label>
           <textarea v-model="user.message"></textarea>
         </div>
-        <div class="item-j">
-          <label class="checkbox" style="display: inline; vertical-align: middle">
-            <input disabled v-model="agreed" type="checkbox" name="terms" />
-            I agree to the <a @click="showTermsModal">Terms and Conditions</a>.
-          </label>
-        </div>
       </div>
       <termsModal
         v-show="isTermsModalVisible"
         @close="closeTermsModal"
-        @accept="acceptTermsModal"
       />
 
       <modal v-show="isModalVisible" @close="closeModal">
@@ -76,6 +69,7 @@
       </modal>
 
       <button class="submit-button" @click="apply"><span>Submit</span></button>
+      <p class="termsAndConditions">By clicking 'Submit' I agree to the <a @click="showTermsModal">Terms and Conditions</a>.</p>
     </div>
   </div>
 </template>
@@ -99,7 +93,6 @@ export default {
     return {
       isModalVisible: false,
       isTermsModalVisible: false,
-      agreed: false,
       schools: SchoolandMajorInfo['School'],
       majors: SchoolandMajorInfo['Major'],
       user: {applicationSubmitted: true, school: ''}
@@ -119,7 +112,7 @@ export default {
     },
     apply () {
       this.$validator.validateAll().then((result) => {
-        if (result && this.agreed) {
+        if (result) {
           this.addUser()
           this.showModal()
         } else {
@@ -139,9 +132,12 @@ export default {
     closeTermsModal () {
       this.isTermsModalVisible = false
     },
-    acceptTermsModal () {
-      this.isTermsModalVisible = false
-      this.agreed = true
+    clean () {
+      for (let propName in this.user) {
+        if (this.user[propName] === '') {
+          delete this.user[propName]
+        }
+      }
     }
   }
 }
@@ -190,21 +186,6 @@ export default {
     padding: 6px;
     text-align: center;
   }
-  .item-j label {
-    display: block;
-    padding: 0px;
-    font-size: 13px;
-  }
-  .item-j .checkbox input {
-    width: 13px;
-    height: 13px;
-    padding: 0;
-    margin:0;
-    position: relative;
-    top: 19px;
-    left: 11px;
-    *overflow: hidden;
-  }
   .message-label {
     font-size: 16px;
   }
@@ -235,12 +216,8 @@ export default {
   .item-i {
     grid-area: item-i;
   }
-  .item-j {
-    grid-area: item-j;
-    margin-bottom: 18px;
-  }
   .submit-button {
-    grid-area: item-k;
+    grid-area: item-j;
   }
   .form-input {
     display: grid;
@@ -255,21 +232,25 @@ export default {
       "item-g"
       "item-h"
       "item-i"
-      "item-j"
-      "item-k";
+      "item-j";
     justify-content: center;
   }
   .application {
     padding:40px;
     overflow: hidden;
   }
+.termsAndConditions {
+  color: #606060;
+  font-weight: 300;
+  font-size: 14px;
+}
 .page-header {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(/static/page-headers/application.jpg);
 }
 
-@media only screen and (min-width: 520px) {
+@media only screen and (min-width: 500px) {
   .form-input {
     grid-template-columns: 250px 250px;
     grid-template-areas:
@@ -280,8 +261,7 @@ export default {
       "item-f item-g"
       "item-h item-h"
       "item-i item-i"
-      "item-j item-j"
-      "item-k item-k";
+      "item-j item-j";
   }
   input {
     width: calc(100% - 40px);
@@ -299,13 +279,6 @@ export default {
   }
   .message-label {
     font-size: 16px;
-  }
-  .item-j label {
-    font-size: 20px;
-  }
-  .item-j .checkbox input {
-    top: 21px;
-    left: 80px;
   }
 }
 </style>

@@ -56,7 +56,6 @@
       <h2>Our Vision</h2>
       <p><i>{{ content.Vision }}</i> Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
       <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to build a distribution system in Maventibao, Madagascar to make water more accessible. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a> </p>
-      <img class="philanthropy-img" src = '/static/img/Corazon1.jpg' />
     </div>
 
     <div class="recruitment">
@@ -124,7 +123,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   background-color: #65D25C;
-  padding: 15px;
+  padding: 10px;
   color: #FFFFFF;
   font-weight: 300;
 }
@@ -183,13 +182,7 @@ a:hover {
 
 @media only screen and (min-width: 420px) {
   .recruitment {
-    font-size: 18px;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .philanthropy-img {
-    max-width: 50%;
+    font-size: 13px;
   }
 }
 
@@ -197,6 +190,9 @@ a:hover {
   .main-image {
     padding-top: 20px;
     width: 550px;
+  }
+  .recruitment {
+    font-size: 18px;
   }
 }
 
