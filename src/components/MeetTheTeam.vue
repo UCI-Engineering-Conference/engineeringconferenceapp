@@ -32,15 +32,15 @@
       </ul>
     </div>
     <h2>Chairs Board</h2>
-    <div class="head-chair">
-      <div class="member">
-        <img class="member-image" :src="imgPreUrl(member_data['head-chair'].img)">
-        <div class="member-info">
-          <a class="member-name" :href="member_data['head-chair'].linkedIn">{{ member_data['head-chair'].name }}</a>
-          <div class="member-position">{{ member_data['head-chair'].position }}</div>
-        </div>
-      </div>
-    </div>
+    <!--<div class="head-chair">-->
+      <!--<div class="member">-->
+        <!--<img class="member-image" :src="imgPreUrl(member_data['head-chair'].img)">-->
+        <!--<div class="member-info">-->
+          <!--<a class="member-name" :href="member_data['head-chair'].linkedIn">{{ member_data['head-chair'].name }}</a>-->
+          <!--<div class="member-position">{{ member_data['head-chair'].position }}</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="chairs">
       <ul class="chairs-grid">
         <li v-for="(member, index) in member_data['chairs']" v-bind:key="index">

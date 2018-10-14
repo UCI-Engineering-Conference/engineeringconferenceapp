@@ -2,8 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueCarousel from 'vue-carousel'
 import VeeValidate from 'vee-validate'
+import VueLongPress from 'vue-long-press-directive'
 import { TableComponent, TableColumn } from 'vue-table-component'
 import VueFire from 'vuefire'
 import firebase from 'firebase/app'
@@ -32,8 +32,8 @@ Vue.component('chevron-left', ChevronLeft)
 Vue.component('table-component', TableComponent)
 Vue.component('table-column', TableColumn)
 
-Vue.use(VueCarousel)
 Vue.use(VeeValidate)
+Vue.use(VueLongPress, { duration: 1000 })
 Vue.use(VueFire)
 Vue.use(Vuex)
 

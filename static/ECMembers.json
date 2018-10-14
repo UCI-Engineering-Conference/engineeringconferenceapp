@@ -22,41 +22,29 @@
       "linkedIn": "https://www.linkedin.com/in/elias-funez-a60801159/"
     },
     {
-      "name": "Carlos Tornell",
-      "position": "Chemical and Materials",
-      "img": "Carlos-Tornell.png",
-      "linkedIn": "https://www.linkedin.com/in/carlos-tornell-65a0b2113/"
-    },
-    {
       "name": "Nik Hammon",
       "position": "Computer Science and Electrical",
       "img": "Nik-Hammon.png",
       "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
     },
     {
-      "name": "Jacob King",
-      "position": "Mechanical and Aerospace",
-      "img": "Jacob-King.png",
-      "linkedIn": "https://www.linkedin.com/in/jacob-michael-king-337947ab/"
-    },
-    {
       "name": "Derek Chang",
       "position": "Chemical and Material",
       "img": "Derek-Chang.png",
-      "linkedIn": ""
+      "linkedIn": "https://www.linkedin.com/in/derek-chang-974106164/"
     }
   ],
   "others": [
     {
-      "name": "Dominic Kemp",
-      "position": "Head of Administration",
-      "img": "Dominic-Kemp.png",
-      "linkedIn": ""
+      "name": "Myriam Khalil",
+      "position": "Organizer",
+      "img": "Myriam-Khalil.png",
+      "linkedIn": "https://www.linkedin.com/in/myriam-khalil-8a9460165/"
     },
     {
-      "name": "Youssef Gorge",
-      "position": "Head of Event Planning",
-      "img": "Youssef-Gorge.png",
+      "name": "Abdullah Jawhar",
+      "position": "Outreach Member",
+      "img": "Abdullah-Jawhar.png",
       "linkedIn": ""
     }
   ]

@@ -6,6 +6,12 @@
   ],
   "Major": [
     "Aerospace", "Biomedical", "Chemical", "Civil", "Computer", "Computer Science and Engineering",
-    "Computer Science", "Electrical", "Environmental", "Material Science", "Mechanical"
+    "Computer Science", "Electrical", "Environmental", "Material Science", "MAE", "Mechanical"
+  ],
+  "Class": [
+    "Freshman", "Sophomore", "Junior", "Senior", "Super Senior"
+  ],
+  "Diet": [
+    "None", "Vegetarian", "Vegan", "Gluten Free", "Halah", "Other"
   ]
 }

@@ -27,7 +27,7 @@
           <router-link to="/jointheteam">Join the Team</router-link>
         </div>
       </div>
-      <p>&copy;UCI Engineering Conference</p>
+      <p><router-link style="display:inline;" tag='p' to="/secretpage">&copy;</router-link>UCI Engineering Conference</p>
     </footer>
   </div>
 </template>

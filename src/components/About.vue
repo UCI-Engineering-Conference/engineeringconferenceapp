@@ -52,8 +52,8 @@ export default {
   }
   .faq-image {
     height: 180px;
-    border: 5px solid #65D25C;
-    border-radius: .5em .5em 0 0;
+    /*border: 5px solid #65D25C;*/
+    /*border-radius: .5em .5em 0 0;*/
   }
   .faq-grid li {
     width: 280px;
@@ -68,7 +68,8 @@ export default {
     color: #EAEAEA;
   }
   .faq-grid li:nth-child(odd) .faq-image {
-    border: 5px solid #A2E49D;
+    /*border: 5px solid #A2E49D;*/
+    /*border-radius: .5em 0 0 .5em;*/
   }
   .page-header {
     background-image:
@@ -78,8 +79,6 @@ export default {
   @media only screen and (min-width: 660px) {
     .faq-image {
       height: 150px;
-      border: 5px solid #65D25C;
-      border-radius: 0 .5em .5em 0;
       vertical-align: middle;
       float:right;
       margin-left: 10px
@@ -97,7 +96,7 @@ export default {
     }
     .faq-grid li:nth-child(odd) {
       border-left: none;
-      border-right: 1em solid #A2E49D;
+      border-right: 1em solid #65D25C;
       background-color: #808080;
       text-align:left;
       color: #EAEAEA;
@@ -106,8 +105,6 @@ export default {
       float:left;
       margin-left:0px;
       margin-right: 10px;
-      border: 5px solid #A2E49D;
-      border-radius: .5em 0 0 .5em;
     }
   }
   @media only screen and (min-width: 1000px) {

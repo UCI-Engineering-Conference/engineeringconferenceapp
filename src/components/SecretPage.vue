@@ -27,7 +27,7 @@
     <table-column show="phone" label="Phone"></table-column>
     <table-column show="school" label="School"></table-column>
     <table-column show="major" label="Major"></table-column>
-    <table-column show="graduationyear" label="Year"></table-column>
+    <table-column show="class" label="Class"></table-column>
     <table-column show="linkedin" label="LinkedIn"></table-column>
     <table-column show="message" label="Message For APP"></table-column>
 

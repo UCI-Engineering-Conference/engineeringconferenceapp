@@ -45,26 +45,36 @@
           <span class="alert">{{ errors.first('phone') }}</span>
         </div>
         <div class="item-e">
-          <label>Major</label>
-          <input type="text" v-model="user.majorForEC">
+          <label>Major <b>*</b></label>
+          <input type="text" v-model="user.majorForEC" v-validate="'required'" name="major">
+          <span class="alert">{{ errors.first('major') }}</span>
         </div>
         <div class="item-f">
-          <label>Graduation Year <b>*</b></label>
-          <input type="text" v-model="user.graduationyear" v-validate="'required'" name="graduation year">
-          <span class="alert">{{ errors.first('graduation year') }}</span>
+          <label>Class <b>*</b></label>
+          <select v-model="user.class" v-validate="'required'" name="class">
+            <option disabled value="">Please select one</option>
+            <option v-for="cla in classes" :key="cla">{{cla}}</option>
+          </select>
+          <span class="alert">{{ errors.first('class') }}</span>
         </div>
         <div class="item-g">
           <label>LinkedIn</label>
           <input type="text" v-model="user.linkedin">
         </div>
         <div class="item-h">
-          <label>Desired Position</label>
-          <select v-model="user.position">
+          <label>Desired Position <b>*</b></label>
+          <select v-model="user.position" v-validate="'required'" name="position">
             <option disabled value="">Please select one</option>
             <option v-for="(data, index) in positionInfo" :key="index">{{data.title}}</option>
           </select>
+          <span class="alert">{{ errors.first('position') }}</span>
         </div>
         <div class="item-i">
+          <label>Hrs/Week you can dedicate <b>*</b></label>
+          <input type="text" v-model="user.hours" v-validate="'required|decimal'" name="hours">
+          <span class="alert">{{ errors.first('hours') }}</span>
+        </div>
+        <div class="item-j">
           <label class="message-label">Write a few lines about why you would be a good fit for EC and the position specified. Or specify multiple positions that you would be willing to take on!</label>
           <textarea type="text" v-model="user.messageForEC"></textarea>
         </div>
@@ -81,7 +91,7 @@
 <script>
 import modal from './ApplicationModal.vue'
 import PositionInfo from '../../static/positioninfo.json'
-
+import ApplicationOptions from '../../static/ApplicationOptions.json'
 import { db } from '../main'
 export default {
   components: {
@@ -91,7 +101,8 @@ export default {
     return {
       isModalVisible: false,
       positionInfo: PositionInfo,
-      user: { teamInterest: true } // the rest is added by the form input fields
+      classes: ApplicationOptions['Class'],
+      user: { teamInterest: true, class: '', position: '' } // the rest is added by the form input fields
     }
   },
   methods: {
@@ -202,8 +213,11 @@ export default {
   .item-i {
     grid-area: item-i;
   }
-  .submit-button {
+  .item-j {
     grid-area: item-j;
+  }
+  .submit-button {
+    grid-area: item-k;
   }
 
   .form-input {
@@ -276,9 +290,9 @@ export default {
       "item-d item-d"
       "item-e item-e"
       "item-f item-g"
-      "item-h item-h"
-      "item-i item-i"
-      "item-j item-j";
+      "item-h item-i"
+      "item-j item-j"
+      "item-k item-k";
   }
   input {
     width: calc(100% - 40px);

@@ -2,8 +2,8 @@
   <div>
     <img class="main-image" src="/static/img/thumbnail.png"/>
     <div class="intro">
-      <h1 class="intro-line1">innovate, lead, debate</h1>
-      <h1 class="intro-line2">at ENGINEERING CONFERENCE</h1>
+      <h1 class="intro-line1">Innovate. Lead. Debate.</h1>
+      <h1 class="intro-line2">ENGINEERING CONFERENCE</h1>
       <p class="intro-line3">University of California Irvine·{{ date }}</p>
     </div>
 
@@ -11,7 +11,7 @@
       <router-link to="/application" tag="button" style="margin:30px;width:200px;height:80px;font-size: 32px;" class="submit-button"><span>Apply Now!</span></router-link>
     </div>
     <div v-else>
-      <p >Applications for Engineering Conference 2019 are now closed.</p>
+      <p>Applications for Engineering Conference 2019 are now closed.</p>
 
       <p>Join our community to be the first to know about important updates.</p>
       <button
@@ -36,26 +36,33 @@
     <div class="video-section">
       <div class="video-header">
         <h2>UC Irvine's Engineering Conference is back</h2>
-        <p>Gather with hundreds of engineering students of all backgrounds to research and design for solutions for contemporary problems.</p>
-        <p>Our mission at EC is <i>{{content.Mission}}</i> Let us take care of the food, resources, energy, and entertainment so you can focus on the engineering.</p>
+        <p>Gather with hundreds of students of all backgrounds to research and design solutions for engineering problems. Let us take care of the food, resources, energy, and entertainment so you can focus on the innovation.</p>
+        <p>UCI Engineering Conference is an undergraduate student-run conference that pushes
+          engineers to utilize the knowledge in their fields of interest to solve real world engineering
+          problems as they improve their public speaking and debate skills. </p>
       </div>
       <div class="video-container">
         <iframe class="resp-iframe" src="https://www.youtube.com/embed/yCOshvp6BV0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
 
-    <!--<div class="published-papers">-->
-      <!--<div>-->
-        <!--<a href="https://escholarship.org/uc/item/5qb1r7tv">SolarFlair</a>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<a href="https://escholarship.org/uc/item/5rc1q3xr">Connect the Zots</a>-->
-      <!--</div>-->
-    <!--</div>-->
     <div class="philanthropy">
+      <h2>Our Mission</h2>
+      <p><i>{{ content.Mission }}</i> </p>
       <h2>Our Vision</h2>
-      <p><i>{{ content.Vision }}</i> Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
-      <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to build a distribution system in Maventibao, Madagascar to make water more accessible. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a> </p>
+      <p><i>{{ content.Vision }}</i> </p>
+      <p>Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
+      <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to support building a distribution system in Maventibao, Madagascar that makes water more accessible for the people who live there. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <!--<a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a>--> </p>
+    </div>
+
+    <div class="published-papers">
+      <p>Check out the work from undergraduate students during Engineering Conference 2018 that has now been published in the UC repository.</p>
+      <div>
+        <a href="https://escholarship.org/uc/item/5qb1r7tv">SolarFlair</a>
+      </div>
+      <div>
+        <a href="https://escholarship.org/uc/item/5rc1q3xr">Connect the Zots</a>
+      </div>
     </div>
 
     <div class="recruitment">
@@ -83,7 +90,7 @@ export default {
   data () {
     return {
       isModalVisible: false,
-      date: 'March 3-6, 2019',
+      date: 'February 16-18, 2019',
       content: homePageContent
     }
   },
@@ -179,7 +186,9 @@ a:hover {
   border: 5px solid #606060;
   border-radius: .5em;
 }
-
+.published-papers {
+  margin: 20px 10%;
+}
 @media only screen and (min-width: 420px) {
   .recruitment {
     font-size: 13px;

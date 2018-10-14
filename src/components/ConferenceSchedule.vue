@@ -149,7 +149,9 @@ export default {
     margin: 0 0 0 -32px;
     font-weight: 900;
     color: #3D3D3D;
-    background: url('/static/img/ScheduleBullet.png') no-repeat;
+    background-color: rgba(255, 255, 255, .7);
+    border-radius: 50%;
+    /*background: url('/static/img/ScheduleBullet.png') no-repeat;*/
   }
   .timeline li div.event span.time span {
     display: block;
@@ -221,6 +223,11 @@ export default {
       width: 80%;
       margin: 20px auto;
       position: relative;
+    }
+    .timeline li div.event span.time {
+      width: 70px;
+      height: 60px;
+      margin: 0 0 0 -37px;
     }
     .timeline li div.event span.time span.start {
       font-size: 14px;

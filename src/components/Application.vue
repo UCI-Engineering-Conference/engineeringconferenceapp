@@ -26,13 +26,26 @@
           <span class="alert">{{ errors.first('phone') }}</span>
         </div>
         <div class="item-e">
+          <label>Dietary Restrictions <b>*</b></label>
+          <select v-model="user.diet" v-validate="'required'" name="diet">
+            <option disabled value="">Please select one</option>
+            <option v-for="d in diet" :key="d">{{d}}</option>
+          </select>
+          <span class="alert">{{ errors.first('diet') }}</span>
+        </div>
+        <div class="item-f">
+          <label>Other Dietary Restrictions</label>
+          <input type="text" v-model="user.otherDiet">
+          <span class="alert">{{ errors.first('phone') }}</span>
+        </div>
+        <div class="item-g">
           <label>School <b>*</b></label>
           <select v-model="user.school">
             <option disabled value="">Please select one</option>
             <option v-for="school in schools" :key="school">{{school}}</option>
           </select>
         </div>
-        <div class="item-f">
+        <div class="item-h">
           <label>Major <b>*</b></label>
           <div>
             <select v-if="['Engineering', 'Computer Science'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
@@ -44,16 +57,19 @@
           </div>
 
         </div>
-        <div class="item-g">
-          <label>Graduation Year <b>*</b></label>
-          <input type="text" v-model="user.graduationyear" v-validate="'required'" name="graduation year">
-          <span class="alert">{{ errors.first('graduation year') }}</span>
+        <div class="item-i">
+          <label>Class <b>*</b></label>
+          <select v-model="user.class" v-validate="'required'" name="class">
+            <option disabled value="">Please select one</option>
+            <option v-for="cla in classes" :key="cla">{{cla}}</option>
+          </select>
+          <span class="alert">{{ errors.first('class') }}</span>
         </div>
-        <div class="item-h">
+        <div class="item-j">
           <label>LinkedIn</label>
           <input type="text" v-model="user.linkedin">
         </div>
-        <div class="item-i">
+        <div class="item-k">
           <label class="message-label">Is there anything else you like us to know regarding your skills or accomplishments?</label>
           <textarea v-model="user.message"></textarea>
         </div>
@@ -77,7 +93,7 @@
 <script>
 import modal from './ApplicationModal.vue'
 import termsModal from './TermsModal.vue'
-import SchoolandMajorInfo from '../../static/SchoolAndMajor.json'
+import ApplicationOptions from '../../static/ApplicationOptions.json'
 import { db } from '../main'
 export default {
   components: {
@@ -93,9 +109,11 @@ export default {
     return {
       isModalVisible: false,
       isTermsModalVisible: false,
-      schools: SchoolandMajorInfo['School'],
-      majors: SchoolandMajorInfo['Major'],
-      user: {applicationSubmitted: true, school: ''}
+      schools: ApplicationOptions['School'],
+      majors: ApplicationOptions['Major'],
+      classes: ApplicationOptions['Class'],
+      diet: ApplicationOptions['Diet'],
+      user: {applicationSubmitted: true, school: '', class: '', diet: ''}
     }
   },
   methods: {
@@ -216,8 +234,14 @@ export default {
   .item-i {
     grid-area: item-i;
   }
-  .submit-button {
+  .item-j {
     grid-area: item-j;
+  }
+  .item-k {
+    grid-area: item-k;
+  }
+  .submit-button {
+    grid-area: item-l;
   }
   .form-input {
     display: grid;
@@ -257,11 +281,12 @@ export default {
       "item-a item-b"
       "item-c item-c"
       "item-d item-d"
-      "item-e item-e"
-      "item-f item-g"
-      "item-h item-h"
-      "item-i item-i"
-      "item-j item-j";
+      "item-e item-f"
+      "item-g item-g"
+      "item-h item-i"
+      "item-j item-j"
+      "item-k item-k"
+      "item-l item-l";
   }
   input {
     width: calc(100% - 40px);
