@@ -11,6 +11,10 @@
       </div>
     </div>
     <router-view/>
+    <modal v-show="isModalVisible" @close="closeModal">
+      <h2 slot="header">Amazing!</h2>
+      <p slot ="body">You're official registered for UCI Engineering Conference! We'll be in touch with you soon regarding the status of your application.</p>
+    </modal>
     <footer id="footer">
       <div class="footer-icon">
         <a href="mailto:EngineeringConferenceUCI@gmail.com"><font-awesome-icon icon="envelope" /></a>
@@ -27,16 +31,19 @@
           <router-link to="/jointheteam">Join the Team</router-link>
         </div>
       </div>
-      <p><router-link style="display:inline;" tag='p' to="/secretpage">&copy;</router-link>UCI Engineering Conference</p>
+      <p><span @click="showModal">&copy;</span>UCI Engineering Conference</p>
     </footer>
   </div>
 </template>
 
 <script>
 import VeeValidate from 'vee-validate'
-
+import modal from './components/SecretPageModal.vue'
 export default {
   name: 'App',
+  components: {
+    modal
+  },
   computed: {
     isApplicationOpen () {
       return this.$store.state.applicationOpen
@@ -54,6 +61,19 @@ export default {
         })
       })
     })
+  },
+  data () {
+    return {
+      isModalVisible: false
+    }
+  },
+  methods: {
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
+    }
   }
 }
 </script>

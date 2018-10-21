@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'
 import VueLongPress from 'vue-long-press-directive'
 import { TableComponent, TableColumn } from 'vue-table-component'
+import {Tabs, Tab} from 'vue-tabs-component'
 import VueFire from 'vuefire'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -31,6 +32,8 @@ Vue.component('chevron-left', ChevronLeft)
 
 Vue.component('table-component', TableComponent)
 Vue.component('table-column', TableColumn)
+Vue.component('tabs', Tabs)
+Vue.component('tab', Tab)
 
 Vue.use(VeeValidate)
 Vue.use(VueLongPress, { duration: 1000 })

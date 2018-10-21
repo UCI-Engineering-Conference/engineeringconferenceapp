@@ -36,7 +36,6 @@
         <div class="item-f">
           <label>Other Dietary Restrictions</label>
           <input type="text" v-model="user.otherDiet">
-          <span class="alert">{{ errors.first('phone') }}</span>
         </div>
         <div class="item-g">
           <label>School <b>*</b></label>
