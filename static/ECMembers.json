@@ -1,51 +1,154 @@
-{
-  "management": [
-    {
-      "name": "Mazen Nader Alkhatib",
-      "position": "President / Founder",
-      "img": "Mazen-Nader-Alkhatib.png",
-      "linkedIn": "https://www.linkedin.com/in/mazen-nader-alkhatib-41a635139/"
-    }
-  ],
-  "head-chair":
+[
   {
-    "name": "Faisal Altassan",
-    "position": "Head of Chairs Board",
-    "img": "Faisal-Altassan.png",
-    "linkedIn": "https://www.linkedin.com/in/faisal-altassan-b56606b6/"
+    "year": "2018-2019",
+    "management": [
+      {
+        "name": "Mazen Nader Alkhatib",
+        "position": "President / Founder",
+        "img": "Mazen-Nader-Alkhatib.png",
+        "linkedIn": "https://www.linkedin.com/in/mazen-nader-alkhatib-41a635139/"
+      }
+    ],
+    "head-chair":
+    {
+      "name": "Faisal Altassan",
+      "position": "Head of Chairs Board",
+      "img": "Faisal-Altassan.png",
+      "linkedIn": "https://www.linkedin.com/in/faisal-altassan-b56606b6/"
+    },
+    "chairs": [
+      {
+        "name": "Elias Funez",
+        "position": "MAE Senior Chair",
+        "img": "Elias-Funez.png",
+        "linkedIn": "https://www.linkedin.com/in/elias-funez-a60801159/"
+      },
+      {
+        "name": "Nik Hammon",
+        "position": "EECS Senior Chair",
+        "img": "Nik-Hammon.png",
+        "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
+      },
+      {
+        "name": "Derek Chang",
+        "position": "CBEMS Senior Chair",
+        "img": "Derek-Chang.png",
+        "linkedIn": "https://www.linkedin.com/in/derek-chang-974106164/"
+      },
+      {
+        "name": "Jesse Navarrete",
+        "position": "CE Chair",
+        "img": "Placeholder.png",
+        "linkedIn": ""
+      },
+      {
+        "name": "Crystal Lai",
+        "position": "EECS Chair",
+        "img": "Placeholder.png",
+        "linkedIn": ""
+      }
+    ],
+    "others": [
+      {
+        "name": "Myriam Khalil",
+        "position": "Organizer",
+        "img": "Myriam-Khalil.png",
+        "linkedIn": "https://www.linkedin.com/in/myriam-khalil-8a9460165/"
+      },
+      {
+        "name": "Abdullah Jawhar",
+        "position": "Outreach Member",
+        "img": "Abdullah-Jawhar.png",
+        "linkedIn": "https://www.linkedin.com/in/abdullah-jawhar-4777a6172/"
+      },
+      {
+        "name": "Jesus Reyes",
+        "position": "Graphic Designer",
+        "img": "Placeholder.png",
+        "linkedIn": "https://www.linkedin.com/in/jesus-reyes-9090bb150/"
+      }
+    ]
   },
-  "chairs": [
+  {
+    "year": "2017-2018",
+    "management": [
+      {
+        "name": "Mazen Nader Alkhatib",
+        "position": "President / Founder",
+        "img": "Mazen-Nader-Alkhatib.png",
+        "linkedIn": "https://www.linkedin.com/in/mazen-nader-alkhatib-41a635139/"
+      }
+    ],
+    "head-chair":
     {
-      "name": "Elias Funez",
-      "position": "Mechanical and Aerospace",
-      "img": "Elias-Funez.png",
-      "linkedIn": "https://www.linkedin.com/in/elias-funez-a60801159/"
+      "name": "Faisal Altassan",
+      "position": "Head of Chairs Board",
+      "img": "Faisal-Altassan.png",
+      "linkedIn": "https://www.linkedin.com/in/faisal-altassan-b56606b6/"
     },
-    {
-      "name": "Nik Hammon",
-      "position": "Computer Science and Electrical",
-      "img": "Nik-Hammon.png",
-      "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
-    },
-    {
-      "name": "Derek Chang",
-      "position": "Chemical and Material",
-      "img": "Derek-Chang.png",
-      "linkedIn": "https://www.linkedin.com/in/derek-chang-974106164/"
-    }
-  ],
-  "others": [
-    {
-      "name": "Myriam Khalil",
-      "position": "Organizer",
-      "img": "Myriam-Khalil.png",
-      "linkedIn": "https://www.linkedin.com/in/myriam-khalil-8a9460165/"
-    },
-    {
-      "name": "Abdullah Jawhar",
-      "position": "Outreach Member",
-      "img": "Abdullah-Jawhar.png",
-      "linkedIn": "https://www.linkedin.com/in/abdullah-jawhar-4777a6172/"
-    }
-  ]
-}
+    "chairs": [
+      {
+        "name": "Elias Funez",
+        "position": "MAE Chair",
+        "img": "Elias-Funez.png",
+        "linkedIn": "https://www.linkedin.com/in/elias-funez-a60801159/"
+      },
+      {
+        "name": "Carlos Tornell",
+        "position": "CBEMS Chair",
+        "img": "Carlos-Tornell.png",
+        "linkedIn": ""
+      },
+      {
+        "name": "Andres Lozano",
+        "position": "CE Chair",
+        "img": "Andres-Lozano.png",
+        "linkedIn": ""
+      },
+      {
+        "name": "Nik Hammon",
+        "position": "EECS Chair",
+        "img": "Nik-Hammon.png",
+        "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
+      },
+      {
+        "name": "Derek Chang",
+        "position": "CBEMS CoChair",
+        "img": "Derek-Chang.png",
+        "linkedIn": "https://www.linkedin.com/in/derek-chang-974106164/"
+      },
+      {
+        "name": "Jacob King",
+        "position": "MAE CoChair",
+        "img": "Jacob-King.png",
+        "linkedIn": ""
+      }
+    ],
+    "others": [
+      {
+        "name": "Youssef Gorge",
+        "position": "Head of Event Planning",
+        "img": "Youssef-Gorge.png",
+        "linkedIn": ""
+      },
+      {
+        "name": "Dominic Kemp",
+        "position": "Head of Administration",
+        "img": "Dominic-Kemp.png",
+        "linkedIn": ""
+      },
+      {
+        "name": "Dania Alfeerawi",
+        "position": "Organizing Member",
+        "img": "Placeholder.png",
+        "linkedIn": ""
+      },
+      {
+        "name": "Ruby Gu",
+        "position": "Media Member",
+        "img": "Ruby-Gu.png",
+        "linkedIn": ""
+      }
+    ]
+  }
+]

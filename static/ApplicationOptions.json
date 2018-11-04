@@ -4,9 +4,13 @@
     "Information and Computer Science", "Interdisciplinary Studies", "Law", "Physical Sciences",
     "Social Ecology", "Social Sciences", "Undeclared"
   ],
-  "Major": [
+  "EngMajor": [
     "Aerospace", "Biomedical", "Chemical", "Civil", "Computer", "Computer Science and Engineering",
-    "Computer Science", "Electrical", "Environmental", "Material Science", "MAE", "Mechanical"
+    "Electrical", "Environmental", "Material Science", "MAE", "Mechanical"
+  ],
+  "ICSMajor": [
+    "Business Information Management", "Computer Game Science", "Computer Science", "Computer Science and Engineering",
+    "Data Science", "Informatics", "Software Engineering"
   ],
   "Class": [
     "Freshman", "Sophomore", "Junior", "Senior", "Super Senior"

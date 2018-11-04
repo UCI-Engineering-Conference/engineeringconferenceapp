@@ -47,9 +47,13 @@
         <div class="item-h">
           <label>Major <b>*</b></label>
           <div>
-            <select v-if="['Engineering', 'Computer Science'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
+            <select v-if="['Engineering'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
               <option disabled value="">Please select one</option>
-              <option v-for="major in majors" :key="major">{{major}}</option>
+              <option v-for="major in engMajors" :key="major">{{major}}</option>
+            </select>
+            <select v-else-if="['Information and Computer Science'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
+              <option disabled value="">Please select one</option>
+              <option v-for="major in icsMajors" :key="major">{{major}}</option>
             </select>
             <input v-else type="text" v-model="user.major" v-validate="'required'" name="major">
             <span class="alert">{{ errors.first('major') }}</span>
@@ -109,7 +113,8 @@ export default {
       isModalVisible: false,
       isTermsModalVisible: false,
       schools: ApplicationOptions['School'],
-      majors: ApplicationOptions['Major'],
+      engMajors: ApplicationOptions['EngMajor'],
+      icsMajors: ApplicationOptions['ICSMajor'],
       classes: ApplicationOptions['Class'],
       diet: ApplicationOptions['Diet'],
       user: {applicationSubmitted: true, school: '', class: '', diet: ''}
