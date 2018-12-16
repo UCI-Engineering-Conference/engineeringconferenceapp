@@ -12,8 +12,8 @@
     <transition name="slide-fade" mode="out-in">
       <div class="container" v-bind:key="currentYear">
         <div class="team">
-          <div class="president">
-            <ul>
+          <div class="management">
+            <ul class="management-grid">
               <li v-for="(member, index) in member_data[currentYear]['management']" v-bind:key="index">
                 <div class="member">
                   <img class="member-image" :src="imgPreUrl(member.img)">
@@ -39,18 +39,32 @@
             </ul>
           </div>
           <h2>Chairs Board</h2>
-          <!--<div class="head-chair">-->
-            <!--<div class="member">-->
-              <!--<img class="member-image" :src="imgPreUrl(member_data[currentYear]['head-chair'].img)">-->
-              <!--<div class="member-info">-->
-                <!--<a class="member-name" :href="member_data['head-chair'].linkedIn">{{ member_data['head-chair'].name }}</a>-->
-                <!--<div class="member-position">{{ member_data['head-chair'].position }}</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
+          <div class="head-chair" v-if="member_data[currentYear]['head-chair']">
+            <div class="member">
+              <img class="member-image" :src="imgPreUrl(member_data[currentYear]['head-chair'].img)">
+              <div class="member-info">
+                <a class="member-name" :href="member_data[currentYear]['head-chair'].linkedIn">{{ member_data[currentYear]['head-chair'].name }}</a>
+                <div class="member-position">{{ member_data[currentYear]['head-chair'].position }}</div>
+              </div>
+            </div>
+          </div>
           <div class="chairs">
             <ul class="chairs-grid">
               <li v-for="(member, index) in member_data[currentYear]['chairs']" v-bind:key="index">
+                <div class="member">
+                  <img class="member-image" :src="imgPreUrl(member.img)">
+                  <div class="member-info">
+                    <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+                    <div class="member-position">{{ member.position }}</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <h2>Advisors</h2>
+          <div class="advisors">
+            <ul class="advisors-grid">
+              <li v-for="(member, index) in member_data[currentYear]['advisors']" v-bind:key="index">
                 <div class="member">
                   <img class="member-image" :src="imgPreUrl(member.img)">
                   <div class="member-info">
@@ -94,7 +108,7 @@ export default {
 </script>
 
 <style scoped>
-  .president, .head-chair{
+   .head-chair, .management{
     margin: 0 auto;
     padding: 10px;
   }
@@ -134,7 +148,7 @@ export default {
     color: #606060;
   }
 
-  .chairs {
+  .chairs, .advisors{
     margin: 0 auto;
   }
   .page-header {
@@ -142,7 +156,7 @@ export default {
       linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url(/static/page-headers/meet-the-team.jpg);
   }
-  .chairs-grid, .others-grid {
+  .chairs-grid, .others-grid, .advisors-grid, .management-grid{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -213,7 +227,7 @@ export default {
     }
   }
   @media only screen and (min-width: 540px) {
-    .president, .head-chair{
+     .head-chair{
       width: 440px;
       margin: 0 auto;
       padding: 10px;

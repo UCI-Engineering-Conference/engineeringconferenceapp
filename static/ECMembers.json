@@ -11,10 +11,10 @@
     ],
     "head-chair":
     {
-      "name": "Faisal Altassan",
+      "name": "Nik Hammon",
       "position": "Head of Chairs Board",
-      "img": "Faisal-Altassan.png",
-      "linkedIn": "https://www.linkedin.com/in/faisal-altassan-b56606b6/"
+      "img": "Nik-Hammon.png",
+      "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
     },
     "chairs": [
       {
@@ -24,12 +24,6 @@
         "linkedIn": "https://www.linkedin.com/in/elias-funez-a60801159/"
       },
       {
-        "name": "Nik Hammon",
-        "position": "EECS Senior Chair",
-        "img": "Nik-Hammon.png",
-        "linkedIn": "https://www.linkedin.com/in/niklas-hammon-9b0459155/"
-      },
-      {
         "name": "Derek Chang",
         "position": "CBEMS Senior Chair",
         "img": "Derek-Chang.png",
@@ -37,21 +31,27 @@
       },
       {
         "name": "Jesse Navarrete",
-        "position": "CE Chair",
-        "img": "Placeholder.png",
+        "position": "CE CoChair",
+        "img": "Jesse-Navarrete.png",
         "linkedIn": ""
       },
       {
         "name": "Crystal Lai",
-        "position": "EECS Chair",
-        "img": "Placeholder.png",
-        "linkedIn": ""
+        "position": "EECS CoChair",
+        "img": "Crystal-Lai.png",
+        "linkedIn": "https://www.linkedin.com/in/crystal-lai/"
+      },
+      {
+        "name": "Donald Ordorica",
+        "position": "MAE CoChair",
+        "img": "Donald-Ordorica.png",
+        "linkedIn": "https://www.linkedin.com/in/donaldordorica/"
       }
     ],
     "others": [
       {
         "name": "Myriam Khalil",
-        "position": "Organizer",
+        "position": "Head of Organizing",
         "img": "Myriam-Khalil.png",
         "linkedIn": "https://www.linkedin.com/in/myriam-khalil-8a9460165/"
       },
@@ -62,10 +62,36 @@
         "linkedIn": "https://www.linkedin.com/in/abdullah-jawhar-4777a6172/"
       },
       {
+        "name": "Daniela Uriostegui",
+        "position": "Event Planner",
+        "img": "Daniela-Uriostegui.png",
+        "linkedIn": ""
+      },
+      {
         "name": "Jesus Reyes",
         "position": "Graphic Designer",
-        "img": "Placeholder.png",
+        "img": "Jesus-Reyes.png",
         "linkedIn": "https://www.linkedin.com/in/jesus-reyes-9090bb150/"
+      }
+    ],
+    "advisors": [
+      {
+        "name": "Dr. Hamed Youssefpour",
+        "position": "Faculty Advisor",
+        "img": "Hamed-Youssefpour.png",
+        "linkedIn": "https://www.linkedin.com/in/hamed-youssefpour-a3a7a552/"
+      },
+      {
+        "name": "Dr. Natascha Buswell",
+        "position": "Engineering Faculty Advisor",
+        "img": "Natascha-Buswell.png",
+        "linkedIn": "https://www.linkedin.com/in/natascha-buswell-69102a66/"
+      },
+      {
+        "name": "Taylor Garrett",
+        "position": "Staff Advisor",
+        "img": "Taylor-Garrett.png",
+        "linkedIn": "https://www.linkedin.com/in/taylor-garrett/"
       }
     ]
   },
@@ -77,6 +103,12 @@
         "position": "President / Founder",
         "img": "Mazen-Nader-Alkhatib.png",
         "linkedIn": "https://www.linkedin.com/in/mazen-nader-alkhatib-41a635139/"
+      },
+      {
+        "name": "Adora Anound Tadros",
+        "position": "Vice President / Founder",
+        "img": "Adora-Tadros.png",
+        "linkedIn": ""
       }
     ],
     "head-chair":
@@ -97,13 +129,13 @@
         "name": "Carlos Tornell",
         "position": "CBEMS Chair",
         "img": "Carlos-Tornell.png",
-        "linkedIn": ""
+        "linkedIn": "https://www.linkedin.com/in/carlos-tornell-65a0b2113/"
       },
       {
         "name": "Andres Lozano",
         "position": "CE Chair",
         "img": "Andres-Lozano.png",
-        "linkedIn": ""
+        "linkedIn": "https://www.linkedin.com/in/andres-lozano-626210111/"
       },
       {
         "name": "Nik Hammon",
@@ -121,7 +153,7 @@
         "name": "Jacob King",
         "position": "MAE CoChair",
         "img": "Jacob-King.png",
-        "linkedIn": ""
+        "linkedIn": "https://www.linkedin.com/in/jacob-michael-king-337947ab/"
       }
     ],
     "others": [
@@ -140,7 +172,7 @@
       {
         "name": "Dania Alfeerawi",
         "position": "Organizing Member",
-        "img": "Placeholder.png",
+        "img": "Dania-Alfeerawi.png",
         "linkedIn": ""
       },
       {
@@ -148,6 +180,20 @@
         "position": "Media Member",
         "img": "Ruby-Gu.png",
         "linkedIn": ""
+      }
+    ],
+    "advisors": [
+      {
+        "name": "Dr. Hamed Youssefpour",
+        "position": "Faculty Advisor",
+        "img": "Hamed-Youssefpour.png",
+        "linkedIn": "https://www.linkedin.com/in/hamed-youssefpour-a3a7a552/"
+      },
+      {
+        "name": "Taylor Garrett",
+        "position": "Staff Advisor",
+        "img": "Taylor-Garrett.png",
+        "linkedIn": "https://www.linkedin.com/in/taylor-garrett/"
       }
     ]
   }

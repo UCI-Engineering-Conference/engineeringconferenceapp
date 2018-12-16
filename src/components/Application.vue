@@ -58,7 +58,6 @@
             <input v-else type="text" v-model="user.major" v-validate="'required'" name="major">
             <span class="alert">{{ errors.first('major') }}</span>
           </div>
-
         </div>
         <div class="item-i">
           <label>Class <b>*</b></label>
@@ -84,7 +83,7 @@
 
       <modal v-show="isModalVisible" @close="closeModal">
         <h2 slot="header">Amazing!</h2>
-        <p slot ="body">You're official registered for UCI Engineering Conference! We'll be in touch with you soon regarding the status of your application.</p>
+        <p slot ="body">You're official registered for UCI Engineering Conference!</p>
       </modal>
 
       <button class="submit-button" @click="apply"><span>Submit</span></button>
@@ -248,29 +247,19 @@ export default {
     grid-area: item-l;
   }
   .form-input {
-    display: grid;
-    grid-template-columns: 250px;
-    grid-template-areas:
-      "item-a"
-      "item-b"
-      "item-c"
-      "item-d"
-      "item-e"
-      "item-f"
-      "item-g"
-      "item-h"
-      "item-i"
-      "item-j";
     justify-content: center;
   }
   .application {
-    padding:40px;
+    padding: 40px;
     overflow: hidden;
   }
 .termsAndConditions {
   color: #606060;
   font-weight: 300;
   font-size: 14px;
+}
+label {
+  text-align: left;
 }
 .page-header {
   background-image:
@@ -280,6 +269,7 @@ export default {
 
 @media only screen and (min-width: 500px) {
   .form-input {
+    display: grid;
     grid-template-columns: 250px 250px;
     grid-template-areas:
       "item-a item-b"
@@ -291,23 +281,12 @@ export default {
       "item-j item-j"
       "item-k item-k"
       "item-l item-l";
-  }
-  input {
-    width: calc(100% - 40px);
+    justify-content: center;
   }
   textarea {
     width: 460px;
     height: 100px;
     text-align: left;
-  }
-  select {
-    width: calc(100% - 17px);
-  }
-  label {
-    text-align: left;
-  }
-  .message-label {
-    font-size: 16px;
   }
 }
 </style>
