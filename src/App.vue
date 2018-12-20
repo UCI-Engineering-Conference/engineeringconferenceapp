@@ -164,7 +164,7 @@ ul {
 }
 .submit-button {
   display: inline-block;
-  border-radius: 6px;
+  border-radius: 20px;
   background-color: #FFB511;
   border: none;
   border-bottom: 3px solid #E5AE0B;
