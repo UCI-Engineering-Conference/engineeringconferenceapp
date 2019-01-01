@@ -4,14 +4,14 @@
     <div class="intro">
       <h1 class="intro-line1">Innovate. Lead. Debate.</h1>
       <h1 class="intro-line2">ENGINEERING CONFERENCE</h1>
-      <p class="intro-line3">University of California Irvine·{{ date }}</p>
+      <p class="intro-line3">University of California Irvine·{{ generalContent.Date }}</p>
     </div>
 
     <div v-if="isApplicationOpen">
-      <router-link to="/application" tag="button" style="margin:30px;width:200px;height:80px;font-size: 32px;" class="submit-button"><span>Apply Now!</span></router-link>
+      <router-link to="/application" tag="button" style="margin:30px;width:200px;height:50px;font-size:24px;" class="submit-button"><span>APPLY NOW</span></router-link>
     </div>
     <div v-else>
-      <p>Applications for Engineering Conference 2019 are now closed.</p>
+      <p>Applications for Engineering Conference {{generalContent.Year}} are now closed.</p>
 
       <p>Join our community to be the first to know about important updates.</p>
       <button
@@ -28,9 +28,9 @@
     />
 
     <div class="numbers">
-      <p><b>{{content.Attended}}</b> Engineers.</p>
-      <p><b>{{content.Days}}</b> Days.</p>
-      <p><b>{{content.Published}}</b> Students Published.</p>
+      <p><b>{{generalContent.Attended}}</b> Engineers.</p>
+      <p><b>{{generalContent.Days}}</b> Days.</p>
+      <p><b>{{generalContent.Published}}</b> Students Published.</p>
     </div>
 
     <div class="video-section">
@@ -48,9 +48,9 @@
 
     <div class="philanthropy">
       <h2>Our Mission</h2>
-      <p><i>{{ content.Mission }}</i> </p>
+      <p><i>{{ generalContent.Mission }}</i> </p>
       <h2>Our Vision</h2>
-      <p><i>{{ content.Vision }}</i> </p>
+      <p><i>{{ generalContent.Vision }}</i> </p>
       <p>Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
       <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to support building a distribution system in Maventibao, Madagascar that makes water more accessible for the people who live there. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <!--<a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a>--> </p>
     </div>
@@ -77,7 +77,7 @@
 
 <script>
 import modal from './MailingListModal.vue'
-import homePageContent from '../../static/HomePageContent.json'
+import generalContent from '../../static/GeneralContent.json'
 export default {
   components: {
     modal
@@ -90,8 +90,7 @@ export default {
   data () {
     return {
       isModalVisible: false,
-      date: 'February 16-18, 2019',
-      content: homePageContent
+      generalContent: generalContent
     }
   },
   methods: {

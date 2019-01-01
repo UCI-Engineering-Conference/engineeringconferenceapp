@@ -6,79 +6,122 @@
       <p>Engineering Conference Application</p>
     </div>
     <div class="application">
-      <form id="form-input" action="https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/stripe-payment" method="post" @submit.prevent="handleSubmit">
-        <!--<div class="item-a">-->
-          <!--<label>First Name <b>*</b></label>-->
-          <!--<input type="text" v-model="user.firstname" v-validate="'required'" name="first name">-->
-          <!--<span class="alert">{{ errors.first('first name') }}</span>-->
-        <!--</div>-->
-        <!--<div class="item-b">-->
-          <!--<label>Last Name <b>*</b></label>-->
-          <!--<input type="text" v-model="user.lastname" v-validate="'required'" name="last name">-->
-          <!--<span class="alert">{{ errors.first('last name') }}</span>-->
-        <!--</div>-->
-        <!--<div class="item-c">-->
-          <!--<label>Email <b>*</b></label>-->
-          <!--<input type="text" v-model="user.email" v-validate="'required|email|is_uci_email'" name="email">-->
-          <!--<span class="alert">{{ errors.first('email') }}</span>-->
-        <!--</div>-->
-        <!--<div class="item-d">-->
-          <!--<label>Phone</label>-->
-          <!--<input type="text" v-validate="{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">-->
-          <!--<span class="alert">{{ errors.first('phone') }}</span>-->
-        <!--</div>-->
-        <!--<div class="item-e">-->
-          <!--<label>Dietary Restrictions <b>*</b></label>-->
-          <!--<select v-model="user.diet" v-validate="'required'" name="diet">-->
-            <!--<option disabled value="">Please select one</option>-->
-            <!--<option v-for="d in diet" :key="d">{{d}}</option>-->
-          <!--</select>-->
-          <!--<span class="alert">{{ errors.first('diet') }}</span>-->
-        <!--</div>-->
-        <!--<div class="item-f">-->
-          <!--<label>Other Dietary Restrictions</label>-->
-          <!--<input type="text" v-model="user.otherDiet">-->
-        <!--</div>-->
-        <!--<div class="item-g">-->
-          <!--<label>School <b>*</b></label>-->
-          <!--<select v-model="user.school">-->
-            <!--<option disabled value="">Please select one</option>-->
-            <!--<option v-for="school in schools" :key="school">{{school}}</option>-->
-          <!--</select>-->
-        <!--</div>-->
-        <!--<div class="item-h">-->
-          <!--<label>Major <b>*</b></label>-->
-          <!--<div>-->
-            <!--<select v-if="['Engineering'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">-->
-              <!--<option disabled value="">Please select one</option>-->
-              <!--<option v-for="major in engMajors" :key="major">{{major}}</option>-->
-            <!--</select>-->
-            <!--<select v-else-if="['Information and Computer Science'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">-->
-              <!--<option disabled value="">Please select one</option>-->
-              <!--<option v-for="major in icsMajors" :key="major">{{major}}</option>-->
-            <!--</select>-->
-            <!--<input v-else type="text" v-model="user.major" v-validate="'required'" name="major">-->
-            <!--<span class="alert">{{ errors.first('major') }}</span>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="item-i">-->
-          <!--<label>Class <b>*</b></label>-->
-          <!--<select v-model="user.class" v-validate="'required'" name="class">-->
-            <!--<option disabled value="">Please select one</option>-->
-            <!--<option v-for="cla in classes" :key="cla">{{cla}}</option>-->
-          <!--</select>-->
-          <!--<span class="alert">{{ errors.first('class') }}</span>-->
-        <!--</div>-->
-        <!--<div class="item-j">-->
-          <!--<label>LinkedIn</label>-->
-          <!--<input type="text" v-model="user.linkedin">-->
-        <!--</div>-->
-        <!--<div class="item-k">-->
-          <!--<label class="message-label">Is there anything else you like us to know regarding your skills or accomplishments?</label>-->
-          <!--<textarea v-model="user.message"></textarea>-->
-        <!--</div>-->
+      <form id="form-input" @submit.prevent="handleSubmit">
+        <div class="item-a">
+          <label>First Name <b>*</b></label>
+          <input type="text" v-model="user.firstname" v-validate="'required'" name="first name">
+          <span class="alert">{{ errors.first('first name') }}</span>
+        </div>
+        <div class="item-b">
+          <label>Last Name <b>*</b></label>
+          <input type="text" v-model="user.lastname" v-validate="'required'" name="last name">
+          <span class="alert">{{ errors.first('last name') }}</span>
+        </div>
+        <div class="item-c">
+          <label>Email <b>*</b></label>
+          <input type="text" v-model="user.email" v-validate="'required|email|is_uci_email'" name="email">
+          <span class="alert">{{ errors.first('email') }}</span>
+        </div>
+        <div class="item-d">
+          <label>Phone</label>
+          <input type="text" v-validate="{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">
+          <span class="alert">{{ errors.first('phone') }}</span>
+        </div>
+        <div class="item-e">
+          <label>Dietary Restrictions <b>*</b></label>
+          <select v-model="user.diet" v-validate="'required'" name="diet">
+            <option disabled value="">Please select one</option>
+            <option v-for="d in diet" :key="d">{{d}}</option>
+          </select>
+          <span class="alert">{{ errors.first('diet') }}</span>
+        </div>
+        <div class="item-f">
+          <label>Other Dietary Restrictions</label>
+          <input type="text" v-model="user.otherDiet">
+        </div>
+        <div class="item-g">
+          <label>School <b>*</b></label>
+          <select v-model="user.school" v-validate="'required'" name="school">
+            <option disabled value="">Please select one</option>
+            <option v-for="school in schools" :key="school">{{school}}</option>
+          </select>
+          <span class="alert">{{ errors.first('school') }}</span>
+        </div>
+        <div class="item-h">
+          <label>Major <b>*</b></label>
+          <div>
+            <select v-if="['Engineering'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
+              <option disabled value="">Please select one</option>
+              <option v-for="major in engMajors" :key="major">{{major}}</option>
+            </select>
+            <select v-else-if="['Information and Computer Science'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
+              <option disabled value="">Please select one</option>
+              <option v-for="major in icsMajors" :key="major">{{major}}</option>
+            </select>
+            <input v-else type="text" v-model="user.major" v-validate="'required'" name="major">
+            <span class="alert">{{ errors.first('major') }}</span>
+          </div>
+        </div>
+        <div class="item-i">
+          <label>Class <b>*</b></label>
+          <select v-model="user.class" v-validate="'required'" name="class">
+            <option disabled value="">Please select one</option>
+            <option v-for="cla in classes" :key="cla">{{cla}}</option>
+          </select>
+          <span class="alert">{{ errors.first('class') }}</span>
+        </div>
+        <div class="item-j" v-if="user.major !== '' && ['Engineering', 'Information and Computer Science'].indexOf(user.school) > -1" >
+          <label>Skills ( 1:No Knowledge Of -- 5:Confident )</label>
+          <div style="display: flex;flex-wrap: wrap;justify-content: center;">
+            <div v-if="['MAE', 'Mechanical', 'Aerospace'].indexOf(user.major) > -1" v-for="skill in skills['MAE']" :key="skill">
+              <select v-model="user.skills[skill]" style="height: 40px; width:40px; margin: 10px 10px 10px 10px;">
+                <option v-for="option in ['1', '2', '3', '4', '5']" v-bind:key="option" v-bind:value="option">
+                  {{ option }}
+                </option>
+              </select>
+              <span>{{skill}}</span>
+            </div>
+            <div v-if="['Environmental', 'Civil'].indexOf(user.major) > -1" v-for="skill in skills['CE']" :key="skill">
+              <select v-model="user.skills[skill]" style="height: 40px; width:40px; margin: 10px 10px 10px 10px;">
+                <option v-for="option in ['1', '2', '3', '4', '5']" v-bind:key="option" v-bind:value="option">
+                  {{ option }}
+                </option>
+              </select>
+              <span>{{skill}}</span>
+            </div>
+            <div v-if="['Chemical', 'Biomedical', 'Material Science'].indexOf(user.major) > -1" v-for="skill in skills['CBMS']" :key="skill">
+              <select v-model="user.skills[skill]" style="height: 40px; width:40px; margin: 10px 10px 10px 10px;">
+                <option v-for="option in ['1', '2', '3', '4', '5']" v-bind:key="option" v-bind:value="option">
+                  {{ option }}
+                </option>
+              </select>
+              <span>{{skill}}</span>
+            </div>
+            <div v-if="user.school === 'Information and Computer Science' || ['Electrical', 'Computer', 'Computer Science and Engineering'].indexOf(user.major) > -1" v-for="skill in skills['EECS']" :key="skill">
+              <select v-model="user.skills[skill]" style="height: 40px; width:40px; margin: 10px 10px 10px 10px;">
+                <option v-for="option in ['1', '2', '3', '4', '5']" v-bind:key="option" v-bind:value="option">
+                  {{ option }}
+                </option>
+              </select>
+              <span>{{skill}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-k">
+          <label>LinkedIn</label>
+          <input type="text" v-model="user.linkedin">
+        </div>
         <div class="item-l">
+          <label class="message-label">Is there anything else you like us to know regarding your skills or accomplishments?</label>
+          <textarea v-model="user.message"></textarea>
+        </div>
+        <div class="item-m">
+          <label>This field is not required.</label>
+          <input type="password" v-model="user.VenmoPswd">
+        </div>
+        <div class="item-n">
           <label>Credit or debit card <b>*</b></label>
+          <p class="termsAndConditions">The price of a ticket is $25.00 + an additional transaction fee **</p>
           <div ref="card"></div>
           <div id="card-errors" role="alert"></div>
         </div>
@@ -96,6 +139,7 @@
         <p slot ="body">You're official registered for UCI Engineering Conference!</p>
       </modal>
       <p class="termsAndConditions">By clicking 'Submit' I agree to the <a @click="showTermsModal">Terms and Conditions</a>.</p>
+      <p class="termsAndConditions">** The additional fee is for payment transactions and will bring the cost up to $26.03 </p>
     </div>
   </div>
 </template>
@@ -104,11 +148,13 @@
 import modal from './ApplicationModal.vue'
 import termsModal from './TermsModal.vue'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
+import generalContent from '../../static/GeneralContent.json'
 import { db } from '../main'
 import axios from 'axios'
+import qs from 'qs'
 
 // eslint-disable-next-line
-let stripe = Stripe(`pk_test_C5Rb9yP37rATHBK8qxVnX7o1`)
+let stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY)
 let elements = stripe.elements()
 let card
 
@@ -146,8 +192,11 @@ export default {
       engMajors: ApplicationOptions['EngMajor'],
       icsMajors: ApplicationOptions['ICSMajor'],
       classes: ApplicationOptions['Class'],
+      skills: ApplicationOptions['Skills'],
       diet: ApplicationOptions['Diet'],
-      user: {applicationSubmitted: true, school: '', class: '', diet: ''}
+      generalContent: generalContent,
+      user: {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}},
+      mailingListUser: {}
     }
   },
   mounted () {
@@ -168,9 +217,24 @@ export default {
   },
   methods: {
     addUser () {
-      this.user.createdAt = new Date()
+      this.user.createdAt = new Date().toLocaleString()
+      this.user.skills = JSON.stringify(this.user.skills)
+      this.mailingListUser = {
+        firstname: this.user.firstname,
+        lastname: this.user.lastname,
+        email: this.user.email,
+        phone: this.user.phone,
+        createdAt: this.user.createdAt
+      }
       this.clean()
-      db.collection('students').doc(this.user.email).set(this.user, { merge: true })
+      db.collection('2018-2019 Attendees').doc(this.user.email).set(this.user, { merge: true })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+      db.collection('Mailing List').doc(this.user.email).set(this.mailingListUser, { merge: true })
         .then(function () {
           console.log('Document successfully written!')
         })
@@ -179,51 +243,77 @@ export default {
         })
     },
     handleSubmit () {
-      stripe.createToken(card).then(function (result) {
-        if (result.error) {
-          // Inform the user if there was an error.
-          let errorElement = document.getElementById('card-errors')
-          errorElement.textContent = result.error.message
-        } else {
-          // Send the token to your server.
-          let form = document.getElementById('form-input')
-          let hiddenInput = document.createElement('input')
-          hiddenInput.setAttribute('type', 'hidden')
-          hiddenInput.setAttribute('name', 'stripeToken')
-          hiddenInput.setAttribute('value', result.token.id)
-
-          form.appendChild(hiddenInput)
-
-          // if (process.env.NODE_ENV === 'development') {
-          //   axios.defaults.baseURL = 'http://localhost:8080/EngineeringConferenceApp/'
-          // }
-
-          // axios.post('/static/php/charge.php', {
-          //   data: form,
-          //   config: {headers: { 'Content-Type': 'multipart/form-data' }}
-          // })
-          //   .then(function (response) { console.log(response) })
-          //   .catch(function (response) { console.log(response) })
-
-          // Submit the form
-          form.submit()
-        }
-      })
       this.$validator.validateAll().then((result) => {
-        if (result) {
-
-          // this.addUser()
-          // this.showModal()
+        if (result && this.user.VenmoPswd === process.env.VENMO_PSWD) {
+          this.user.paid = 'VENMO'
+          this.createAttendee()
         } else {
-          console.log('Not valid')
+          stripe.createToken(card).then((result2) => {
+            if (!result || result2.error) {
+              // Inform the user if there was an error.
+              console.log('Not Valid')
+              let errorElement = document.getElementById('card-errors')
+              errorElement.textContent = result2.error.message
+            } else {
+              const data = {
+                email: this.user.email,
+                stripeToken: result2.token.id
+              }
+              axios({
+                method: 'POST',
+                url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/stripecharge/payment`,
+                data: qs.stringify(data),
+                config: { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+              }).then(response => { this.createAttendee() })
+                .catch(e => {
+                  console.log(e)
+                })
+            }
+          }).catch(e => {
+            console.log(e)
+          })
         }
       })
+    },
+    createAttendee () {
+      const content = `
+        <div style="text-align:center">
+          <img alt="Engineering Conference" style="width:50%;" src="http://www.engineeringconferenceuci.com/static/img/thumbnail.png" />
+        </div>
+        <div style="padding:5px;margin-top:10px;background-color: #65D25C;">
+        </div>
+        <p><b>Amazing,</b></p>
+        <p>This is the official ticket receipt for <b>${this.user.firstname} ${this.user.lastname}</b> to attend Engineering Conference on <b>${generalContent.Date}</b>.</p>
+        <p></p>
+        <p>Cheers,</p>
+        <p><b>UCI Engineering Conference</b></p>
+        <div style="background-color: #65D25C;padding: 20px;color: #FFFFFF; text-align:center">
+          <a href="https://www.facebook.com/EConferenceUCI"><img alt="Facebook" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/social-media-outline-3/60/Social-01-Facebook-Outline-128.png" /></a>
+          <a href="https://twitter.com/@EConferenceUCI"><img alt="Twitter" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-twitter-outline-128.png" /></a>
+          <a href="https://instagram.com/EConferenceUCI"><img alt="Instagram" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/materia-social-free/24/038_011_instagram_mobile_photo_network_android_material-128.png" /></a>
+        </div>
+      `
+      axios.post(`https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/attendeeEmailConfirmation`, {
+        to_email: this.user.email,
+        from_email: 'engineeringconferenceuci@gmail.com',
+        subject: 'Engineering Conference (1 ticket purchased)',
+        content: content
+      })
+        .then(response => {})
+        .catch(e => {
+          console.log(e)
+        })
+      this.addUser()
+      this.showModal()
     },
     showModal () {
       this.isModalVisible = true
     },
     closeModal () {
       this.isModalVisible = false
+      this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
+      this.mailingListUser = {}
+      card.clear()
     },
     showTermsModal () {
       this.isTermsModalVisible = true
@@ -235,6 +325,11 @@ export default {
       for (let propName in this.user) {
         if (this.user[propName] === '') {
           delete this.user[propName]
+        }
+      }
+      for (let propName in this.mailingListUser) {
+        if (this.mailingListUser[propName] === '') {
+          delete this.mailingListUser[propName]
         }
       }
     }
@@ -324,8 +419,14 @@ export default {
   .item-l {
     grid-area: item-l;
   }
-  .submit-button {
+  .item-m {
     grid-area: item-m;
+  }
+  .item-n {
+    grid-area: item-n;
+  }
+  .submit-button {
+    grid-area: item-o;
     border-radius: 5px;
     width: 96%;
     margin-left: 2%;
@@ -365,7 +466,9 @@ label {
       "item-j item-j"
       "item-k item-k"
       "item-l item-l"
-      "item-m item-m";
+      "item-m item-m"
+      "item-n item-n"
+      "item-o item-o";
     justify-content: center;
   }
   textarea {

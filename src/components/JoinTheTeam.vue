@@ -102,14 +102,29 @@ export default {
       isModalVisible: false,
       positionInfo: PositionInfo,
       classes: ApplicationOptions['Class'],
-      user: { teamInterest: true, class: '', position: '' } // the rest is added by the form input fields
+      user: { teamInterest: true, class: '', position: '' }, // the rest is added by the form input fields
+      mailingListUser: {}
     }
   },
   methods: {
     addUser () {
-      this.user.createdAt = new Date()
+      this.user.createdAt = new Date().toLocaleString()
+      this.mailingListUser = {
+        firstname: this.user.firstname,
+        lastname: this.user.lastname,
+        email: this.user.email,
+        phone: this.user.phone,
+        createdAt: this.user.createdAt
+      }
       this.clean()
-      db.collection('students').doc(this.user.email).set(this.user, { merge: true })
+      db.collection('2018-2019 Team Interest List').doc(this.user.email).set(this.user, { merge: true })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+      db.collection('Mailing List').doc(this.user.email).set(this.mailingListUser, { merge: true })
         .then(function () {
           console.log('Document successfully written!')
         })
@@ -118,7 +133,6 @@ export default {
         })
     },
     postJoin () {
-      console.log(this.user)
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.addUser()
@@ -218,6 +232,9 @@ export default {
   }
   .submit-button {
     grid-area: item-k;
+    border-radius: 5px;
+    width: 200px;
+    margin-top: 16px;
   }
 
   .form-input {
@@ -233,7 +250,8 @@ export default {
       "item-g"
       "item-h"
       "item-i"
-      "item-j";
+      "item-j"
+      "item-k";
     justify-content: center;
   }
 
@@ -310,6 +328,10 @@ export default {
   }
   .message-label {
     font-size: 16px;
+  }
+  .submit-button {
+    width: calc(100% - 40px);
+    margin-top: 16px;
   }
 }
 @media only screen and (min-width: 600px) {

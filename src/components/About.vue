@@ -20,6 +20,7 @@
 </template>
 <script>
 import FAQList from '../../static/FAQList.json'
+
 export default {
   data () {
     return {

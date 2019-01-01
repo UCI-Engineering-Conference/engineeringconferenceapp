@@ -56,9 +56,9 @@ export default {
   },
   methods: {
     addUser () {
-      this.user.createdAt = new Date()
+      this.user.createdAt = new Date().toLocaleString()
       this.clean()
-      db.collection('messages').add(this.user)
+      db.collection('Messages').add(this.user)
     },
     postMessage () {
       this.$validator.validateAll().then((result) => {
@@ -137,6 +137,14 @@ export default {
   .item-d {
     grid-area: item-d;
   }
+  .submit-button {
+    grid-area: item-e;
+    border-radius: 5px;
+    width: 66.5%;
+    margin-top: 16px;
+    margin-bottom: 40px;
+  }
+
   .form-input {
     display: grid;
     grid-template-columns: 250px;
@@ -144,11 +152,9 @@ export default {
       "item-a"
       "item-b"
       "item-c"
-      "item-d";
+      "item-d"
+      "item-e";
     justify-content: center;
-  }
-  .submit-button {
-    margin-bottom: 40px;
   }
   .page-header {
     background-image:
@@ -162,7 +168,8 @@ export default {
     grid-template-areas:
       "item-a item-b"
       "item-c item-c"
-      "item-d item-d";
+      "item-d item-d"
+      "item-e item-e";
   }
   input {
     width: calc(100% - 40px);

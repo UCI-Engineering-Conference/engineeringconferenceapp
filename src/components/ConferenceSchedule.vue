@@ -5,7 +5,7 @@
     </div>
     <div>
      <button class="arrow-left" @click="switchSchedule(-1)"></button>
-     <h4>Day {{ displayDay }}</h4>
+     <h4>{{ displayDay }}</h4>
      <button class="arrow-right" @click="switchSchedule(1)"></button>
     </div>
     <div class="timeline-wrapper">
@@ -13,7 +13,7 @@
         <div class="container" v-bind:key="currentDay">
             <div class="timeline">
               <ul>
-                <li v-for="(event, index) in timeline_data[currentDay]" v-bind:key="index">
+                <li v-for="(event, index) in timeline_data[currentDay].events" v-bind:key="index">
                     <div class="event">
                       <span class="time">
                         <span class="start">{{ event.start }}</span>
@@ -40,9 +40,9 @@ import ECSchedule from '../../static/Schedule.json'
 export default {
   data () {
     return {
+      timeline_data: ECSchedule,
       currentDay: 0,
-      displayDay: 1,
-      timeline_data: ECSchedule
+      displayDay: ECSchedule[0].day
     }
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
       if (this.currentDay + inc < 0) this.currentDay = this.timeline_data.length - 1
       else if (this.currentDay + inc >= this.timeline_data.length) this.currentDay = 0
       else this.currentDay += inc
-      this.displayDay = this.currentDay + 1
+      this.displayDay = this.timeline_data[this.currentDay].day
     }
   }
 }

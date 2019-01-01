@@ -9,11 +9,11 @@
             <h3>What is Mazen's favorite animal?</h3>
           </div>
           <div class="modal-body">
-            <input type="text" v-model="password">
+            <input type="password" v-model="password">
           </div>
           <div class="modalt-footer">
             <div name="footer">
-              <router-link to="/secretpage" v-if="password==='beard'" tag="button" class="submit-button" @click="$emit('close')"><span>Submit</span></router-link>
+              <router-link to="/secretpage" v-if="password===adminPswd" tag="button" class="submit-button" @click="$emit('close')"><span>Submit</span></router-link>
               <button v-else class="submit-button" @click="$emit('close')"><span>Submit</span></button>
             </div>
           </div>
@@ -27,7 +27,8 @@
 export default {
   data () {
     return {
-      password: ''
+      password: '',
+      adminPswd: process.env.ADMIN_PSWD
     }
   }
 }

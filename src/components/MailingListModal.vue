@@ -12,7 +12,7 @@ export default {
       this.$emit('close')
     },
     addUser () {
-      this.user.createdAt = new Date()
+      this.user.createdAt = new Date().toLocaleString()
       this.clean()
       db.collection('students').doc(this.user.email).set(this.user, { merge: true })
         .then(function () {

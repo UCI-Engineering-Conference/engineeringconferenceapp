@@ -18,7 +18,7 @@ export default {
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            <router-link to="/" tag="button" style="float:right;" class="modal-close-button" @click="$emit('close')"><close /></router-link>
+            <button style="float:right;" class="modal-close-button" @click="$emit('close')"><close /></button>
             <br/><br/>
             <slot name="header">
               default header

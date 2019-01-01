@@ -12,6 +12,12 @@
     "Business Information Management", "Computer Game Science", "Computer Science", "Computer Science and Engineering",
     "Data Science", "Informatics", "Software Engineering"
   ],
+  "Skills": {
+    "MAE": ["SolidWorks", "Research"],
+    "EECS": ["Java/Python/C++", "PHP/SQL", "System Design", "PCB/Schematics Design", "Research"],
+    "CE": ["AutoCAD", "Research"],
+    "CBMS": ["Research"]
+  },
   "Class": [
     "Freshman", "Sophomore", "Junior", "Senior", "Super Senior"
   ],

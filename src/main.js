@@ -6,9 +6,13 @@ import VeeValidate from 'vee-validate'
 import VueLongPress from 'vue-long-press-directive'
 import { TableComponent, TableColumn } from 'vue-table-component'
 import {Tabs, Tab} from 'vue-tabs-component'
+import VueApexCharts from 'vue-apexcharts'
 import VueFire from 'vuefire'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import VueGAPI from 'vue-gapi'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from './App'
 import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -34,11 +38,15 @@ Vue.component('table-component', TableComponent)
 Vue.component('table-column', TableColumn)
 Vue.component('tabs', Tabs)
 Vue.component('tab', Tab)
+Vue.component('apexchart', VueApexCharts)
 
 Vue.use(VeeValidate)
 Vue.use(VueLongPress, { duration: 1000 })
+Vue.use(VueApexCharts)
 Vue.use(VueFire)
 Vue.use(Vuex)
+Vue.use(VueGAPI, process.env.GOOGLE_API_CREDENTIALS)
+Vue.use(VueAxios, axios)
 
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
