@@ -8,7 +8,7 @@ const routerOptions = [
   { path: '/schedule', component: 'ConferenceSchedule' },
   { path: '/sponsors', component: 'Sponsors' },
   { path: '/contact', component: 'ContactUs' },
-  { path: '/secretpage', component: 'SecretPage' },
+  { path: '/secretpagebeard', component: 'SecretPage' },
   { path: '/jointheteam', component: 'JoinTheTeam' },
   { path: '/application', component: 'Application' },
   { path: '*', component: 'Home' }

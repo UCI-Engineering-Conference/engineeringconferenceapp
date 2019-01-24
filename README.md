@@ -30,6 +30,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## Each Year you must
 1. Set the date in the GeneralContent.json (study the .json files all the easy changes can be make through them)
 2. Change the indexes the firebase posts too (it is not necessary to delete the cloud firestore change the dates in the vue components)
+3. The application open can be changed in the vuex store (if off people can only sign up for the mailing list)
 
 ## All third parties are linked in the secret page
 + All are accessible with the engineeringconferenceuci@gmail.com

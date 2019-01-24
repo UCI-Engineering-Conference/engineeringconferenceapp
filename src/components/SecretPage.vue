@@ -115,13 +115,11 @@ export default {
       majorSeries: [0, 0, 0, 0, 0],
       majorChartOptions: {
         labels: ['MAE', 'EECS', 'CE', 'CBMS', 'OTHER'],
-        theme: {monochrome: {color: '#65D25C', enabled: true}},
         title: {text: 'EC by Major', style: {color: '#3D3D3D'}}
       },
       classSeries: [0, 0, 0, 0, 0],
       classChartOptions: {
         labels: ['Fresh', 'Soph', 'Jun', 'Sen', 'SupSen'],
-        theme: {monochrome: {color: '#606060', enabled: true}},
         title: {text: 'EC by Class', style: {color: '#3D3D3D'}}
       }
     }

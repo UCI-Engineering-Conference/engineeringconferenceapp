@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link class="nav-logo" to="/"><img src="/static/img/logo.png"/></router-link>
+      <router-link class="nav-logo" to="/"><img src="/static/img/thumbnail.png"/></router-link>
       <div class="nav-link">
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
@@ -31,7 +31,8 @@
           <router-link to="/jointheteam">Join the Team</router-link>
         </div>
       </div>
-      <p><span @click="showModal">&copy;</span>UCI Engineering Conference</p>
+      <!--TODO: Delete SecretPageModal-->
+      <p>&copy;UCI Engineering Conference</p>
     </footer>
   </div>
 </template>
@@ -55,9 +56,22 @@ export default {
       getMessage: (field) => `The ${field} must be an @uci.edu email.`,
       // Custom validation rule
       validate: (value) => new Promise(resolve => {
-        const reg = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(uci)\.edu$/
+        const reg = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(uci)\.edu$/i
         resolve({
           valid: value && reg.test(value)
+        })
+      })
+    })
+    // TODO: is_open_committee currently not being used
+    VeeValidate.Validator.extend('is_open_committee', {
+      // Custom validation message
+      getMessage: (field) => `The tickets for this ${field} have been sold out.`,
+      // Custom validation rule
+      validate: (value) => new Promise(resolve => {
+        // TODO: Add Committee Restrictions
+        let closedCommittees = []
+        resolve({
+          valid: !(closedCommittees.indexOf(value) > -1)
         })
       })
     })
@@ -129,7 +143,7 @@ ul {
 }
 #nav .nav-logo img {
   float: left;
-  height:60px;
+  height: 50px;
 }
 #footer {
   background-color: #65D25C;

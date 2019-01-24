@@ -6,6 +6,8 @@
       <p>Engineering Conference Application</p>
     </div>
     <div class="application">
+      <p style="color: #fa755a; margin: 0; padding:0;"><b>The following committees have been sold out of all tickets: {{fullCommittees}}</b></p>
+      <p style="color: #fa755a; margin: 6px 0 22px 0; padding:0;"><b>Feel free to apply as a different major if you are still interested in coming or want to learn something new.</b></p>
       <form id="form-input" @submit.prevent="handleSubmit">
         <div class="item-a">
           <label>First Name <b>*</b></label>
@@ -52,7 +54,7 @@
           <div>
             <select v-if="['Engineering'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
               <option disabled value="">Please select one</option>
-              <option v-for="major in engMajors" :key="major">{{major}}</option>
+              <option v-for="major in engMajors" :key="major" :disabled="fullCommittees.indexOf(major) > -1">{{major}}</option>
             </select>
             <select v-else-if="['Information and Computer Science'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
               <option disabled value="">Please select one</option>
@@ -116,7 +118,7 @@
           <textarea v-model="user.message"></textarea>
         </div>
         <div class="item-m">
-          <label>This field is not required.</label>
+          <label>For EC member use.</label>
           <input type="password" v-model="user.VenmoPswd">
         </div>
         <div class="item-n">
@@ -126,7 +128,7 @@
           <div id="card-errors" role="alert"></div>
         </div>
 
-      <button class="submit-button"><span>Submit</span></button>
+      <button :disabled="!submitActive" class="submit-button"><span>Submit</span></button>
       </form>
 
       <termsModal
@@ -136,10 +138,10 @@
 
       <modal v-show="isModalVisible" @close="closeModal">
         <h2 slot="header">Amazing!</h2>
-        <p slot ="body">You're official registered for UCI Engineering Conference!</p>
+        <p slot ="body">You're officially registered for UCI Engineering Conference!</p>
       </modal>
       <p class="termsAndConditions">By clicking 'Submit' I agree to the <a @click="showTermsModal">Terms and Conditions</a>.</p>
-      <p class="termsAndConditions">** The additional fee is for payment transactions and will bring the cost up to $26.03 </p>
+      <p class="termsAndConditions">** The additional transaction fee will bring the total ticket cost to $26.05.</p>
     </div>
   </div>
 </template>
@@ -188,6 +190,7 @@ export default {
     return {
       isModalVisible: false,
       isTermsModalVisible: false,
+      fullCommittees: ['Mechanical', 'Aerospace', 'MAE'],
       schools: ApplicationOptions['School'],
       engMajors: ApplicationOptions['EngMajor'],
       icsMajors: ApplicationOptions['ICSMajor'],
@@ -195,6 +198,7 @@ export default {
       skills: ApplicationOptions['Skills'],
       diet: ApplicationOptions['Diet'],
       generalContent: generalContent,
+      submitActive: true,
       user: {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}},
       mailingListUser: {}
     }
@@ -243,35 +247,43 @@ export default {
         })
     },
     handleSubmit () {
+      this.submitActive = false
       this.$validator.validateAll().then((result) => {
-        if (result && this.user.VenmoPswd === process.env.VENMO_PSWD) {
-          this.user.paid = 'VENMO'
-          this.createAttendee()
+        if (!result) {
+          console.log('Not Valid')
+          this.submitActive = true
         } else {
-          stripe.createToken(card).then((result2) => {
-            if (!result || result2.error) {
-              // Inform the user if there was an error.
-              console.log('Not Valid')
-              let errorElement = document.getElementById('card-errors')
-              errorElement.textContent = result2.error.message
-            } else {
-              const data = {
-                email: this.user.email,
-                stripeToken: result2.token.id
-              }
-              axios({
-                method: 'POST',
-                url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/stripecharge/payment`,
-                data: qs.stringify(data),
-                config: { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-              }).then(response => { this.createAttendee() })
-                .catch(e => {
-                  console.log(e)
+          if (this.user.VenmoPswd === process.env.VENMO_PSWD) {
+            this.user.paid = 'VENMO'
+            this.createAttendee()
+          } else {
+            stripe.createToken(card).then((result2) => {
+              if (result2.error) {
+                // Inform the user if there was an error.
+                let errorElement = document.getElementById('card-errors')
+                errorElement.textContent = result2.error.message
+                this.submitActive = true
+              } else {
+                const data = {
+                  email: this.user.email,
+                  stripeToken: result2.token.id
+                }
+                axios({
+                  method: 'POST',
+                  url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/stripecharge/payment`,
+                  data: qs.stringify(data),
+                  config: {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+                }).then(response => {
+                  this.createAttendee()
                 })
-            }
-          }).catch(e => {
-            console.log(e)
-          })
+                  .catch(e => {
+                    console.log(e)
+                  })
+              }
+            }).catch(e => {
+              console.log(e)
+            })
+          }
         }
       })
     },
@@ -313,6 +325,7 @@ export default {
       this.isModalVisible = false
       this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
       this.mailingListUser = {}
+      this.submitActive = true
       card.clear()
     },
     showTermsModal () {

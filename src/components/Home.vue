@@ -1,10 +1,9 @@
 <template>
   <div>
-    <img class="main-image" src="/static/img/thumbnail.png"/>
+    <img class="main-image" src="/static/img/EC_logo_v3.png"/>
     <div class="intro">
       <h1 class="intro-line1">Innovate. Lead. Debate.</h1>
-      <h1 class="intro-line2">ENGINEERING CONFERENCE</h1>
-      <p class="intro-line3">University of California Irvine·{{ generalContent.Date }}</p>
+      <p class="intro-line3">{{ generalContent.Date }}</p>
     </div>
 
     <div v-if="isApplicationOpen">
@@ -116,7 +115,7 @@ export default {
   color: #3D3D3D;
 }
 .intro-line1 {
-  color: #FFB511;
+  color: #65D25C;
 }
 .intro-line3 {
   text-transform: uppercase;

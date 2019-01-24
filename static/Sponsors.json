@@ -1,6 +1,15 @@
-{
-  "general": [
-    "school-of-engineering.png", "school-of-computer-science.png", "school-of-physical-sciences.png", "ansys.png"
+[
+  {
+    "year": "2019",
+    "general": [
+      "school-of-engineering.png", "boeing_rgbblue_large.png", "siemens-logo.png", "ansys.png", "navy.png", "redbull.png", "double-tree.png"
+    ]
+  },
+  {
+    "year": "2018",
+    "general": [
+      "school-of-engineering.png", "school-of-computer-science.png", "school-of-physical-sciences.png", "ansys.png"
     , "tgif.png", "aem.png", "asuci.png", "redbull.png", "urop.png", "antreprenuer-center.png", "double-tree.png"
-  ]
-}
+    ]
+  }
+]

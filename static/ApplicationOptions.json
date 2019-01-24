@@ -22,6 +22,6 @@
     "Freshman", "Sophomore", "Junior", "Senior", "Super Senior"
   ],
   "Diet": [
-    "None", "Vegetarian", "Vegan", "Gluten Free", "Halah", "Other"
+    "None", "Vegetarian", "Vegan", "Gluten Free", "Halal", "Other"
   ]
 }

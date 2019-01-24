@@ -6,62 +6,69 @@
         "name": "Registration",
         "location": "Hotel Lobby",
         "description": "Get Badges and Participant Packet",
-        "start": "8:30am",
-        "end": "9:00am"
+        "start": "8:00am",
+        "end": "8:30am"
       },
       {
         "name": "Opening Ceremony",
         "location": "Hotel Conference Room",
-        "description": "Guest Speaker and Introduction to the Conference",
+        "description": "Guest Speakers and Introduction to the Conference",
         "start": "9:00am",
         "end": "10:30am"
       },
       {
-        "name": "Networking Break",
-        "location": "Hotel Lobby",
-        "description": "Meet the students and faculty of EC",
+        "name": "Lobbying and Merging",
+        "location": "Committee Rooms",
+        "description": "Break into committees and meet your team",
         "start": "10:30am",
-        "end": "11:00am"
+        "end": "11:30am"
       },
       {
         "name": "Career Fair",
         "location": "Hotel Lobby",
-        "description": "Opportunity to pass on your resume to engineering companies.",
-        "start": "11:00am",
-        "end": "1:00pm"
+        "description": "Opportunity to pass on your resume to engineering companies",
+        "start": "11:30am",
+        "end": "12:30pm"
       },
       {
         "name": "Lunch Break",
         "location": "Hotel Conference Room",
-        "description": "Enjoy a lunch provided by Double Tree by Hilton.",
-        "start": "1:00pm",
-        "end": "2:00pm"
+        "description": "Enjoy a lunch provided by Double Tree by Hilton",
+        "start": "12:30pm",
+        "end": "1:30pm"
       },
       {
         "name": "Training Session I",
         "location": "Training Rooms",
-        "description": "Learn skills from ANSYS and other companies to get an official certification.",
-        "start": "2:00pm",
+        "description": "Learn skills from ANSYS and other companies to get an official certification",
+        "start": "1:30pm",
+        "end": "3:30pm"
+      },
+      {
+        "name": "Networking Break",
+        "location": "Hotel Lobby",
+        "description": "Enjoy a coffee break and meet the students and faculty of EC",
+        "start": "3:30pm",
         "end": "4:00pm"
       },
       {
         "name": "Training Session II",
-        "location": "Hotel Conference Room",
-        "description": "Engage in a mock debate hosted by our chairs board.",
+        "location": "Training Rooms",
+        "description": "Engage in a mock debate hosted by our chairs board",
         "start": "4:00pm",
-        "end": "6:00pm"
-      },
-      {
-        "name": "Dinner Break",
-        "location": "Hotel Conference Room",
-        "description": "Enjoy a dinner provided by Double Tree by Hilton.",
-        "start": "6:00pm",
         "end": "7:00pm"
       },
       {
-        "name": "Lobbying and Merging",
+        "name": "Dinner Break",
         "location": "Committee Rooms",
-        "description": "Break into committees and meet your team.",
+        "description": "Enjoy a dinner provided by Double Tree by Hilton",
+        "start": "7:00pm",
+        "end": "8:00pm"
+      },
+      {
+        "name": "Reflecting and Planning",
+        "location": "Committee Rooms",
+        "description": "Brainstorm ideas with your team",
         "start": "7:00pm",
         "end": "9:00pm"
       }
@@ -78,58 +85,58 @@
         "end": "9:00am"
       },
       {
-        "name": "Research Session",
+        "name": "Research Session I",
         "location": "Committee Rooms",
-        "description": "Decide on a project and begin researching.",
+        "description": "Decide on a project and begin researching",
         "start": "9:00am",
         "end": "10:00am"
       },
       {
-        "name": "Networking Break",
-        "location": "Hotel Lobby",
-        "description": "Talk with the other delegates.",
-        "start": "10:00am",
-        "end": "10:30am"
-      },
-      {
-        "name": "Design Session I",
+        "name": "Research Session II",
         "location": "Committee Rooms",
-        "description": "Begin working on your research paper.",
+        "description": "Determine the helpful resources to be used for your design",
         "start": "10:30am",
-        "end": "12:30pm"
+        "end": "12:30am"
       },
       {
         "name": "Lunch Break",
         "location": "Hotel Conference Room",
-        "description": "Enjoy a lunch provided by Double Tree by Hilton.",
-        "start": "12:30pm",
+        "description": "Enjoy a lunch provided by Double Tree by Hilton",
+        "start": "12:30am",
         "end": "1:30pm"
+      },
+      {
+        "name": "Design Session I",
+        "location": "Committee Rooms",
+        "description": "Begin working on your research paper",
+        "start": "1:30pm",
+        "end": "3:30pm"
       },
       {
         "name": "Design Session II",
         "location": "Committee Rooms",
         "description": "Learn the fundamentals of design engineering",
-        "start": "1:30pm",
+        "start": "3:30pm",
         "end": "5:30pm"
       },
       {
         "name": "Dinner Break",
         "location": "Hotel Conference Room",
-        "description": "Enjoy a dinner provided by Double Tree by Hilton.",
+        "description": "Enjoy a dinner provided by Double Tree by Hilton",
         "start": "5:30pm",
         "end": "6:30pm"
       },
       {
         "name": "Evaluation Session",
         "location": "Committee Rooms",
-        "description": "Learn the fundamentals of design engineering",
+        "description": "Revise your research paper",
         "start": "6:30pm",
         "end": "8:30pm"
       },
       {
         "name": "Presentation Prep",
         "location": "Committee Rooms",
-        "description": "Learn the fundamentals of design engineering",
+        "description": "Practice presenting the slides created to explain your design",
         "start": "8:30pm",
         "end": "9:30pm"
       }
