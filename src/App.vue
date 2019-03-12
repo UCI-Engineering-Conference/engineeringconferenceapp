@@ -7,7 +7,7 @@
         <router-link to="/about">About</router-link>
         <router-link to="/meettheteam">Meet the Team</router-link>
         <router-link to="/schedule">Schedule</router-link>
-        <router-link to="/sponsors">Sponsors</router-link>
+        <router-link to="/sponsors">Partners</router-link>
       </div>
     </div>
     <router-view/>

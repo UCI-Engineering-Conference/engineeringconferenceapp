@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-header">
-      <p>Sponsors</p>
+      <p>Partners</p>
     </div>
     <div>
       <button class="arrow-left" @click="switchYear(1)"></button>

@@ -51,7 +51,7 @@ Vue.use(VueAxios, axios)
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
-    applicationOpen: true
+    applicationOpen: false // TODO: add application route in router/index.js
   }
 })
 

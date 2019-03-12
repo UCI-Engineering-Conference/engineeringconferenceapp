@@ -161,8 +161,9 @@ export default {
             let CBMS = {}
             let CE = {}
             result.valueRanges[0].values.forEach(function (student) {
+              console.log(student[3])
               if (student[0] !== 'First Name' && student[3] === 'TRUE') {
-                if (['Aerospace', 'Mechanical', 'MAE'].indexOf(this.applicantsDict[student[2]].major) > -1) {
+                if (['Aerospace', 'Mechanical', 'MAE', 'Physics'].indexOf(this.applicantsDict[student[2]].major) > -1) {
                   MAE[student[2]] = {
                     firstname: this.applicantsDict[student[2]].firstname,
                     lastname: this.applicantsDict[student[2]].lastname,
@@ -171,7 +172,7 @@ export default {
                     skills: this.applicantsDict[student[2]].skills
                   }
                 }
-                if (['Software Engineering', 'Computer Game Science', 'Computer Science and Engineering', 'Computer', 'Computer Science', 'Electrical'].indexOf(this.applicantsDict[student[2]].major) > -1) {
+                if (this.applicantsDict[student[2]].school === 'Information and Computer Science' || ['Computer Science and Engineering', 'Computer', 'Electrical', 'CSE', 'Humanities-Undeclared', 'UNDERCLARED'].indexOf(this.applicantsDict[student[2]].major) > -1) {
                   EECS[student[2]] = {
                     firstname: this.applicantsDict[student[2]].firstname,
                     lastname: this.applicantsDict[student[2]].lastname,
@@ -180,7 +181,7 @@ export default {
                     skills: this.applicantsDict[student[2]].skills
                   }
                 }
-                if (['Biomedical', 'Chemical', 'Material Science'].indexOf(this.applicantsDict[student[2]].major) > -1) {
+                if (['Biomedical', 'Chemical', 'Material Science', 'Chemistry', 'aerospace engineering', 'Mechanical engineering'].indexOf(this.applicantsDict[student[2]].major) > -1) {
                   CBMS[student[2]] = {
                     firstname: this.applicantsDict[student[2]].firstname,
                     lastname: this.applicantsDict[student[2]].lastname,
@@ -189,7 +190,7 @@ export default {
                     skills: this.applicantsDict[student[2]].skills
                   }
                 }
-                if (['Civil', 'Environmental'].indexOf(this.applicantsDict[student[2]].major) > -1) {
+                if (['Civil', 'Environmental', 'Applied Mathematics'].indexOf(this.applicantsDict[student[2]].major) > -1) {
                   CE[student[2]] = {
                     firstname: this.applicantsDict[student[2]].firstname,
                     lastname: this.applicantsDict[student[2]].lastname,
@@ -200,16 +201,10 @@ export default {
                 }
               }
             }.bind(this))
-
-            let MAESheet = [['First Name', 'LastName', 'Major', 'Class']]
-            let EECSSheet = [['First Name', 'LastName', 'Major', 'Class']]
-            let CBMSSheet = [['First Name', 'LastName', 'Major', 'Class']]
-            let CESheet = [['First Name', 'LastName', 'Major', 'Class']]
-
-            for (let student in MAE) MAESheet.push([MAE[student].firstname, MAE[student].lastname, MAE[student].major, MAE[student].class])
-            for (let student in EECS) EECSSheet.push([EECS[student].firstname, EECS[student].lastname, EECS[student].major, EECS[student].class])
-            for (let student in CBMS) CBMSSheet.push([CBMS[student].firstname, CBMS[student].lastname, CBMS[student].major, CBMS[student].class])
-            for (let student in CE) CESheet.push([CE[student].firstname, CE[student].lastname, CE[student].major, CE[student].class])
+            let MAESheet = this.writeToCommitteeSheet(this.sortByMajorClass(6, MAE, ['MAE', 'Aerospace', 'Mechanical', 'Physics']))
+            let EECSSheet = this.writeToCommitteeSheet(this.sortByMajorClass(6, EECS, ['Electrical', 'Computer', 'Computer Science and Engineering', 'CSE', 'Software Engineering', 'Computer Game Science', 'Data Science', 'Informatics', 'Computer Science', 'Humanities-Undeclared', 'UNDERCLARED']))
+            let CBMSSheet = this.writeToCommitteeSheet(this.sortByMajorClass(5, CBMS, ['Material Science', 'Chemical', 'Biomedical', 'Chemistry', 'aerospace engineering', 'Mechanical engineering']))
+            let CESheet = this.writeToCommitteeSheet(this.sortByMajorClass(5, CE, ['Environmental', 'Civil', 'Applied Mathematics']))
 
             this.writeToSpreadSheets(gapi, '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ', 'MAE', MAESheet)
             this.writeToSpreadSheets(gapi, '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ', 'EECS', EECSSheet)
@@ -217,6 +212,64 @@ export default {
             this.writeToSpreadSheets(gapi, '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ', 'CE', CESheet)
           })
         })
+    },
+    sortByMajorClass (sizeOfCommittees, committee, majorsInCommittee) {
+      let numberOfCommittees = parseInt(Object.keys(committee).length / sizeOfCommittees)
+      if (numberOfCommittees === 0 && Object.keys(committee).length > 0) numberOfCommittees++
+      let sortedMajors = this.sortedByMajor(committee, majorsInCommittee)
+      for (let i = 0; i < sortedMajors; i++) sortedMajors[i] = this.sortedByClass(sortedMajors[i])
+      let sortedMajorClass = this.concatArrays(sortedMajors)
+      return this.createListFromSorted(sortedMajorClass, numberOfCommittees)
+    },
+    sortedByMajor (students, majors) {
+      let major = []
+      for (let i = 0; i < majors.length; i++) major.push([])
+      for (let student in students) {
+        for (let i = 0; i < majors.length; i++) {
+          if (students[student].major === majors[i]) major[i].push(students[student])
+        }
+      }
+      return major
+      // let sortedTeam = major[major.length - 1]
+      // for (let i = major.length - 2; i >= 0; i--) sortedTeam = sortedTeam.concat(major[i])
+      // return sortedTeam
+    },
+    sortedByClass (students) {
+      let grade = [[], [], [], []]
+      for (let student in students) {
+        if (students[student].class === 'Freshman') grade[0].push(students[student])
+        else if (students[student].class === 'Sophomore') grade[1].push(students[student])
+        else if (students[student].class === 'Junior') grade[2].push(students[student])
+        else grade[3].push(students[student])
+      }
+      return this.concatArrays(grade)
+    },
+    concatArrays (arr) {
+      let sortedTeam = arr[arr.length - 1]
+      for (let i = arr.length - 2; i >= 0; i--) sortedTeam = sortedTeam.concat(arr[i])
+      return sortedTeam
+    },
+    createListFromSorted (sortedList, committees) {
+      let committeeList = []
+      for (let i = 0; i < committees; i++) committeeList.push([])
+      for (let i = 0; i < sortedList.length;) {
+        for (let j = 0; j < committeeList.length; j++) {
+          committeeList[j].push(sortedList[i + j])
+        }
+        i += committeeList.length
+      }
+      return committeeList
+    },
+    writeToCommitteeSheet (committeeList) {
+      let sheet = [['First Name', 'LastName', 'Major', 'Class']]
+      for (let i = 0; i < committeeList.length; i++) {
+        sheet.push(['Committee '.concat((i + 1).toString()), ' ', '', ''])
+        for (let j = 0; j < committeeList[i].length; j++) {
+          if (committeeList[i][j] === undefined) break
+          sheet.push([committeeList[i][j].firstname, committeeList[i][j].lastname, committeeList[i][j].major, committeeList[i][j].class])
+        }
+      }
+      return sheet
     },
     writeToSpreadSheets (gapi, spreadsheetId, range, values) {
       gapi.client.sheets.spreadsheets.values.batchUpdate({
@@ -240,7 +293,7 @@ export default {
       this.applicants.forEach(function (student) {
         this.numberOfApps++
         if (['Aerospace', 'Mechanical', 'MAE'].indexOf(student.major) > -1) ++this.majorSeries[0]
-        else if (['Software Engineering', 'Computer Game Science', 'Computer Science and Engineering', 'Computer', 'Computer Science', 'Electrical'].indexOf(student.major) > -1) ++this.majorSeries[1]
+        else if (student.school === 'Information and Computer Science' || ['CSE', 'Software Engineering', 'Computer Game Science', 'Computer Science and Engineering', 'Computer', 'Computer Science', 'Electrical'].indexOf(student.major) > -1) ++this.majorSeries[1]
         else if (['Civil', 'Environmental'].indexOf(student.major) > -1) ++this.majorSeries[2]
         else if (['Biomedical', 'Chemical', 'Material Science'].indexOf(student.major) > -1) ++this.majorSeries[3]
         else ++this.majorSeries[4]
@@ -254,6 +307,7 @@ export default {
     },
     getApplicants () {
       this.applicantsDict = {}
+      this.attendeeSheet = [['First Name', 'Last Name', 'Email', 'Payment Method', 'Phone', 'Diet', 'Other Diet', 'School', 'Major', 'Skills', 'Class', 'LinkedIn', 'Message', 'Date']]
       this.applicants.forEach(function (student) {
         this.applicantsDict[student.email] = student
         this.attendeeSheet.push([student.firstname, student.lastname, student.email, student.paid, student.phone, student.diet, student.otherDiet, student.school, student.major, 100, student.class, student.linkedin, student.message])//, student.createdAt])

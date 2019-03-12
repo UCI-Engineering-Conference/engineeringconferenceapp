@@ -10,7 +10,7 @@ const routerOptions = [
   { path: '/contact', component: 'ContactUs' },
   { path: '/secretpagebeard', component: 'SecretPage' },
   { path: '/jointheteam', component: 'JoinTheTeam' },
-  { path: '/application', component: 'Application' },
+  // { path: '/application', component: 'Application' }, // TODO : Uncomment when application goes live
   { path: '*', component: 'Home' }
 ]
 

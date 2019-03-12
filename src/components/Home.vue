@@ -10,7 +10,8 @@
       <router-link to="/application" tag="button" style="margin:30px;width:200px;height:50px;font-size:24px;" class="submit-button"><span>APPLY NOW</span></router-link>
     </div>
     <div v-else>
-      <p>Applications for Engineering Conference {{generalContent.Year}} are now closed.</p>
+      <p>Tickets for Engineering Conference {{generalContent.Year}} are officially</p>
+      <h1 class="sold-out">Sold Out!</h1>
 
       <p>Join our community to be the first to know about important updates.</p>
       <button
@@ -121,6 +122,12 @@ export default {
   text-transform: uppercase;
   font-weight: 400;
   color: #606060;
+}
+.sold-out {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 50px;
+  color: #fa755a;
 }
 .numbers {
   margin: 20px auto;

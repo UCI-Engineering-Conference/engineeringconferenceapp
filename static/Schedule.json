@@ -17,7 +17,7 @@
         "end": "10:30am"
       },
       {
-        "name": "Lobbying and Merging",
+        "name": "Lobbying & Merging",
         "location": "Committee Rooms",
         "description": "Break into committees and meet your team",
         "start": "10:30am",
@@ -38,7 +38,7 @@
         "end": "1:30pm"
       },
       {
-        "name": "Training Session I",
+        "name": "Technical Training I",
         "location": "Training Rooms",
         "description": "Learn skills from ANSYS and other companies to get an official certification",
         "start": "1:30pm",
@@ -52,7 +52,7 @@
         "end": "4:00pm"
       },
       {
-        "name": "Training Session II",
+        "name": "Technical Training II",
         "location": "Training Rooms",
         "description": "Engage in a mock debate hosted by our chairs board",
         "start": "4:00pm",
@@ -66,10 +66,10 @@
         "end": "8:00pm"
       },
       {
-        "name": "Reflecting and Planning",
+        "name": "Project Forecasting",
         "location": "Committee Rooms",
         "description": "Brainstorm ideas with your team",
-        "start": "7:00pm",
+        "start": "8:00pm",
         "end": "9:00pm"
       }
     ]
@@ -85,14 +85,14 @@
         "end": "9:00am"
       },
       {
-        "name": "Research Session I",
+        "name": "Debate Workshop",
         "location": "Committee Rooms",
-        "description": "Decide on a project and begin researching",
+        "description": "Training in formal debate",
         "start": "9:00am",
-        "end": "10:00am"
+        "end": "10:30am"
       },
       {
-        "name": "Research Session II",
+        "name": "Research Session",
         "location": "Committee Rooms",
         "description": "Determine the helpful resources to be used for your design",
         "start": "10:30am",
@@ -102,18 +102,18 @@
         "name": "Lunch Break",
         "location": "Hotel Conference Room",
         "description": "Enjoy a lunch provided by Double Tree by Hilton",
-        "start": "12:30am",
+        "start": "12:30pm",
         "end": "1:30pm"
       },
       {
-        "name": "Design Session I",
+        "name": "Design Session",
         "location": "Committee Rooms",
         "description": "Begin working on your research paper",
         "start": "1:30pm",
         "end": "3:30pm"
       },
       {
-        "name": "Design Session II",
+        "name": "Analysis Session",
         "location": "Committee Rooms",
         "description": "Learn the fundamentals of design engineering",
         "start": "3:30pm",
@@ -134,7 +134,7 @@
         "end": "8:30pm"
       },
       {
-        "name": "Presentation Prep",
+        "name": "Presentation Session",
         "location": "Committee Rooms",
         "description": "Practice presenting the slides created to explain your design",
         "start": "8:30pm",
@@ -153,14 +153,14 @@
         "end": "9:00am"
       },
       {
-        "name": "Debate Session I",
+        "name": "Panel Debate",
         "location": "Debate Rooms",
         "description": "Debate against the others in your committee",
         "start": "9:00am",
         "end": "11:00am"
       },
       {
-        "name": "Voting Session",
+        "name": "Panel Voting",
         "location": "Debate Rooms",
         "description": "Vote on the teams that will be moving on.",
         "start": "11:00am",
@@ -171,10 +171,10 @@
         "location": "Hotel Conference Room",
         "description": "Enjoy a lunch provided by Double Tree by Hilton.",
         "start": "11:30am",
-        "end": "12:30am"
+        "end": "12:30pm"
       },
       {
-        "name": "Integration Session I",
+        "name": "Integration I",
         "location": "Debate Rooms",
         "description": "Work with the teams that progressed to design and even greater system.",
         "start": "12:30pm",
@@ -188,7 +188,7 @@
         "end": "3:30pm"
       },
       {
-        "name": "Integration Session II",
+        "name": "Integration II",
         "location": "Debate Rooms",
         "description": "Work with the teams that progressed to design and even greater system.",
         "start": "3:30pm",
@@ -202,14 +202,14 @@
         "end": "6:30pm"
       },
       {
-        "name": "Final Debate Session",
+        "name": "Final Debate",
         "location": "Hotel Conference Room",
         "description": "Work with the teams that progressed to design and even greater system.",
         "start": "6:30pm",
         "end": "7:30pm"
       },
       {
-        "name": "Voting Session",
+        "name": "Final Voting",
         "location": "Hotel Conference Room",
         "description": "All committees decide on the overall winner.",
         "start": "7:30pm",

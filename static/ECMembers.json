@@ -4,7 +4,7 @@
     "management": [
       {
         "name": "Mazen Nader Alkhatib",
-        "position": "President / Founder",
+        "position": "Founder & President",
         "img": "Mazen-Nader-Alkhatib.png",
         "linkedIn": "https://www.linkedin.com/in/mazen-nader-alkhatib-41a635139/"
       }
@@ -31,19 +31,13 @@
       },
       {
         "name": "Jumana Alamamreh",
-        "position": "CE CoChair",
+        "position": "CEE Chair",
         "img": "Jumana-Alamamreh.png",
         "linkedIn": "https://www.linkedin.com/in/jumana-alamamreh-bab205149/"
       },
       {
-        "name": "Crystal Lai",
-        "position": "EECS CoChair",
-        "img": "Crystal-Lai.png",
-        "linkedIn": "https://www.linkedin.com/in/crystal-lai/"
-      },
-      {
         "name": "Donald Ordorica",
-        "position": "MAE CoChair",
+        "position": "MAE Chair",
         "img": "Donald-Ordorica.png",
         "linkedIn": "https://www.linkedin.com/in/donaldordorica/"
       }
@@ -63,7 +57,7 @@
       },
       {
         "name": "Daniela Uriostegui",
-        "position": "Event Planner",
+        "position": "Head of Event Planning",
         "img": "Daniela-Uriostegui.png",
         "linkedIn": ""
       },
@@ -100,13 +94,13 @@
     "management": [
       {
         "name": "Mazen Nader Alkhatib",
-        "position": "President / Founder",
+        "position": "Founder & President",
         "img": "Mazen-Nader-Alkhatib.png",
         "linkedIn": "https://www.linkedin.com/in/mazen-nader-alkhatib-41a635139/"
       },
       {
         "name": "Adora Anound Tadros",
-        "position": "Vice President / Founder",
+        "position": "Founder & Vice-President",
         "img": "Adora-Tadros.png",
         "linkedIn": ""
       }
@@ -133,7 +127,7 @@
       },
       {
         "name": "Andres Lozano",
-        "position": "CE Chair",
+        "position": "CEE Chair",
         "img": "Andres-Lozano.png",
         "linkedIn": "https://www.linkedin.com/in/andres-lozano-626210111/"
       },
