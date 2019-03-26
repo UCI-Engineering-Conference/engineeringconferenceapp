@@ -78,12 +78,12 @@
           <label class="message-label">Write a few lines about why you would be a good fit for EC and the position specified. Or specify multiple positions that you would be willing to take on!</label>
           <textarea type="text" v-model="user.messageForEC"></textarea>
         </div>
+        <button class="submit-button" @click="postJoin"><span>Submit</span></button>
       </div>
       <modal v-show="isModalVisible" @close="closeModal">
         <h2 slot="header">All Done!</h2>
         <p slot ="body">Thank you for applying to be on the EC team. Our leadership will contact you as soon as they are available to set up an interview.</p>
       </modal>
-      <button class="submit-button" @click="postJoin"><span>Submit</span></button>
     </div>
   </div>
 </template>
@@ -163,6 +163,9 @@ export default {
   b {
     color: red;
   }
+  h2 {
+    color: var(--white-color);
+  }
   input, label {
     display: block;
     margin: auto;
@@ -171,8 +174,8 @@ export default {
     padding: 10px;
     border-radius: 5px;
     font-weight: 700;
-    color: #606060;
-    border: 2px solid #D3D3D3;
+    color: var(--white-color);
+    border: 2px solid var(--black-color);
   }
   select option {
     background: #FFFFFF;
@@ -191,7 +194,7 @@ export default {
     width: calc(100% - 17px);
   }
   label {
-    color: #606060;
+    color: var(--white-color);
     font-size: 20px;
     font-weight: 300;
     padding: 6px;
@@ -233,10 +236,9 @@ export default {
   .submit-button {
     grid-area: item-k;
     border-radius: 5px;
-    width: 200px;
+    width: calc(100% - 10px);
     margin-top: 16px;
   }
-
   .form-input {
     display: grid;
     grid-template-columns: 250px;
@@ -254,13 +256,11 @@ export default {
       "item-k";
     justify-content: center;
   }
-
   .application {
     padding:40px;
-    background-color: #A2E49D;
+    background-color: var(--light-black-color);
     overflow: hidden;
   }
-
   .position-grid {
     margin: 30px;
     display: grid;
@@ -268,11 +268,10 @@ export default {
     grid-column-gap: 20px;
     grid-row-gap: 20px;
   }
-
   .title {
     font-size: 1.5em;
     padding: 0 0 10px 0;
-    color: #65D25C;
+    color: var(--green-color);
   }
   .description {
     font-size: 1em;
@@ -283,7 +282,7 @@ export default {
   }
   .req-title, .description-title{
     padding: 0 0 6px 0px;
-    color: #606060;
+    color: var(--light-black-color);
   }
   .requirements {
     font-size: 14px;
@@ -295,7 +294,7 @@ export default {
   }
   .page-header {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
       url(/static/page-headers/join-the-team.jpg);
   }
 
@@ -328,10 +327,6 @@ export default {
   }
   .message-label {
     font-size: 16px;
-  }
-  .submit-button {
-    width: calc(100% - 40px);
-    margin-top: 16px;
   }
 }
 @media only screen and (min-width: 600px) {

@@ -98,7 +98,7 @@ export default {
   }
   .page-header {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
       url(/static/page-headers/sponsors.jpg);
   }
   /*@media only screen and (min-width: 740px) {*/

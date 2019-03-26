@@ -38,7 +38,8 @@
               </li>
             </ul>
           </div>
-          <h2>Chairs Board</h2>
+          <h2 class="lined-header">Chairs Board</h2>
+
           <div class="head-chair" v-if="member_data[currentYear]['head-chair']">
             <div class="member">
               <img class="member-image" :src="imgPreUrl(member_data[currentYear]['head-chair'].img)">
@@ -61,7 +62,7 @@
               </li>
             </ul>
           </div>
-          <h2>Advisors</h2>
+          <h2 class="lined-header">Advisors</h2>
           <div class="advisors">
             <ul class="advisors-grid">
               <li v-for="(member, index) in member_data[currentYear]['advisors']" v-bind:key="index">
@@ -78,17 +79,27 @@
         </div>
       </div>
     </transition>
+    <div class="img-strip-wrapper">
+      <ul class="img-strip">
+        <li v-for="img in image_strip.team" v-bind:key="img">
+          <img :src="miscImgPreUrl(img)">
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
 import ECMembers from '../../static/ECMembers.json'
+import ImageStrip from '../../static/ImageStrips.json'
 export default {
   data () {
     return {
       imgLocation: '/static/memberpics/',
+      miscImgLoc: '/static/misc-pics/',
       member_data: ECMembers,
+      image_strip: ImageStrip,
       currentYear: 0,
       displayYear: ECMembers[0].year
     }
@@ -96,6 +107,9 @@ export default {
   methods: {
     imgPreUrl (img) {
       return this.imgLocation.concat(img)
+    },
+    miscImgPreUrl (img) {
+      return this.miscImgLoc.concat(img)
     },
     switchYear (inc) {
       if (this.currentYear + inc < 0) this.currentYear = this.member_data.length - 1
@@ -114,8 +128,8 @@ export default {
   }
   .member {
     margin: 10px;
-    border-bottom: 4px solid #65D25C;
-    background-color: #A2E49D;
+    border-bottom: 4px solid var(--light-black-color);
+    background-color: var(--black-color);
     border-radius: 10px;
   }
   .member-image {
@@ -123,29 +137,29 @@ export default {
     height: 60px;
     margin: -26px 0px 0px 0px;
     border-radius: 50%;
-    border: 3px solid #65D25C;
+    border: 3px solid var(--black-color);
   }
   .member-name {
     font-size: 10px;
     font-weight: 700;
     line-height: 20px;
-    color: #606060;
+    color: var(--white-color);
   }
-  a{
+  a {
     text-decoration: none;
-    color: #606060;
+    color: var(--light-black-color);
     -webkit-transition: all 500ms ease;
     -moz-transition: all 500ms ease;
     -o-transition: all 500ms ease;
     transition: all 500ms ease;
   }
   a:hover{
-    color: #FFB511;;
+    color: var(--green-color);
   }
   .member-position {
     font-size: 5px;
     font-weight: 300;
-    color: #606060;
+    color: var(--white-color);
   }
 
   .chairs, .advisors{
@@ -153,7 +167,7 @@ export default {
   }
   .page-header {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
       url(/static/page-headers/meet-the-team.jpg);
   }
   .chairs-grid, .others-grid, .advisors-grid, .management-grid{
@@ -190,7 +204,7 @@ export default {
     transition: all 500ms ease;
   }
   .arrow-right:hover, .arrow-left:hover{
-    color:  #65D25C;
+    color:  var(--green-color);
   }
   .arrow-left:before {
     content: '\00ab';
@@ -205,14 +219,15 @@ export default {
   button {
     padding: 10px;
   }
+
   @media only screen and (min-width: 420px) {
     .member {
-      border-bottom: 10px solid #65D25C;
+      border-bottom: 10px solid var(--light-black-color);
     }
     .member-image {
       width: 150px;
       height: 150px;
-      border: 5px solid #65D25C;
+      border: 5px solid var(--light-black-color);
     }
     .member-name {
       font-size: 26px;
@@ -223,11 +238,10 @@ export default {
     }
     ul li {
       flex-basis: 300px;
-      margin: 10px 0;
     }
   }
   @media only screen and (min-width: 540px) {
-     .head-chair{
+     .head-chair {
       width: 440px;
       margin: 0 auto;
       padding: 10px;
@@ -236,7 +250,6 @@ export default {
   @media only screen and (min-width: 820px) {
     ul li {
       flex-basis: 350px;
-      margin: 10px 0;
     }
   }
 </style>

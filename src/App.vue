@@ -28,6 +28,8 @@
         </div>
         <div class="other-footer-links">
           <router-link to="/contact">Contact Us</router-link>
+          <router-link to="/papersandprojects">Papers</router-link>
+          <router-link to="/papersandprojects">Projects</router-link>
           <router-link to="/jointheteam">Join the Team</router-link>
         </div>
       </div>
@@ -93,13 +95,23 @@ export default {
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700');#app {
+  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700');
+  :root {
+    --page-header-bg: 0.3;
+    --light-black-color: #606060;
+    --black-color: #3d3d3d;
+    --green-color: #65D25C;
+    --light-green-color: #A2E49D;
+    --white-color: #FFFFFF;
+    --error-color: #fa755a;
+  }
+  #app {
   font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #3D3D3D;
-  background-color: #FFFFFF;
+  color: var(--black-color);
+  background-color: var(--white-color);
 }
 #nav {
   position: relative;
@@ -110,7 +122,7 @@ export default {
   padding-bottom: 10px;
   box-shadow: 0 6px 7px -7px rgba(0,0,0,.6);
   text-align: right;
-  background-color: #FFFFFF;
+  background-color: var(--white-color);
   z-index: 10;
 }
 
@@ -130,7 +142,7 @@ ul {
   font-size: 2.9vw;
   font-weight: 400;
   padding: 2px;
-  color: #3D3D3D;
+  color: var(--black-color);
   position:relative;
   top: 30px;
 }
@@ -139,23 +151,23 @@ ul {
   border-bottom: 3px solid rgba(101, 210, 92, .7);
 }
 #nav .nav-link .router-link-exact-active {
-  border-bottom: 3px solid #65D25C;
+  border-bottom: 3px solid var(--green-color);
 }
 #nav .nav-logo img {
   float: left;
   height: 50px;
 }
 #footer {
-  background-color: #65D25C;
+  background-color: var(--black-color);
   padding: 20px;
-  color: #FFFFFF;
+  color: var(--white-color);
 }
 #footer a {
   cursor: pointer;
   text-decoration: none;
   font-size: 2em;
   padding: 6px;
-  color: #FFFFFF;
+  color: var(--white-color);
   -webkit-transition: all 500ms ease;
   -moz-transition: all 500ms ease;
   -o-transition: all 500ms ease;
@@ -174,19 +186,19 @@ ul {
   font-weight: 900;
 }
 #footer a:hover {
-  color: #FFB511;
+  color: var(--green-color);
 }
 .submit-button {
   display: inline-block;
   border-radius: 20px;
-  background-color: #FFB511;
+  background-color: var(--light-green-color);
   border: none;
-  border-bottom: 3px solid #E5AE0B;
-  color: #FFFFFF;
+  border-bottom: 3px solid var(--green-color);
+  color: var(--white-color);
   text-align: center;
   font-size: 22px;
   padding: 4px;
-  width: 120px;
+  width: 200px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -217,7 +229,7 @@ ul {
   right: 0;
 }
 .page-header {
-  color: #FFFFFF;
+  color: var(--white-color);
   font-weight: 300;
   font-size: 20px;
   background: no-repeat center center;
@@ -234,19 +246,55 @@ ul {
       border-bottom: 5px solid rgba(101, 210, 92, .7);
     }
     #nav .nav-link .router-link-exact-active {
-      border-bottom: 5px solid #65D25C;
+      border-bottom: 5px solid var(--green-color);
     }
     #footer .footer-icon a {
       font-size: 2.8em;
       padding: 12px;
     }
+
     .page-header {
       font-size: 30px;
       padding: 100px;
       margin-bottom: 50px;
     }
   }
+  .img-strip {
+    display: flex;
+    justify-content: center;
 
+  }
+  .img-strip li {
+    flex-basis: 200px;
+  }
+  .img-strip li img{
+    background-color: var(--black-color);
+    padding: 2px;
+    width: 50px;
+  }
+  .img-strip li:nth-child(even) img{
+    background-color: var(--green-color);
+  }
+  .lined-header {
+    display: grid;
+    grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+    align-items: center;
+    text-align: center;
+    grid-gap: 20px;
+    width: 100%;
+  }
+
+  .lined-header:before,
+  .lined-header:after {
+    content: '';
+    color: var(--black-color);
+    border-top: 2px solid;
+  }
+  @media only screen and (min-width: 540px) {
+    .img-strip li img{
+      width:80px;
+    }
+  }
   @media only screen and (min-width: 600px) {
     #footer .footer-link .other-footer-links a {
        font-size: 18px;
@@ -264,6 +312,11 @@ ul {
     }
     #nav {
       height: 100px;
+    }
+  }
+  @media only screen and (min-width: 820px) {
+    .img-strip li img{
+      width:120px;
     }
   }
 

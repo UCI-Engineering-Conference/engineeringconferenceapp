@@ -18,7 +18,7 @@
         type="button"
         class="submit-button"
         @click="showModal"
-      ><span>Sign Up</span>
+      ><span>Get Connected</span>
       </button>
     </div>
 
@@ -28,9 +28,9 @@
     />
 
     <div class="numbers">
-      <p><b>{{generalContent.Attended}}</b> Engineers.</p>
-      <p><b>{{generalContent.Days}}</b> Days.</p>
-      <p><b>{{generalContent.Published}}</b> Students Published.</p>
+      <p class="numbers1"><b>{{generalContent.Attended}}</b> <br>Engineers</p>
+      <p class="numbers2"><b>{{generalContent.Days}}</b> <br>Days</p>
+      <p class="numbers3"><b>{{generalContent.Published}}</b> <br>Published</p>
     </div>
 
     <div class="video-section">
@@ -46,23 +46,37 @@
       </div>
     </div>
 
+    <div class="img-strip-wrapper">
+      <ul class="img-strip">
+        <li v-for="img in image_strip.delegates1" v-bind:key="img">
+          <img :src="miscImgPreUrl(img)">
+        </li>
+      </ul>
+    </div>
+
     <div class="philanthropy">
-      <h2>Our Mission</h2>
+      <h2 class="lined-header">Our Mission</h2>
       <p><i>{{ generalContent.Mission }}</i> </p>
-      <h2>Our Vision</h2>
+      <h2 class="lined-header">Our Vision</h2>
       <p><i>{{ generalContent.Vision }}</i> </p>
+      <h2 class="lined-header">Philanthropy</h2>
       <p>Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
-      <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to support building a distribution system in Maventibao, Madagascar that makes water more accessible for the people who live there. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <!--<a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a>--> </p>
+      <p>Well, it does. And not just some of it, all of it. In the past we've raised over enough money to give over six full one-year scholarships to students in developing countries through UMR, in addition to support building a distribution system in Maventibao, Madagascar that makes water more accessible for the people who live there. Engineers in our organization are <b>BIG</b> on philanthropy and we pick the projects that prove it. <!--<a @click="showModal">Sign up for our news letter</a> to come with us on projects like <a href="http://corazon.org/en/the-programs/the-corazon-experience">Corazon Builds.</a>--> </p>
     </div>
 
     <div class="published-papers">
-      <p>Check out the work from undergraduate students during Engineering Conference 2018 that has now been published in the UC repository.</p>
-      <div>
-        <a href="https://escholarship.org/uc/item/5qb1r7tv">SolarFlair</a>
+      <h2 class="lined-header">Papers</h2>
+      <p>Congratulations to the winners of Engineering Conference 2019, and many others that we have helped earn a publication in the UC repository. To find out more and view the other publications click <router-link to="/papersandprojects">Here</router-link>.</p>
+      <div class="pub">
+        <img class="pub-image" :src="miscImgPreUrl(generalContent.Publications[0].img)"/>
+        <a class="pub-title" :href="generalContent.Publications[0].link">{{generalContent.Publications[0].name}}</a>
+        <div class="pub-description">{{generalContent.Publications[0].desc}}...</div>
       </div>
-      <div>
-        <a href="https://escholarship.org/uc/item/5rc1q3xr">Connect the Zots</a>
-      </div>
+    </div>
+    <div class="projects">
+      <h2 class="lined-header">Projects</h2>
+      <p>Dream of designing large scale, cutting edge, multidisciplinary engineering projects? </p>
+      <p>Every year the delegates of Engineering Conference, with the help of our dedicated Chairs Board, research in-depth solutions to the technical problems facing the modern world. In the past we've researched, designed, and debated Smart-Buildings and the next generation of Agriculture. Get more details about past projects <router-link to="/papersandprojects">Here</router-link>.</p>
     </div>
 
     <div class="recruitment">
@@ -70,14 +84,21 @@
       <p>Are you <b>creative</b>, <b>dedicated</b>, and want to have a <b>global impact</b>?</p>
       <p>UCI Engineering Conference wants students like you!</p>
       <p>Click <router-link to="/jointheteam">Here</router-link> to see what positions are available.</p>
+      <div class="img-strip-wrapper">
+        <ul class="img-strip">
+          <li v-for="img in image_strip.chairs" v-bind:key="img">
+            <img :src="miscImgPreUrl(img)">
+          </li>
+        </ul>
+      </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import modal from './MailingListModal.vue'
 import generalContent from '../../static/GeneralContent.json'
+import ImageStrip from '../../static/ImageStrips.json'
 export default {
   components: {
     modal
@@ -90,7 +111,10 @@ export default {
   data () {
     return {
       isModalVisible: false,
-      generalContent: generalContent
+      generalContent: generalContent,
+      imgLocation: '/static/faqpics/',
+      miscImgLoc: '/static/misc-pics/',
+      image_strip: ImageStrip
     }
   },
   methods: {
@@ -99,6 +123,12 @@ export default {
     },
     closeModal () {
       this.isModalVisible = false
+    },
+    imgPreUrl (img) {
+      return this.imgLocation.concat(img)
+    },
+    miscImgPreUrl (img) {
+      return this.miscImgLoc.concat(img)
     }
   }
 }
@@ -113,38 +143,64 @@ export default {
 .intro-line1, .intro-line2, .intro-line3 {
   padding:0;
   margin:0;
-  color: #3D3D3D;
+  color: var(--black-color);
 }
 .intro-line1 {
-  color: #65D25C;
+  color: var(--green-color);
 }
 .intro-line3 {
   text-transform: uppercase;
   font-weight: 400;
-  color: #606060;
+  color: var(--light-black-color);
 }
 .sold-out {
   text-transform: uppercase;
   font-weight: 900;
   font-size: 50px;
-  color: #fa755a;
+  color: var(--error-color);
 }
 .numbers {
   margin: 20px auto;
   font-size: 5vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #65D25C;
+
   padding: 10px;
-  color: #FFFFFF;
+  color: var(--white-color);
   font-weight: 300;
+}
+.numbers1 {
+  padding: 40px 0 20px 0;
+  margin: 0;
+  border-right: 2px solid var(--white-color);
+  background: rgba(24, 24, 24, 0.9) url("/static/misc-pics/delegate6.jpg") no-repeat;
+  background-size: 100%;
+  background-blend-mode: darken;
+}
+.numbers2 {
+  padding: 40px 0 20px 0;
+  margin: 0;
+  background: rgba(40, 82, 36, 0.9) url("/static/misc-pics/delegate7.jpg") no-repeat;
+  background-size: 100%;
+  background-blend-mode: darken;
+}
+.numbers3 {
+  padding: 40px 0 20px 0;
+  margin: 0;
+  border-left: 2px solid var(--white-color);
+  background: rgba(24, 24, 24, 0.9) url("/static/misc-pics/delegate5.jpg") no-repeat;
+  background-size: 100%;
+  background-blend-mode: darken;
 }
 .video-section {
   overflow:hidden;
   margin: 40px;
 }
 .video-header {
-  padding: 0px 20px 0px 20px;
+  background: rgba(255, 255, 255, 0.8) url("/static/img/ecgraphic.png") no-repeat;
+  background-size: 100%;
+  background-blend-mode: lighten;
+  padding: 0 20px 0 20px;
 }
 .video-container {
   position: relative;
@@ -159,25 +215,20 @@ export default {
   height: 100%;
   border: 0;
 }
-
 .recruitment {
-  background-color: #A2E49D;
-  color: #3D3D3D;
-  margin: 0px;
+  background-color: var(--light-black-color);
+  color: var(--white-color);
   overflow: hidden;
-  padding: 20px;
   font-size: 9px;
 }
-
 .recruitment p {
-  padding: 0px;
-  margin: 1px;
+  padding: 0;
+  margin: 2px;
 }
-
 a {
   cursor: pointer;
   text-decoration: none;
-  color: #FFB511;
+  color: var(--green-color);
 }
 a:hover {
   text-decoration: underline;
@@ -188,12 +239,40 @@ a:hover {
 .philanthropy-img {
   max-width: 80%;
   transform: scaleY(-1) scaleX(-1);
-  border: 5px solid #606060;
+  border: 5px solid var(--black-color);
   border-radius: .5em;
 }
 .published-papers {
   margin: 20px 10%;
 }
+.pub-title {
+  font-size: 16px;
+}
+.pub-description {
+  font-size: 11px;
+  padding: 6px 10px 16px 10px;
+  color: var(--white-color);
+  background: rgba(60, 60, 60, 0.8) url("/static/img/ecgraphic.png") no-repeat center;
+  background-size: 90%;
+  background-blend-mode: darken;
+}
+.pub-image {
+  height: 180px;
+  border: 2px solid var(--light-black-color);
+}
+.pub {
+  width: 280px;
+  padding: 8px 5px 0 5px;
+  justify-content: center;
+  border: 2px solid var(--light-black-color);
+  border-radius: 2px;
+  background-color: var(--black-color);
+  margin: 20px auto;
+}
+.projects {
+  margin: 20px 10%;
+}
+
 @media only screen and (min-width: 420px) {
   .recruitment {
     font-size: 13px;
@@ -208,11 +287,21 @@ a:hover {
   .recruitment {
     font-size: 18px;
   }
+
 }
 
 @media only screen and (min-width: 845px) {
   .numbers {
     font-size: 40px;
+  }
+  .numbers1 {
+    padding: 100px 0 80px 0;
+  }
+  .numbers2 {
+    padding: 100px 0 80px 0;
+  }
+  .numbers3 {
+    padding: 100px 0 80px 0;
   }
 }
 
@@ -234,9 +323,7 @@ a:hover {
     height: 200px;
     padding:90px 0px 0px 20px;
   }
-
 }
-
 @media only screen and (min-width: 1200px) {
 
 }

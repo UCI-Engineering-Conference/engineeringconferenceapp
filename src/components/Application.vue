@@ -461,7 +461,7 @@ label {
 }
 .page-header {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
     url(/static/page-headers/application.jpg);
 }
 

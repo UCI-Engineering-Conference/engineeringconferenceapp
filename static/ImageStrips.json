@@ -1,0 +1,7 @@
+{
+  "chairs": ["chairs-elias.jpg", "chairs-nik.jpg", "chairs-derek.jpg", "chairs-donald.jpg", "chairs-jumana.jpg", "chairs-andres.jpg"],
+  "team": [ "sixsigma.jpg", "ec-swag.jpg", "team-mazen.jpg", "team-abdullahandmyriam.jpg", "youssefpour.jpg", "boeing-speaker.jpg"],
+  "delegates1": ["delegate1.jpg", "delegate2.jpg", "delegate3.jpg", "delegate4.jpg", "delegate11.jpg", "delegate10.jpg"],
+  "delegates2": ["delegate14.jpg", "delegate9.jpg", "delegate12.jpg", "delegate13.jpg", "delegate8.jpg", "delegate15.jpg"]
+
+}

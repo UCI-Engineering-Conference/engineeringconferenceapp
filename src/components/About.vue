@@ -15,22 +15,34 @@
         </li>
       </ul>
     </div>
+    <div class="img-strip-wrapper">
+      <ul class="img-strip">
+        <li v-for="img in image_strip.delegates2" v-bind:key="img">
+          <img :src="miscImgPreUrl(img)">
+        </li>
+      </ul>
+    </div>
   </section>
  </div>
 </template>
 <script>
 import FAQList from '../../static/FAQList.json'
-
+import ImageStrip from '../../static/ImageStrips.json'
 export default {
   data () {
     return {
       faqList: FAQList,
-      imgLocation: '/static/faqpics/'
+      imgLocation: '/static/faqpics/',
+      miscImgLoc: '/static/misc-pics/',
+      image_strip: ImageStrip
     }
   },
   methods: {
     imgPreUrl (img) {
       return this.imgLocation.concat(img)
+    },
+    miscImgPreUrl (img) {
+      return this.miscImgLoc.concat(img)
     }
   }
 }
@@ -38,7 +50,7 @@ export default {
 <style scoped>
   p a {
     text-decoration: none;
-    color: #FFB511;
+    color: var(--green-color);
   }
   p a:hover {
     text-decoration: underline;
@@ -52,55 +64,39 @@ export default {
     padding:10px;
   }
   .faq-image {
-    height: 180px;
-    /*border: 5px solid #65D25C;*/
-    /*border-radius: .5em .5em 0 0;*/
+    width: 300px;
   }
   .faq-grid li {
-    width: 280px;
-    border-bottom: 1em solid #65D25C;
-    border-radius: .5em;
-    background-color: #D3D3D3;
-    color: #606060;
+    width: 300px;
+    color: var(--light-black-color);
     margin: 20px auto;
+    background: rgba(255, 255, 255, 0.8) url("/static/img/ecgraphic.png") no-repeat;
+    background-size: 50%;
+    background-blend-mode: lighten;
   }
   .faq-grid li:nth-child(odd) {
-    background-color: #808080;
-    color: #EAEAEA;
-  }
-  .faq-grid li:nth-child(odd) .faq-image {
-    /*border: 5px solid #A2E49D;*/
-    /*border-radius: .5em 0 0 .5em;*/
+    background-position: right;
   }
   .page-header {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
       url(/static/page-headers/about.jpg);
   }
   @media only screen and (min-width: 660px) {
     .faq-image {
-      height: 150px;
+      width: 300px;
       vertical-align: middle;
       float:right;
       margin-left: 10px
     }
     .faq-grid li {
       width: 600px;
-      border-bottom: none;
-      border-left: 1em solid #65D25C;
-      border-radius: .5em;
-      background-color: #D3D3D3;
-      color: #606060;
       margin: 30px 20px;
       text-align: right;
       display: inline-block;
     }
     .faq-grid li:nth-child(odd) {
-      border-left: none;
-      border-right: 1em solid #65D25C;
-      background-color: #808080;
       text-align:left;
-      color: #EAEAEA;
     }
     .faq-grid li:nth-child(odd) .faq-image {
       float:left;
@@ -117,7 +113,7 @@ export default {
       font-size: 18px;
     }
     .faq-image {
-      height: 250px;
+      width: 300px;
     }
     .faq-grid li {
       width: 970px;

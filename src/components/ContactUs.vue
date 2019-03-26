@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="contact-page">
   <div class="page-header">
     <p>Contact Us</p>
   </div>
@@ -24,6 +24,7 @@
       <textarea type="text" v-model="user.message" v-validate="'required'" name="message"></textarea>
       <span class="alert">{{ errors.first('message') }}</span>
     </div>
+    <button class="submit-button" @click="postMessage"><span>Submit</span></button>
   </div>
 
   <modal v-show="isModalVisible" @close="closeModal">
@@ -31,7 +32,6 @@
     <p slot ="body">Engineering Conference takes every message sent to us into consideration. If necessary, we'll get back to as soon as we can!</p>
   </modal>
 
-  <button class="submit-button" @click="postMessage"><span>Submit</span></button>
 </div>
 </template>
 
@@ -99,8 +99,8 @@ export default {
     padding: 10px;
     border-radius: 5px;
     font-weight: 700;
-    color: #606060;
-    border: 2px solid #D3D3D3;
+    color: var(--white-color);
+    border: 2px solid var(--black-color);
   }
   input {
     width: calc(100% - 40px);
@@ -116,7 +116,7 @@ export default {
     width: calc(100% - 17px);
   }
   label {
-    color: #606060;
+    color: var(--white-color);
     font-size: 20px;
     font-weight: 300;
     padding: 6px;
@@ -140,7 +140,7 @@ export default {
   .submit-button {
     grid-area: item-e;
     border-radius: 5px;
-    width: 66.5%;
+    width: calc(100% - 10px);
     margin-top: 16px;
     margin-bottom: 40px;
   }
@@ -156,9 +156,12 @@ export default {
       "item-e";
     justify-content: center;
   }
+  .contact-page {
+    background-color: var(--light-black-color);
+  }
   .page-header {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
       url(/static/page-headers/contact-us.jpg);
   }
 

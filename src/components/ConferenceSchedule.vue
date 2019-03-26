@@ -156,7 +156,7 @@ export default {
   .timeline li div.event span.time span {
     display: block;
     text-align: center;
-    padding-top:2px;
+    padding-top: 2px;
   }
   .timeline li div.event span.time span.start {
     font-size: 10px;
@@ -214,7 +214,7 @@ export default {
   }
   .page-header {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
       url(/static/page-headers/conference-schedule.jpg);
   }
 
