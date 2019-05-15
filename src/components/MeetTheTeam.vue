@@ -16,61 +16,70 @@
             <ul class="management-grid">
               <li v-for="(member, index) in member_data[currentYear]['management']" v-bind:key="index">
                 <div class="member">
-                  <img class="member-image" :src="imgPreUrl(member.img)">
-                  <div class="member-info">
-                    <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
-                    <div class="member-position">{{ member.position }}</div>
+                  <div class="member-bg">
+                    <img class="member-image" :src="imgPreUrl(member.img)">
+                    <div class="member-info">
+                      <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+                      <div class="member-position">{{ member.position }}</div>
+                    </div>
                   </div>
                 </div>
               </li>
             </ul>
-          </div>
-          <div class="others">
-            <ul class="others-grid">
+            <ul class="management-grid">
               <li v-for="(member, index) in member_data[currentYear]['others']" v-bind:key="index">
                 <div class="member">
-                  <img class="member-image" :src="imgPreUrl(member.img)">
-                  <div class="member-info">
-                    <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
-                    <div class="member-position">{{ member.position }}</div>
+                  <div class="member-bg">
+                    <img class="member-image" :src="imgPreUrl(member.img)">
+                    <div class="member-info">
+                      <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+                      <div class="member-position">{{ member.position }}</div>
+                    </div>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <h2 class="lined-header">Chairs Board</h2>
-
-          <div class="head-chair" v-if="member_data[currentYear]['head-chair']">
-            <div class="member">
-              <img class="member-image" :src="imgPreUrl(member_data[currentYear]['head-chair'].img)">
-              <div class="member-info">
-                <a class="member-name" :href="member_data[currentYear]['head-chair'].linkedIn">{{ member_data[currentYear]['head-chair'].name }}</a>
-                <div class="member-position">{{ member_data[currentYear]['head-chair'].position }}</div>
-              </div>
-            </div>
-          </div>
           <div class="chairs">
+            <h2 class="lined-header">Chairs Board</h2>
+            <ul class="chairs-grid">
+              <li class="head-chair" v-if="member_data[currentYear]['head-chair']">
+                <div class="member">
+                  <div class="member-bg">
+                    <img class="member-image" :src="imgPreUrl(member_data[currentYear]['head-chair'].img)">
+                    <div class="member-info">
+                      <a class="member-name" :href="member_data[currentYear]['head-chair'].linkedIn">{{ member_data[currentYear]['head-chair'].name }}</a>
+                      <div class="member-position">{{ member_data[currentYear]['head-chair'].position }}</div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
             <ul class="chairs-grid">
               <li v-for="(member, index) in member_data[currentYear]['chairs']" v-bind:key="index">
                 <div class="member">
-                  <img class="member-image" :src="imgPreUrl(member.img)">
-                  <div class="member-info">
-                    <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
-                    <div class="member-position">{{ member.position }}</div>
+                  <div class="member-bg">
+                    <img class="member-image" :src="imgPreUrl(member.img)">
+                    <div class="member-info">
+                      <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+                      <div class="member-position">{{ member.position }}</div>
+                    </div>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <h2 class="lined-header">Advisors</h2>
-          <div class="advisors">
-            <ul class="advisors-grid">
-              <li v-for="(member, index) in member_data[currentYear]['advisors']" v-bind:key="index">
+          <h2 class="lined-header">Advisers</h2>
+          <div class="advisers">
+            <ul class="advisers-grid">
+              <li v-for="(member, index) in member_data[currentYear]['advisers']" v-bind:key="index">
                 <div class="member">
-                  <img class="member-image" :src="imgPreUrl(member.img)">
-                  <div class="member-info">
-                    <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
-                    <div class="member-position">{{ member.position }}</div>
+                  <div class="member-bg">
+                    <img class="member-image" :src="imgPreUrl(member.img)">
+                    <div class="member-info">
+                      <a class="member-name" :href="member.linkedIn">{{ member.name }}</a>
+                      <div class="member-position">{{ member.position }}</div>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -122,15 +131,18 @@ export default {
 </script>
 
 <style scoped>
-   .head-chair, .management{
-    margin: 0 auto;
-    padding: 10px;
-  }
+
   .member {
     margin: 10px;
     border-bottom: 4px solid var(--light-black-color);
-    background-color: var(--black-color);
     border-radius: 10px;
+    background-color: var(--black-color);
+  }
+  .member-bg {
+    border-radius: 10px;
+    background: rgba(20, 20, 20, .6) url("/static/img/ecgraphic.png") no-repeat center;
+    background-blend-mode: darken;
+    background-size: 90%;
   }
   .member-image {
     width: 60px;
@@ -140,14 +152,13 @@ export default {
     border: 3px solid var(--black-color);
   }
   .member-name {
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 700;
     line-height: 20px;
     color: var(--white-color);
   }
   a {
     text-decoration: none;
-    color: var(--light-black-color);
     -webkit-transition: all 500ms ease;
     -moz-transition: all 500ms ease;
     -o-transition: all 500ms ease;
@@ -161,8 +172,7 @@ export default {
     font-weight: 300;
     color: var(--white-color);
   }
-
-  .chairs, .advisors{
+  .chairs, .advisers, .management{
     margin: 0 auto;
   }
   .page-header {
@@ -170,12 +180,11 @@ export default {
       linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
       url(/static/page-headers/meet-the-team.jpg);
   }
-  .chairs-grid, .others-grid, .advisors-grid, .management-grid{
+  .chairs-grid, .advisers-grid, .management-grid{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-
   ul li {
     flex-basis: 100px;
     margin: 10px 0;
@@ -227,7 +236,6 @@ export default {
     .member-image {
       width: 150px;
       height: 150px;
-      border: 5px solid var(--light-black-color);
     }
     .member-name {
       font-size: 26px;
@@ -238,13 +246,6 @@ export default {
     }
     ul li {
       flex-basis: 300px;
-    }
-  }
-  @media only screen and (min-width: 540px) {
-     .head-chair {
-      width: 440px;
-      margin: 0 auto;
-      padding: 10px;
     }
   }
   @media only screen and (min-width: 820px) {

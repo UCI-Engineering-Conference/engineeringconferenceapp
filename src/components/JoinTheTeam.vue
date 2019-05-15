@@ -8,9 +8,9 @@
         <li v-for="(data, index) in positionInfo" :key="index">
           <div class="position">
             <div class="title">{{ data.title }}</div>
-            <div class="description-title">{{ data.title }} Team Description </div>
+            <div class="description-title">{{ data.title }} Description </div>
             <div class="description"> {{ data.description }}</div>
-            <div class="req-title">Requirements</div>
+            <div class="req-title">Qualifications</div>
             <ul class="requirements-list">
               <li v-for="(req, k) in data.requirements" :key="k">
                 <div class="requirements">{{ req }}</div>
@@ -40,13 +40,13 @@
           <span class="alert">{{ errors.first('email') }}</span>
         </div>
         <div class="item-d">
-          <label>Phone</label>
-          <input type="text" v-validate="{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">
+          <label>Phone <b>*</b></label>
+          <input type="text" v-validate="'required'|{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">
           <span class="alert">{{ errors.first('phone') }}</span>
         </div>
         <div class="item-e">
           <label>Major <b>*</b></label>
-          <input type="text" v-model="user.majorForEC" v-validate="'required'" name="major">
+          <input type="text" v-model="user.major" v-validate="'required'" name="major">
           <span class="alert">{{ errors.first('major') }}</span>
         </div>
         <div class="item-f">
@@ -74,9 +74,38 @@
           <input type="text" v-model="user.hours" v-validate="'required|decimal'" name="hours">
           <span class="alert">{{ errors.first('hours') }}</span>
         </div>
-        <div class="item-j">
-          <label class="message-label">Write a few lines about why you would be a good fit for EC and the position specified. Or specify multiple positions that you would be willing to take on!</label>
-          <textarea type="text" v-model="user.messageForEC"></textarea>
+        <div class="item-j" v-if="user.position === 'MEDIA'">
+          <label>Media Position <b>*</b></label>
+          <select v-model="user.subposition" v-validate="'required'" name="subposition">
+            <option disabled value="">Please select one</option>
+            <option v-for="(data, index) in positionInfo.MEDIA.subpositions" :key="index">{{data}}</option>
+          </select>
+          <span class="alert">{{ errors.first('subposition') }}</span>
+        </div>
+        <div class="item-k">
+          <label class="message-label">Please elaborate on your interest in becoming a member of UCI Engineering Conference <b>*</b></label>
+          <textarea type="text" v-model="user.interest" v-validate="'required'" name="first message"></textarea>
+          <span class="alert">{{ errors.first('first message') }}</span>
+        </div>
+        <div class="item-l">
+          <label class="message-label">Please outline your past experiences or qualifications for the position you selected <b>*</b></label>
+          <textarea type="text" v-model="user.qualifications" v-validate="'required'" name="second message"></textarea>
+          <span class="alert">{{ errors.first('second message') }}</span>
+        </div>
+        <div class="item-m">
+          <label class="message-label">Please provide your availability (by 30min) for the next 2 weeks <b>*</b></label>
+          <textarea type="text" v-model="user.availability" v-validate="'required'" name="availablity"></textarea>
+          <span class="alert">{{ errors.first('availability') }}</span>
+        </div>
+        <div class="item-n">
+          <label class="file-select">Upload your resume: <b>*</b></label>
+          <input type="file" id="resume" accept="image/*,.txt,.doc,.docx,.pdf" v-validate="'required'" name="resume"/>
+          <span class="alert">{{ errors.first('resume') }}</span>
+        </div>
+        <div class="item-o">
+          <label class="file-select">Upload your unofficial transcript: <b>*</b></label>
+          <input type="file" id="transcript" accept="image/*,.txt,.doc,.docx,.pdf" v-validate="'required'" name="transcript"/>
+          <span class="alert">{{ errors.first('transcript') }}</span>
         </div>
         <button class="submit-button" @click="postJoin"><span>Submit</span></button>
       </div>
@@ -92,7 +121,7 @@
 import modal from './ApplicationModal.vue'
 import PositionInfo from '../../static/positioninfo.json'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
-import { db } from '../main'
+import { db, storage } from '../main'
 export default {
   components: {
     modal
@@ -102,7 +131,7 @@ export default {
       isModalVisible: false,
       positionInfo: PositionInfo,
       classes: ApplicationOptions['Class'],
-      user: { teamInterest: true, class: '', position: '' }, // the rest is added by the form input fields
+      user: { teamInterest: true, class: '', position: '', subposition: '' }, // the rest is added by the form input fields
       mailingListUser: {}
     }
   },
@@ -117,7 +146,7 @@ export default {
         createdAt: this.user.createdAt
       }
       this.clean()
-      db.collection('2018-2019 Team Interest List').doc(this.user.email).set(this.user, { merge: true })
+      db.collection('2019-2020 Team Interest List').doc(this.user.email).set(this.user, { merge: true })
         .then(function () {
           console.log('Document successfully written!')
         })
@@ -132,11 +161,24 @@ export default {
           console.error('Error writing document: ', error)
         })
     },
+    handleFileUploadSubmit (filetype) {
+      let selectedFile = document.getElementById(filetype).files[0]
+      const uploadTask = storage.ref().child(`${filetype}/${this.user.email}-${filetype}`).put(selectedFile)
+      uploadTask.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+      }, (error) => {
+        console.log(error)
+      }, () => {
+        console.log('success')
+      })
+    },
     postJoin () {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.addUser()
           this.showModal()
+          this.handleFileUploadSubmit('resume')
+          this.handleFileUploadSubmit('transcript')
         } else {
           console.log('Not valid')
         }
@@ -161,7 +203,7 @@ export default {
 
 <style scoped>
   b {
-    color: red;
+    color: var(--error-color);
   }
   h2 {
     color: var(--white-color);
@@ -174,7 +216,7 @@ export default {
     padding: 10px;
     border-radius: 5px;
     font-weight: 700;
-    color: var(--white-color);
+    color: var(--black-color);
     border: 2px solid var(--black-color);
   }
   select option {
@@ -186,7 +228,7 @@ export default {
   }
   textarea {
     width: 200px;
-    height: 100px;
+    height: 70px;
     resize: none;
     text-align: left;
   }
@@ -199,6 +241,9 @@ export default {
     font-weight: 300;
     padding: 6px;
     text-align: center;
+  }
+  .file-select {
+    font-size: 16px;
   }
   .message-label {
     font-size: 16px;
@@ -233,8 +278,23 @@ export default {
   .item-j {
     grid-area: item-j;
   }
-  .submit-button {
+  .item-k {
     grid-area: item-k;
+  }
+  .item-l {
+    grid-area: item-l;
+  }
+  .item-m {
+    grid-area: item-m;
+  }
+  .item-n {
+    grid-area: item-n;
+  }
+  .item-o {
+    grid-area: item-o;
+  }
+  .submit-button {
+    grid-area: item-p;
     border-radius: 5px;
     width: calc(100% - 10px);
     margin-top: 16px;
@@ -253,7 +313,12 @@ export default {
       "item-h"
       "item-i"
       "item-j"
-      "item-k";
+      "item-k"
+      "item-l"
+      "item-m"
+      "item-n"
+      "item-o"
+      "item-p";
     justify-content: center;
   }
   .application {
@@ -309,14 +374,17 @@ export default {
       "item-f item-g"
       "item-h item-i"
       "item-j item-j"
-      "item-k item-k";
+      "item-k item-k"
+      "item-l item-l"
+      "item-m item-m"
+      "item-n item-o"
+      "item-p item-p";
   }
   input {
     width: calc(100% - 40px);
   }
   textarea {
     width: 460px;
-    height: 100px;
     text-align: left;
   }
   select {

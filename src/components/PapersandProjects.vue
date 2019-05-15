@@ -110,20 +110,22 @@ export default {
     background-blend-mode: lighten;
   }
   .sub-image {
-    width: 400px;
+    width: 300px;
     border: 2px solid var(--light-black-color);
   }
   .page-header {
     background-image:
       linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
-      url(/static/page-headers/about.jpg);
-  }
-  .papers, .proj-description {
-    margin: 20px 10%;
+      url(/static/page-headers/year1-full.JPG);
   }
 
-  @media only screen and (min-width: 660px) {
-
+  @media only screen and (min-width: 420px) {
+    .sub-image {
+      width: 400px;
+    }
+    .papers, .proj-description {
+      margin: 20px 10%;
+    }
   }
   @media only screen and (min-width: 1000px) {
 

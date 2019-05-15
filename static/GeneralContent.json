@@ -1,7 +1,7 @@
 {
   "Mission": "To provide students with a hands-on experience to solve contemporary problems through education, collaboration, and debate, while investing in sustainable solutions.",
   "Vision": "Engineering Conference aims to develop under-resourced communities and be universally recognized for empowering students to envision their future careers as global leaders.",
-  "Published": "38",
+  "Published": "48",
   "Attended": "230",
   "Days": "3",
   "Date": "February 16-18, 2019",
@@ -38,7 +38,7 @@
     {
       "system": "Vertical Farming",
       "img": "plant.jpg",
-      "desc": "In order to produce high-quality food and feed a growing world population, new methods of sustainable farming must be developed that are designed to increase yields and reduceecological impact. Unlike traditional cultivation, vertical farming has the potential to reduce the need to create additional farmland and increase the productivity of a farm by a factor of 4 to 6 depending on the crop due to year round productivity. Our goal will be to establish a robotic-centric approach to agriculture that takes advantage of modern engineering simulations, mathematics, the revolution in sensor technology, controlled environment agriculture, fertigation, and indoor farming techniques to transform modern food production. The spire will have an 18-floor farm, located around the UC Irvine campus, and our goal is optimizing it to produce 15,000 tons of food annually.",
+      "desc": "In order to produce high-quality food and feed a growing world population, new methods of sustainable farming must be developed that are designed to increase yields and reduce ecological impact. Unlike traditional cultivation, vertical farming has the potential to reduce the need to create additional farmland and increase the productivity of a farm by a factor of 4 to 6 depending on the crop due to year round productivity. Our goal will be to establish a robotic-centric approach to agriculture that takes advantage of modern engineering simulations, mathematics, the revolution in sensor technology, controlled environment agriculture, fertigation, and indoor farming techniques to transform modern food production. The spire will have an 18-floor farm, located around the UC Irvine campus, and our goal is optimizing it to produce 15,000 tons of food annually.",
       "subsystems":
       [
         {
@@ -48,12 +48,12 @@
         },
         {
           "name": "IntelliCulture",
-          "desc": "Precision farming is the practice of adjusting crop treatments in order to increase production efficiency. Our goal is setting up a system that stores all factors which significantly affect crop yields and develop an approximation tool to gain a better understanding of these critical factors and crop response. As with any engineering endeavor, we will consider the varying components of the system, how they interact together, and all possible tradeoffs. An approach can begin with setting up a sustainable wireless monitoring equipment in the field or by setting up a database that is both fast and scalable. We will need to research neural networks and approximation techniques in order to establish our precision farming system as the state of the art. Finally, devising a means of using technology to raise revenue based off the products and data collected will help balance our final budget. Designing an efficient system is exciting we will research these tools and their applications to the fullest extent.",
+          "desc": "Precision farming is the practice of adjusting crop treatments in order to increase production efficiency. Our goal is setting up a system that stores all factors which significantly affect crop yields and develop an approximation tool to gain a better understanding of these critical factors and crop response. As with any engineering endeavor, we will consider the varying components of the system, how they interact together, and all possible tradeoffs. An approach can begin with setting up a sustainable wireless monitoring equipment in the field or by setting up a database that is both fast and scalable. We will need to research neural networks and approximation techniques in order to establish our precision farming system as the state of the art. Finally, devising a means of using technology to raise revenue based off the products and data collected will help balance our final budget. Designing an efficient system is exciting we will research these tools and their applications to the fullest.",
           "img": "IntelliCulture.jpg"
         },
         {
           "name": "Aqua ReFine",
-          "desc": "With the improvement in nanotechnology and a better understanding in concentration gradient, engineers are allowed to be creative in the disinfection of water without harming the ecosystem. Ours task is to design a water purification system that can fully filter out all the harmful chemicals and impurities in water while keeping the beneficial micronutrients abundant. This project focuses on environmental conservation, meaning preventing harm for crops and water source. Keeping water retention high also plays a big part in this project, since the purification process requires a vast amount of water, students need to design an efficient way to extract water so the environmental impact is at a minimum while keeping the water retention high from the source of extraction.",
+          "desc": "With the improvement in nanotechnology and a better understanding in concentration gradients, engineers are able to be creative in the disinfection of water without harming the ecosystem. Ours task is to design a water purification system that can fully filter out all the harmful chemicals and impurities in water while keeping the beneficial micronutrients abundant. This project focuses on environmental conservation, meaning preventing harm for crops and water source. Keeping water retention high also plays a big part in this project, since the purification process requires a vast amount of water, students need to design an efficient way to extract water so the environmental impact is at a minimum while keeping the water retention high from the source of extraction.",
           "img": "AquaRefine.jpg"
         },
         {

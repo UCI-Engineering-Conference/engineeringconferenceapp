@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 /dist/
+/y/
+/static/Gallery/
 config/prod.env.js
 npm-debug.log*
 yarn-debug.log*

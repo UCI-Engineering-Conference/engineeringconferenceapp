@@ -6,9 +6,7 @@
       <p>Engineering Conference Application</p>
     </div>
     <div class="application">
-      <p style="color: #fa755a; margin: 0; padding:0;"><b>The following committees have been sold out of all tickets: {{fullCommittees}}</b></p>
-      <p style="color: #fa755a; margin: 6px 0 22px 0; padding:0;"><b>Feel free to apply as a different major if you are still interested in coming or want to learn something new.</b></p>
-      <form id="form-input" @submit.prevent="handleSubmit">
+     <form id="form-input" @submit.prevent="handleSubmit">
         <div class="item-a">
           <label>First Name <b>*</b></label>
           <input type="text" v-model="user.firstname" v-validate="'required'" name="first name">
@@ -29,7 +27,15 @@
           <input type="text" v-validate="{ regex: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/ }" v-model="user.phone" name="phone">
           <span class="alert">{{ errors.first('phone') }}</span>
         </div>
-        <div class="item-e">
+       <div class="item-e">
+         <label>Gender <b>*</b></label>
+         <select v-model="user.gender" v-validate="'required'" name="gender">
+           <option disabled value="">Please select one</option>
+           <option v-for="g in gender" :key="g">{{g}}</option>
+         </select>
+         <span class="alert">{{ errors.first('gender') }}</span>
+       </div>
+        <div class="item-f">
           <label>Dietary Restrictions <b>*</b></label>
           <select v-model="user.diet" v-validate="'required'" name="diet">
             <option disabled value="">Please select one</option>
@@ -37,11 +43,11 @@
           </select>
           <span class="alert">{{ errors.first('diet') }}</span>
         </div>
-        <div class="item-f">
+        <div class="item-g">
           <label>Other Dietary Restrictions</label>
           <input type="text" v-model="user.otherDiet">
         </div>
-        <div class="item-g">
+        <div class="item-h">
           <label>School <b>*</b></label>
           <select v-model="user.school" v-validate="'required'" name="school">
             <option disabled value="">Please select one</option>
@@ -49,12 +55,12 @@
           </select>
           <span class="alert">{{ errors.first('school') }}</span>
         </div>
-        <div class="item-h">
+        <div class="item-i">
           <label>Major <b>*</b></label>
           <div>
             <select v-if="['Engineering'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
               <option disabled value="">Please select one</option>
-              <option v-for="major in engMajors" :key="major" :disabled="fullCommittees.indexOf(major) > -1">{{major}}</option>
+              <option v-for="major in engMajors" :key="major">{{major}}</option>
             </select>
             <select v-else-if="['Information and Computer Science'].indexOf(user.school) > -1" v-model="user.major" v-validate="'required'" name="major">
               <option disabled value="">Please select one</option>
@@ -64,7 +70,7 @@
             <span class="alert">{{ errors.first('major') }}</span>
           </div>
         </div>
-        <div class="item-i">
+        <div class="item-j">
           <label>Class <b>*</b></label>
           <select v-model="user.class" v-validate="'required'" name="class">
             <option disabled value="">Please select one</option>
@@ -72,7 +78,15 @@
           </select>
           <span class="alert">{{ errors.first('class') }}</span>
         </div>
-        <div class="item-j" v-if="user.major !== '' && ['Engineering', 'Information and Computer Science'].indexOf(user.school) > -1" >
+       <div class="item-k">
+         <label>Committee Preference <b>*</b></label>
+         <select v-model="user.committee" v-validate="'required'" name="committee">
+           <option disabled value="">Please select one</option>
+           <option v-for="com in committee" :key="com" :disabled="fullCommittees.indexOf(com) > -1">{{com}}</option>
+         </select>
+         <span class="alert">{{ errors.first('class') }}</span>
+       </div>
+        <div class="item-l" v-if="user.major !== '' && ['Engineering', 'Information and Computer Science'].indexOf(user.school) > -1" >
           <label>Skills ( 1:No Knowledge Of -- 5:Confident )</label>
           <div style="display: flex;flex-wrap: wrap;justify-content: center;">
             <div v-if="['MAE', 'Mechanical', 'Aerospace'].indexOf(user.major) > -1" v-for="skill in skills['MAE']" :key="skill">
@@ -109,19 +123,19 @@
             </div>
           </div>
         </div>
-        <div class="item-k">
+        <div class="item-m">
           <label>LinkedIn</label>
           <input type="text" v-model="user.linkedin">
         </div>
-        <div class="item-l">
+        <div class="item-n">
           <label class="message-label">Is there anything else you like us to know regarding your skills or accomplishments?</label>
           <textarea v-model="user.message"></textarea>
         </div>
-        <div class="item-m">
+        <div class="item-o">
           <label>For EC member use.</label>
           <input type="password" v-model="user.VenmoPswd">
         </div>
-        <div class="item-n">
+        <div class="item-p">
           <label>Credit or debit card <b>*</b></label>
           <p class="termsAndConditions">The price of a ticket is $25.00 + an additional transaction fee **</p>
           <div ref="card"></div>
@@ -190,16 +204,18 @@ export default {
     return {
       isModalVisible: false,
       isTermsModalVisible: false,
-      fullCommittees: ['Mechanical', 'Aerospace', 'MAE'],
+      fullCommittees: ApplicationOptions['FullCommittee'],
       schools: ApplicationOptions['School'],
       engMajors: ApplicationOptions['EngMajor'],
       icsMajors: ApplicationOptions['ICSMajor'],
       classes: ApplicationOptions['Class'],
       skills: ApplicationOptions['Skills'],
       diet: ApplicationOptions['Diet'],
+      gender: ApplicationOptions['Gender'],
+      committee: ApplicationOptions['Committee'],
       generalContent: generalContent,
       submitActive: true,
-      user: {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}},
+      user: {major: '', school: '', class: '', diet: '', gender: '', committee: '', paid: 'CARD', skills: {}},
       mailingListUser: {}
     }
   },
@@ -357,7 +373,7 @@ export default {
   a {
     cursor: pointer;
     text-decoration: none;
-    color: #FFB511;
+    color: var(--green-color);
   }
   a:hover {
     text-decoration: underline;
@@ -438,8 +454,14 @@ export default {
   .item-n {
     grid-area: item-n;
   }
-  .submit-button {
+  .item-o {
     grid-area: item-o;
+  }
+  .item-p {
+    grid-area: item-p;
+  }
+  .submit-button {
+    grid-area: item-q;
     border-radius: 5px;
     width: 96%;
     margin-left: 2%;
@@ -472,16 +494,16 @@ label {
     grid-template-areas:
       "item-a item-b"
       "item-c item-c"
-      "item-d item-d"
-      "item-e item-f"
-      "item-g item-g"
+      "item-d item-e"
+      "item-f item-g"
       "item-h item-i"
-      "item-j item-j"
-      "item-k item-k"
+      "item-j item-k"
       "item-l item-l"
       "item-m item-m"
       "item-n item-n"
-      "item-o item-o";
+      "item-o item-o"
+      "item-p item-p"
+      "item-q item-q";
     justify-content: center;
   }
   textarea {

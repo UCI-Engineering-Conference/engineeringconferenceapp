@@ -43,18 +43,21 @@
           :data="teamInterestList"
           sort-by="createdAt"
           sort-order="desc"
+          @rowClick="downloadDocs"
         >
           <table-column show="firstname" label="First Name"></table-column>
           <table-column show="lastname" label="Last Name"></table-column>
           <table-column show="email" label="Email"></table-column>
           <table-column show="phone" label="Phone"></table-column>
-          <table-column show="majorForEC" label="Major"></table-column>
+          <table-column show="major" label="Major"></table-column>
           <table-column show="class" label="Class"></table-column>
           <table-column show="linkedin" label="LinkedIn"></table-column>
           <table-column show="position" label="Position"></table-column>
+          <table-column show="subposition" label="Subposition"></table-column>
           <table-column show="hours" label="Hrs/Week"></table-column>
-          <table-column show="messageForEC" label="Message"></table-column>
-
+          <table-column show="interest" label="Interest"></table-column>
+          <table-column show="qualifications" label="Qualifications"></table-column>
+          <table-column show="availability" label="Availability"></table-column>
           <table-column show="createdAt" label="Date"></table-column>
         </table-component>
       </tab>
@@ -98,7 +101,7 @@
 </template>
 
 <script>
-import { db } from '../main'
+import { db, storage } from '../main'
 
 export default {
   data () {
@@ -139,6 +142,25 @@ export default {
       if (this.$isAuthenticated() !== true) {
         this.$login()
       }
+    },
+    downloadDocs (row) {
+      this.openURL(`resume/${row.data.email}-resume`)
+      this.openURL(`transcript/${row.data.email}-transcript`)
+    },
+    openURL (name) {
+      storage.ref().child(name).getDownloadURL().then(function (url) {
+        // `url` is the download URL for 'images/stars.jpg'
+        window.open(url)
+      }).catch(function (error) {
+        switch (error.code) {
+          case 'storage/object-not-found': // File doesn't exist
+            break
+          case 'storage/unauthorized': // User doesn't have permission to access the object
+            break
+          case 'storage/canceled': // User canceled the upload
+            break
+        }
+      })
     },
     exportToSheets () {
       this.$getGapiClient()
@@ -319,7 +341,7 @@ export default {
       applicants: db.collection('2018-2019 Attendees'),
       messages: db.collection('Messages'),
       mailingList: db.collection('Mailing List'),
-      teamInterestList: db.collection('2018-2019 Team Interest List')
+      teamInterestList: db.collection('2019-2020 Team Interest List')
     }
   }
 }

@@ -1,54 +1,93 @@
-[
-  {
-    "title": "MEDIA",
-    "description": "In charge of media for engineering conference which includes all media exposure.",
+{
+  "QUALITY ENGINEER": {
+    "title": "QUALITY ENGINEER",
+    "description": "Tasked with putting the conference on paper. They will be responsible for creating documents that will be informative for the members, companies, and participants.",
     "requirements":
     [
-      "Web Developer: Preparing the conference website (HTML, CSS, JavaScript knowledge preferred)",
-      "Social Media Manager: Manages social media pages for the conference.",
-      "Photographer/video recorder: Responsible for conference footage.",
-      "Photo editor: Should have experience with Abode Illustrator and/or Photoshop.",
-      "Video editor: In charge of recording the whole process of the conference to create a movie after."
+      "Proficient with Microsoft Word, Excel, and Powerpoint", "Proficient with Google Platform (Forms, sheets, doc)",
+      "Adobe Acrobat proficiency preferred",
+      "Good note taker",
+      "Legal documents experience preferred",
+      "MLA Format knowledge preferred"
     ]
   },
-  {
-    "title": "ADMINISTRATION",
-    "description": "In charge of all conference documentation which includes but not limited to: legal paperwork, information packages, student introductory package, chair guidelines package, committee terminology package and committee topic package.",
+  "OPERATIONS ENGINEER": {
+    "title": "OPERATIONS ENGINEER",
+    "description": "Tasked with puzzling all the pieces together. They will be grouping the hard work of all the sub-teams into 3 days. From writing a detailed and top-level schedule to finding the perfect venue, they will be making sure the event goes as smoothly as possible.",
     "requirements":
     [
-      "Completed Lower-division writing courses, documentation experience preferred, upper-div writing course completion preferred."
+      "Proficient with Microsoft Word, Excel, and Powerpoint",
+      "Proficient with Google Platform (Forms, sheets, doc)",
+      "Good note taker",
+      "Leadership and teamwork experience"
     ]
   },
-  {
-    "title": "ORGANIZER",
-    "description": "In charge conference logistics including but not limited to: venue preparation and setup, attendee registration, directing attendees, organizing conference flow.",
-    "requirements":
-    [
-      "Teamwork and Leadership experience, event organizing experience preferred."
-    ]
-  },
-  {
+  "OUTREACH": {
     "title": "OUTREACH",
-    "description": "Members of the outreach team will have various responsibilities which are directed towards contacting sponsors and preparing a sponsorship proposal, inviting keynote speakers and faculty.",
+    "description": "Tasked with contacting companies to sponsor and attend the conference. They will be one of the points of contact between UCI Engineering Conference and companies.",
     "requirements":
     [
-      "Public speaking skills, comfortable contacting professionals, fundraising experience, preferred."
+      "Proficient Microsoft Office and Excel",
+      "Proficient phone call communication",
+      "Public speaking skills",
+      "Comfortable contacting professionals"
     ]
   },
-  {
-    "title": "CHAIRS BOARD",
-    "description": "In charge of researching contemporary engineering problems to provide committee topics. Each chair on the board will be one of the chairs in charge of a conference committee that will provide attendees with content and guidelines to successfully brainstorm solutions and debate. Chairs will run debate sessions using Robert’s Rules of Order.",
+  "CHAIRS": {
+    "title": "CHAIRS",
+    "description": "Tasked with developing a project that challenges conference participants to use their knowledge related to their field of study. Chairs create topics that rely heavily on the principles of system design. Chairs must be willing to learn how to speak in front of and train other students. Chairs will prepare a model project for conference participants and must be able to stimulate their interest in their engineering discipline through mentorship, leadership, and passion.",
     "requirements":
     [
-      "Proficient engineering knowledge, capable of enforcing Robert’s rules of order, good communication, public speaking and leadership skills."
+      "Willing to learn",
+      "Passionate",
+      "Proficient in Microsoft Office and Google Platform",
+      "Research/Hands-on Experience",
+      "Teamwork Experience"
     ]
   },
-  {
-    "title": "EVENT PLANNING",
-    "description": "Members will be in charge of planning various entertainment events including the conference opening and closing ceremonies and networking break events.",
+  "SPECIAL PROJECTS": {
+    "title": "SPECIAL PROJECTS",
+    "description": "Tasked with contacting clubs/organizations for performance events during the conference. They will create design challenges along with a detailed schedule and cost for it.",
     "requirements":
     [
-      "Commitment, good communication skills, organization skills, comfortable with reaching out to on campus organizations."
+      "Proficient Microsoft Office and Excel",
+      "Proficient with Google Platform (Forms, sheets, doc)",
+      "Event planning experience",
+      "Reaching out to clubs experience",
+      "Proficient phone call communication"
+    ]
+  },
+  "VIDEOGRAPHER / PHOTOGRAPHY / SOCIAL MEDIA" : {
+    "title": "VIDEOGRAPHER / PHOTOGRAPHY / SOCIAL MEDIA",
+    "description": "Tasked with creating social media posts, making them active and not passive. Responsible for keeping all social media platforms up to date and knowing how to work all the platforms. ",
+    "requirements":
+    [
+      "Proficient with Google Platform (Forms, sheets, doc)",
+      "Proficient in Editing skills",
+      "Proficient in Video Making",
+      "Teamwork experience",
+      "Proficient in Adobe Illustrator"
+    ]
+  },
+  "GRAPHIC DESIGNER" : {
+    "title": "GRAPHIC DESIGNER",
+    "description": "Tasked with creating all graphic designs for all physical and digital objects. Providing templates and accurate forms of where the graphic designs will be placed.",
+    "requirements":
+    [
+      "Proficient with Google Platform (Forms, sheets, doc)",
+      "Teamwork experience",
+      "Proficient in Adobe Illustrator",
+      "Proficient in Editing skills"
+    ]
+  },
+  "WEB DEVELOPER" : {
+    "title": "WEB DEVELOPER",
+    "description": "Tasked with developing the UCI Engineering Conference website and keeping it up to date with all events, pictures, etc. Provide maintenance to the backend.",
+    "requirements":
+    [
+      "Proficient with Google Platform (Forms, sheets, doc)",
+      "Teamwork experience",
+      "Full stack web development experience"
     ]
   }
-]
+}

@@ -23,5 +23,14 @@
   ],
   "Diet": [
     "None", "Vegetarian", "Vegan", "Gluten Free", "Halal", "Other"
+  ],
+  "Gender": [
+    "Male", "Female", "Other"
+  ],
+  "Committee": [
+    "MAE", "EECS", "CBEMS", "CEE"
+  ],
+  "FullCommittee": [
+    
   ]
 }

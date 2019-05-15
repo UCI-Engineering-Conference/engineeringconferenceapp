@@ -10,6 +10,7 @@ import VueApexCharts from 'vue-apexcharts'
 import VueFire from 'vuefire'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
 import VueGAPI from 'vue-gapi'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -51,12 +52,14 @@ Vue.use(VueAxios, axios)
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
-    applicationOpen: false // TODO: add application route in router/index.js
+    applicationOpen: false, // TODO: add application route in router/index.js
+    applicationClosed: false,
+    recruitmentOpen: true
   }
 })
 
 const firebaseApp = firebase.initializeApp(process.env.FIREBASE_CONF)
-
+export const storage = firebase.storage()
 export const db = firebaseApp.firestore()
 const settings = {timestampsInSnapshots: true}
 db.settings(settings)

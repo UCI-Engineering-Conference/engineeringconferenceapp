@@ -8,6 +8,7 @@
         <router-link to="/meettheteam">Meet the Team</router-link>
         <router-link to="/schedule">Schedule</router-link>
         <router-link to="/sponsors">Partners</router-link>
+        <router-link to="/gallery">Gallery</router-link>
       </div>
     </div>
     <router-view/>
@@ -114,7 +115,7 @@ export default {
   background-color: var(--white-color);
 }
 #nav {
-  position: relative;
+  position: sticky;
   top:0;
   left:0;
   height: 60px;
@@ -137,6 +138,10 @@ ul {
   list-style: none;
   padding: 0;
 }
+.alert {
+  color: var(--error-color);
+}
+
 #nav .nav-link a {
   text-decoration: none;
   font-size: 2.9vw;
@@ -228,6 +233,13 @@ ul {
   opacity: 1;
   right: 0;
 }
+
+.recruitment-button {
+  background-color: var(--white-color);
+  border-bottom: 1px solid var(--green-color);
+  color: var(--green-color);
+  border-radius: 5px;
+}
 .page-header {
   color: var(--white-color);
   font-weight: 300;
@@ -237,6 +249,43 @@ ul {
   padding: 30px;
   margin-bottom: 20px;
 }
+  .img-strip {
+    display: flex;
+    justify-content: center;
+
+  }
+  .img-strip li {
+    flex-basis: 200px;
+  }
+  .img-strip li img {
+    background-color: var(--black-color);
+    padding: 1px;
+    width: 40px;
+  }
+  .img-strip li:nth-child(even) img {
+    background-color: var(--green-color);
+  }
+  .lined-header {
+    display: grid;
+    grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+    align-items: center;
+    text-align: center;
+    grid-gap: 20px;
+    width: 100%;
+  }
+  .lined-header:before,
+  .lined-header:after {
+    content: '';
+    color: var(--black-color);
+    border-top: 2px solid;
+  }
+
+  @media only screen and (min-width: 350px) {
+    .img-strip li img{
+      padding: 2px;
+      width: 50px;
+    }
+  }
   @media only screen and (min-width: 420px) {
     #nav .nav-link a {
       font-size: 3vw;
@@ -259,37 +308,7 @@ ul {
       margin-bottom: 50px;
     }
   }
-  .img-strip {
-    display: flex;
-    justify-content: center;
 
-  }
-  .img-strip li {
-    flex-basis: 200px;
-  }
-  .img-strip li img{
-    background-color: var(--black-color);
-    padding: 2px;
-    width: 50px;
-  }
-  .img-strip li:nth-child(even) img{
-    background-color: var(--green-color);
-  }
-  .lined-header {
-    display: grid;
-    grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
-    align-items: center;
-    text-align: center;
-    grid-gap: 20px;
-    width: 100%;
-  }
-
-  .lined-header:before,
-  .lined-header:after {
-    content: '';
-    color: var(--black-color);
-    border-top: 2px solid;
-  }
   @media only screen and (min-width: 540px) {
     .img-strip li img{
       width:80px;

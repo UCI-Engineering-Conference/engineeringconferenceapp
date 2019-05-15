@@ -9,6 +9,7 @@ const routerOptions = [
   { path: '/sponsors', component: 'Sponsors' },
   { path: '/contact', component: 'ContactUs' },
   { path: '/papersandprojects', component: 'PapersandProjects' },
+  { path: '/gallery', component: 'Gallery' },
   { path: '/secretpagebeard', component: 'SecretPage' },
   { path: '/jointheteam', component: 'JoinTheTeam' },
   // { path: '/application', component: 'Application' }, // TODO : Uncomment when application goes live
