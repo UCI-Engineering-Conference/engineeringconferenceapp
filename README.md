@@ -23,20 +23,25 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## Getting Started
 1. Download nvm (or node/npm)
 2. Download Webstorm (Free jetbrains account for students)
-3. Fork and Clone this repo
+3. Clone this repo
 4. Hosting: NameCheap [CPanel](https://server123.web-hosting.com:2083/cpsess7382350696/frontend/paper_lantern/index.html)
 5. Achieve and upload the files in /dist after npm run build into public_html of file manager
+6. **IMPORTANT** Take the following from our team drive: Gallery (belongs in /static/) and prod.env.js (belongs in /config/)[Website Starter Kit](https://drive.google.com/drive/u/0/folders/1j42-VedOFYNG3ispj78a8bmuDZED_WPd) 
 
 ## Each Year you must
-1. Set the date in the GeneralContent.json (study the .json files all the easy changes can be make through them)
-2. Change the indexes the firebase posts too (it is not necessary to delete the cloud firestore change the dates in the vue components)
-3. The application open can be changed in the vuex store (if off people can only sign up for the mailing list)
++ Update the content:
+  + Use the .json files in /static/ to make easy edits and additions (Meettheteam, schedule, sponsors, papers, projects, etc.)
++ Swap the backend:
+  + Change the years on all of the database pushes ('2018-2019 Attendees' -> to whatever year it is) this is so we can save the information 
+  of everyone who signs up every year. However, the mailing list is added on each year (this will become annoying for people after a few years so be careful)
++ Control the home page state:
+  + Use the vuex store in main.js to switch between (application, recruiting, neutral, etc.)
 
 ## All third parties are linked in the secret page
 + All are accessible with the engineeringconferenceuci@gmail.com
 + Except:
-+ + Stripe
-+ + SendGrid (you make a free account by using the github student developer pack)
+  + Stripe
+  + SendGrid (you make a free account by using the github student developer pack)
 
 ## Switch the backend
 > Uses Firebase's Cloud Firestore. 
@@ -47,4 +52,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## Webtasks
 > Used for completing stripe payments serverless and sending email confirmations through sendGrid
 + Sign into webtask with the engineering conference gmail
-+ stripecharge is the webtask being used
++ 2 webtasks are used (stripecharge, attendeeEmailConfirmation)
