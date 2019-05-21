@@ -73,9 +73,9 @@
       <h2 class="lined-header">Papers</h2>
       <p>Congratulations to the winners of Engineering Conference 2019, who were awarded a guaranteed publication and a Boeing El Segundo Satellite Facility tour. To find out more and view the other publications click <router-link to="/papersandprojects">Here</router-link>.</p>
       <div class="pub">
-        <img class="pub-image" :src="miscImgPreUrl(generalContent.Publications[0].img)"/>
-        <a class="pub-title" :href="generalContent.Publications[0].link">{{generalContent.Publications[0].name}}</a>
-        <div class="pub-description">{{generalContent.Publications[0].desc}}...</div>
+        <img class="pub-image" :src="miscImgPreUrl(papersAndProjects.Publications[0].img)"/>
+        <a class="pub-title" :href="papersAndProjects.Publications[0].link">{{papersAndProjects.Publications[0].name}}</a>
+        <div class="pub-description">{{papersAndProjects.Publications[0].desc}}...</div>
       </div>
     </div>
     <div class="projects">
@@ -103,6 +103,7 @@
 <script>
 import modal from './MailingListModal.vue'
 import generalContent from '../../static/GeneralContent.json'
+import papersAndProjects from '../../static/PapersandProjects.json'
 import ImageStrip from '../../static/ImageStrips.json'
 export default {
   components: {
@@ -123,6 +124,7 @@ export default {
     return {
       isModalVisible: false,
       generalContent: generalContent,
+      papersAndProjects: papersAndProjects,
       imgLocation: '/static/faqpics/',
       miscImgLoc: '/static/misc-pics/',
       image_strip: ImageStrip

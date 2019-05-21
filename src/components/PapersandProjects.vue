@@ -8,7 +8,7 @@
         <h1>Papers</h1>
         <p>Explore the work from undergraduate students during previous Engineering Conferences that have now been published in the UC repository.</p>
         <ul class="pub-grid">
-          <li v-for="(pub, index) in generalContent.Publications" v-bind:key="index">
+          <li v-for="(pub, index) in papersAndProjects.Publications" v-bind:key="index">
             <img class="pub-image" :src="miscImgPreUrl(pub.img)"/>
             <a class="pub-title" :href="pub.link">{{pub.name}}</a>
             <div class="pub-description">{{pub.desc}}...</div>
@@ -19,7 +19,7 @@
         <h1>Projects</h1>
         <P style="margin: 20px 10%;">Engineering Conference places an emphasis on students gaining technical and applicable skills. As such, we design projects with the intent of having students research topics relevant to them based on their studies, but with a backdrop of having them work as if they were in an industrialized setting.</P>
         <ul class="proj-grid">
-          <li v-for="(proj, index) in generalContent.Projects" v-bind:key="index">
+          <li v-for="(proj, index) in papersAndProjects.Projects" v-bind:key="index">
             <img class="proj-image" :src="miscImgPreUrl(proj.img)"/>
             <div class="proj-title">{{proj.system}}</div>
             <div class="proj-description">{{proj.desc}}</div>
@@ -38,12 +38,12 @@
 </template>
 <script>
 import ImageStrip from '../../static/ImageStrips.json'
-import generalContent from '../../static/GeneralContent.json'
+import papersAndProjects from '../../static/PapersandProjects.json'
 export default {
   data () {
     return {
       miscImgLoc: '/static/misc-pics/',
-      generalContent: generalContent,
+      papersAndProjects: papersAndProjects,
       image_strip: ImageStrip
     }
   },
