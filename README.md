@@ -11,8 +11,7 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
+
 
 # build for production and view the bundle analyzer report
 npm run build --report
@@ -21,12 +20,33 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Getting Started
-1. Download nvm (or node/npm)
-2. Download Webstorm (Free jetbrains account for students)
-3. Clone this repo
-4. Hosting: NameCheap [CPanel](https://server123.web-hosting.com:2083/cpsess7382350696/frontend/paper_lantern/index.html)
-5. Achieve and upload the files in /dist after npm run build into public_html of file manager
-6. **IMPORTANT** Take the following from our team drive: Gallery (belongs in /static/) and prod.env.js (belongs in /config/)[Website Starter Kit](https://drive.google.com/drive/u/0/folders/1j42-VedOFYNG3ispj78a8bmuDZED_WPd) 
+ + Download nvm (or node/npm)
+ + Download Webstorm (Free jetbrains account for students)
+ + Clone this repo
+ + Install the dependencies
+``` bash
+# install dependencies
+npm install
+```
+ + **IMPORTANT** Take the following from our team drive and move them into the folders of the EngineeringConferenceApp that they belong to: Gallery (belongs in /static/) and prod.env.js (copy and replace in /config/) [Website Starter Kit](https://drive.google.com/drive/u/0/folders/1j42-VedOFYNG3ispj78a8bmuDZED_WPd) 
+ + Run locally
+``` bash
+# serve with hot reload at localhost:8080
+npm run dev
+```
+## To add files to Cpanel
+ + Build for production
+```bash 
+# build for production with minification
+npm run build
+```
+ + Locate files index.html and /static/ in /dist/ folder
+ + Delete /Gallery/ from the /static/ folder (to reduce upload time)
+ + Compress these two files and upload them to NameCheap [CPanel](https://server123.web-hosting.com:2083/cpsess7382350696/frontend/paper_lantern/index.html) (public_html of file manager)
+ + Move the Gallery page from the old /static/ folder into the home page
+ + Delete the existing /static/ and index.html
+ + Refresh the page to see the newly uploaded file (then extract the Archive.zip)
+ + Move the /Gallery/ folder back into /static/
 
 ## Each Year you must
 + Update the content:

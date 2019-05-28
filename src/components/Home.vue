@@ -4,7 +4,10 @@
       <h3 style="margin:0;">Engineering Conference is now recruiting for Fall 2019!</h3>
       <router-link to="/jointheteam" tag="button" style="width:150px;height:40px;font-size:20px;" class="submit-button recruitment-button"><span>APPLY NOW</span></router-link>
     </div>
-    <img class="main-image" src="/static/img/EC_logo_v3.png"/>
+    <div class="main-video">
+      <iframe class="resp-iframe" src="https://www.youtube.com/embed/OdiwpVA75T8?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <img class="main-image" src="/static/img/EC_logo_v3_text.png"/>
     <div class="intro">
       <h1 class="intro-line1">Innovate. Lead. Debate.</h1>
       <p class="intro-line3">{{ generalContent.Date }}</p>
@@ -46,9 +49,9 @@
           engineers to utilize the knowledge in their fields of interest to solve real world engineering
           problems as they improve their public speaking and debate skills. </p>
       </div>
-      <div class="video-container">
-        <iframe class="resp-iframe" src="https://www.youtube.com/embed/yCOshvp6BV0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
+      <!--<div class="video-container">-->
+        <!--<iframe class="resp-iframe" src="https://www.youtube.com/embed/yCOshvp6BV0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+      <!--</div>-->
     </div>
 
     <div class="img-strip-wrapper">
@@ -219,6 +222,11 @@ export default {
   padding: 0 20px 0 20px;
 }
 .video-container {
+  position: relative;
+  overflow:hidden;
+  padding-top: 56.25%;
+}
+.main-video {
   position: relative;
   overflow:hidden;
   padding-top: 56.25%;
