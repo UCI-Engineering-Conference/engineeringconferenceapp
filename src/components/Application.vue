@@ -351,16 +351,10 @@ export default {
       this.isTermsModalVisible = false
     },
     clean () {
-      for (let propName in this.user) {
-        if (this.user[propName] === '') {
-          delete this.user[propName]
-        }
-      }
-      for (let propName in this.mailingListUser) {
-        if (this.mailingListUser[propName] === '') {
-          delete this.mailingListUser[propName]
-        }
-      }
+      Object.keys(this.user).filter(propName => !this.user[propName])
+        .map(propName => delete this.user[propName])
+      Object.keys(this.mailingListUser).filter(propName => !this.mailingListUser[propName])
+        .map(propName => delete this.mailingListUser[propName])
     }
   }
 }

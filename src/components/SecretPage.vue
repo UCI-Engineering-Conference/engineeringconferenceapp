@@ -102,7 +102,7 @@
 
 <script>
 import { db, storage } from '../main'
-
+const constants = require('../utils/constants.js')
 export default {
   data () {
     return {
@@ -113,7 +113,7 @@ export default {
       teamInterestList: [],
       messages: [],
       mailingList: [],
-      attendeeSheet: [['First Name', 'Last Name', 'Email', 'Payment Method', 'Phone', 'Diet', 'Other Diet', 'School', 'Major', 'Skills', 'Class', 'LinkedIn', 'Message', 'Date']],
+      attendeeSheet: [constants.ATTENDEE_SHEET_ROW1],
       numberOfApps: 0,
       majorSeries: [0, 0, 0, 0, 0],
       majorChartOptions: {
@@ -128,112 +128,69 @@ export default {
     }
   },
   methods: {
+    /*
+     * Counts up attendees by major and year then adds them to graphs,
+     * Creates dict for team balancing and adds all attendees to an export sheet
+     */
     refresh () {
-      /**
-       * Counts up attendees by major and year then adds them to graphs,
-       * Creates dict for team balancing and adds all attendees to a sheet
-       * so they are ready for export
-       */
       this.getStatistics()
       this.getApplicants()
     },
+    /*
+     * Logs into google api
+     */
     login () {
       // TODO: Currently page needs refresh for export and team balance to be enabled
       if (this.$isAuthenticated() !== true) {
         this.$login()
       }
     },
-    downloadDocs (row) {
-      this.openURL(`resume/${row.data.email}-resume`)
-      this.openURL(`transcript/${row.data.email}-transcript`)
+    async downloadDocs (row) {
+      await Promise.all([`resume/${row.data.email}-resume`, `transcript/${row.data.email}-transcript`].map(this.openURL))
     },
-    openURL (name) {
-      storage.ref().child(name).getDownloadURL().then(function (url) {
-        // `url` is the download URL for 'images/stars.jpg'
+    async openURL (name) {
+      try {
+        const url = await storage.ref().child(name).getDownloadURL()
         window.open(url)
-      }).catch(function (error) {
-        switch (error.code) {
-          case 'storage/object-not-found': // File doesn't exist
-            break
-          case 'storage/unauthorized': // User doesn't have permission to access the object
-            break
-          case 'storage/canceled': // User canceled the upload
-            break
+      } catch (err) { console.log(`Failed to open ${name} due to ${err.code}`) }
+    },
+    async exportToSheets () {
+      try {
+        const gapi = await this.$getGapiClient()
+        this.writeToSpreadSheets(gapi, constants.GOOGLE_SHEETS.ATTENDEE_SHEET, 'A1', this.attendeeSheet)
+      } catch (err) { console.log(`Google API Client ERROR: ${err}`) }
+    },
+    async balanceTeams () {
+      try {
+        const gapi = await this.$getGapiClient()
+        const response = await gapi.client.sheets.spreadsheets.values.batchGet({
+          spreadsheetId: constants.GOOGLE_SHEETS.ATTENDANCE_SHEET,
+          ranges: 'Sheet1'
+        })
+        const result = response.result
+        console.log(`${result.valueRanges.length} ranges retrieved.`)
+        let majorFamilyCollection = {MAE: {}, EECS: {}, CEE: {}, CBMS: {}, OTHER: {}}
+        for (let row of result.valueRanges[0].values) {
+          if (row[0] === 'First Name') continue
+          if (row[3] === 'TRUE' && this.applicantsDict[row[2]]) {
+            let student = this.applicantsDict[row[2]]
+            let majorFamily = this.convertMajorToFamily(student.major) // TODO: this will fail if other is returned
+            majorFamilyCollection[majorFamily][student.email] = {
+              firstname: student.firstname,
+              lastname: student.lastname,
+              class: student.class,
+              major: student.major,
+              skills: student.skills
+            }
+          }
         }
-      })
-    },
-    exportToSheets () {
-      this.$getGapiClient()
-        .then(gapi => {
-          this.writeToSpreadSheets(gapi, '1YHuhH_LpC4XuaG2-uSgQFJaRE7QD1DLPLKLpEOiFHaQ', 'A1', this.attendeeSheet)
-        })
-    },
-    balanceTeams () {
-      this.$getGapiClient()
-        .then(gapi => {
-          gapi.client.sheets.spreadsheets.values.batchGet({
-            spreadsheetId: '1L3ugTVFEfVQGNOZ8z-pMH10RFDkfYxfOjy9_nwba5WI',
-            ranges: 'Sheet1'
-          }).then((response) => {
-            let result = response.result
-            console.log(`${result.valueRanges.length} ranges retrieved.`)
 
-            let MAE = {}
-            let EECS = {}
-            let CBMS = {}
-            let CE = {}
-            result.valueRanges[0].values.forEach(function (student) {
-              console.log(student[3])
-              if (student[0] !== 'First Name' && student[3] === 'TRUE') {
-                if (['Aerospace', 'Mechanical', 'MAE', 'Physics'].indexOf(this.applicantsDict[student[2]].major) > -1) {
-                  MAE[student[2]] = {
-                    firstname: this.applicantsDict[student[2]].firstname,
-                    lastname: this.applicantsDict[student[2]].lastname,
-                    class: this.applicantsDict[student[2]].class,
-                    major: this.applicantsDict[student[2]].major,
-                    skills: this.applicantsDict[student[2]].skills
-                  }
-                }
-                if (this.applicantsDict[student[2]].school === 'Information and Computer Science' || ['Computer Science and Engineering', 'Computer', 'Electrical', 'CSE', 'Humanities-Undeclared', 'UNDERCLARED'].indexOf(this.applicantsDict[student[2]].major) > -1) {
-                  EECS[student[2]] = {
-                    firstname: this.applicantsDict[student[2]].firstname,
-                    lastname: this.applicantsDict[student[2]].lastname,
-                    class: this.applicantsDict[student[2]].class,
-                    major: this.applicantsDict[student[2]].major,
-                    skills: this.applicantsDict[student[2]].skills
-                  }
-                }
-                if (['Biomedical', 'Chemical', 'Material Science', 'Chemistry', 'aerospace engineering', 'Mechanical engineering'].indexOf(this.applicantsDict[student[2]].major) > -1) {
-                  CBMS[student[2]] = {
-                    firstname: this.applicantsDict[student[2]].firstname,
-                    lastname: this.applicantsDict[student[2]].lastname,
-                    class: this.applicantsDict[student[2]].class,
-                    major: this.applicantsDict[student[2]].major,
-                    skills: this.applicantsDict[student[2]].skills
-                  }
-                }
-                if (['Civil', 'Environmental', 'Applied Mathematics'].indexOf(this.applicantsDict[student[2]].major) > -1) {
-                  CE[student[2]] = {
-                    firstname: this.applicantsDict[student[2]].firstname,
-                    lastname: this.applicantsDict[student[2]].lastname,
-                    class: this.applicantsDict[student[2]].class,
-                    major: this.applicantsDict[student[2]].major,
-                    skills: this.applicantsDict[student[2]].skills
-                  }
-                }
-              }
-            }.bind(this))
-            let MAESheet = this.writeToCommitteeSheet(this.sortByMajorClass(6, MAE, ['MAE', 'Aerospace', 'Mechanical', 'Physics']))
-            let EECSSheet = this.writeToCommitteeSheet(this.sortByMajorClass(6, EECS, ['Electrical', 'Computer', 'Computer Science and Engineering', 'CSE', 'Software Engineering', 'Computer Game Science', 'Data Science', 'Informatics', 'Computer Science', 'Humanities-Undeclared', 'UNDERCLARED']))
-            let CBMSSheet = this.writeToCommitteeSheet(this.sortByMajorClass(5, CBMS, ['Material Science', 'Chemical', 'Biomedical', 'Chemistry', 'aerospace engineering', 'Mechanical engineering']))
-            let CESheet = this.writeToCommitteeSheet(this.sortByMajorClass(5, CE, ['Environmental', 'Civil', 'Applied Mathematics']))
-
-            this.writeToSpreadSheets(gapi, '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ', 'MAE', MAESheet)
-            this.writeToSpreadSheets(gapi, '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ', 'EECS', EECSSheet)
-            this.writeToSpreadSheets(gapi, '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ', 'CBMS', CBMSSheet)
-            this.writeToSpreadSheets(gapi, '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ', 'CE', CESheet)
-          })
-        })
+        // TODO: names in receiving sheet must match (CEE not CE)
+        await Promise.all(Object.keys(constants.ENG_MAJORS).map(majorFamily => {
+          let exportSheet = this.buildCommitteeSheet(this.sortByMajorClass(6, majorFamilyCollection[majorFamily], constants.ENG_MAJORS[majorFamily]))
+          this.writeToSpreadSheets(gapi, constants.GOOGLE_SHEETS.TEAM_BALANCING_SHEET, majorFamily, exportSheet)
+        }))
+      } catch (err) { console.log(`Balance Teams Failed: ${err}`) }
     },
     sortByMajorClass (sizeOfCommittees, committee, majorsInCommittee) {
       let numberOfCommittees = parseInt(Object.keys(committee).length / sizeOfCommittees)
@@ -252,9 +209,6 @@ export default {
         }
       }
       return major
-      // let sortedTeam = major[major.length - 1]
-      // for (let i = major.length - 2; i >= 0; i--) sortedTeam = sortedTeam.concat(major[i])
-      // return sortedTeam
     },
     sortedByClass (students) {
       let grade = [[], [], [], []]
@@ -282,58 +236,50 @@ export default {
       }
       return committeeList
     },
-    writeToCommitteeSheet (committeeList) {
-      let sheet = [['First Name', 'LastName', 'Major', 'Class']]
-      for (let i = 0; i < committeeList.length; i++) {
-        sheet.push(['Committee '.concat((i + 1).toString()), ' ', '', ''])
-        for (let j = 0; j < committeeList[i].length; j++) {
-          if (committeeList[i][j] === undefined) break
-          sheet.push([committeeList[i][j].firstname, committeeList[i][j].lastname, committeeList[i][j].major, committeeList[i][j].class])
-        }
-      }
+    buildCommitteeSheet (committeeList) {
+      let sheet = [constants.COMMITTEE_SHEET_ROW1]
+      committeeList.map((currCommittee, idx) => {
+        sheet.push([`Committee ${idx + 1}`, '', '', ''])
+        currCommittee.filter(student => student).map(student => sheet.push([student.firstname, student.lastname, student.major, student.class]))
+      })
       return sheet
     },
-    writeToSpreadSheets (gapi, spreadsheetId, range, values) {
-      gapi.client.sheets.spreadsheets.values.batchUpdate({
-        spreadsheetId: spreadsheetId,
-        resource: {
-          data: [{
-            range: range,
-            values: values
-          }],
-          valueInputOption: 'RAW'
-        }
-      }).then((response) => {
-        let result = response.result
-        console.log(`${result.totalUpdatedCells} cells updated.`)
-      })
+    async writeToSpreadSheets (gapi, spreadsheetId, range, values) {
+      try {
+        const response = await gapi.client.sheets.spreadsheets.values.batchUpdate({
+          spreadsheetId: spreadsheetId,
+          resource: {
+            data: [{
+              range: range,
+              values: values
+            }],
+            valueInputOption: 'RAW'
+          }
+        })
+        console.log(`${response.result.totalUpdatedCells} cells updated.`)
+      } catch (err) { console.log(`Batch Update Failed: ${err}`) }
+    },
+    convertMajorToFamily (major) {
+      return Object.keys(constants.ENG_MAJORS).filter(family => constants.ENG_MAJORS[family].includes(major))[0] || 'OTHER'
     },
     getStatistics () {
       this.numberOfApps = 0
-      this.classSeries = [0, 0, 0, 0, 0]
-      this.majorSeries = [0, 0, 0, 0, 0]
-      this.applicants.forEach(function (student) {
+      this.classSeries = new Array(5).fill(0)
+      this.majorSeries = new Array(5).fill(0)
+      for (let student of this.applicants) {
         this.numberOfApps++
-        if (['Aerospace', 'Mechanical', 'MAE'].indexOf(student.major) > -1) ++this.majorSeries[0]
-        else if (student.school === 'Information and Computer Science' || ['CSE', 'Software Engineering', 'Computer Game Science', 'Computer Science and Engineering', 'Computer', 'Computer Science', 'Electrical'].indexOf(student.major) > -1) ++this.majorSeries[1]
-        else if (['Civil', 'Environmental'].indexOf(student.major) > -1) ++this.majorSeries[2]
-        else if (['Biomedical', 'Chemical', 'Material Science'].indexOf(student.major) > -1) ++this.majorSeries[3]
-        else ++this.majorSeries[4]
-
-        if (student.class === 'Freshman') ++this.classSeries[0]
-        else if (student.class === 'Sophomore') ++this.classSeries[1]
-        else if (student.class === 'Junior') ++this.classSeries[2]
-        else if (student.class === 'Senior') ++this.classSeries[3]
-        else if (student.class === 'Super Senior') ++this.classSeries[4]
-      }.bind(this))
+        const majorFamily = this.convertMajorToFamily(student.major)
+        this.majorSeries[constants.SERIES_DATA.MAJOR_NUM[majorFamily]] += 1
+        this.classSeries[constants.SERIES_DATA.CLASS_NUM[student.class]] += 1
+      }
     },
     getApplicants () {
       this.applicantsDict = {}
-      this.attendeeSheet = [['First Name', 'Last Name', 'Email', 'Payment Method', 'Phone', 'Diet', 'Other Diet', 'School', 'Major', 'Skills', 'Class', 'LinkedIn', 'Message', 'Date']]
-      this.applicants.forEach(function (student) {
+      this.attendeeSheet = [constants.ATTENDEE_SHEET_ROW1]
+      for (let student of this.applicants) {
         this.applicantsDict[student.email] = student
         this.attendeeSheet.push([student.firstname, student.lastname, student.email, student.paid, student.phone, student.diet, student.otherDiet, student.school, student.major, 100, student.class, student.linkedin, student.message])//, student.createdAt])
-      }.bind(this))
+      }
     }
   },
   firestore () {
