@@ -218,6 +218,7 @@ export default {
         else if (students[student].class === 'Junior') grade[2].push(students[student])
         else grade[3].push(students[student])
       }
+      // TODO: use lodash .flatten
       return this.concatArrays(grade)
     },
     concatArrays (arr) {

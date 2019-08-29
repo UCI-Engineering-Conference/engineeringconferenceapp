@@ -41,7 +41,7 @@
             </ul>
           </div>
           <div class="chairs">
-            <h2 class="lined-header">Chairs Board</h2>
+            <h2 class="lined-header">Chairs</h2>
             <ul class="chairs-grid">
               <li class="head-chair" v-if="member_data[currentYear]['head-chair']">
                 <div class="member">

@@ -236,7 +236,7 @@ export default {
     card.destroy()
   },
   methods: {
-    addUser () {
+    async addUser () {
       this.user.createdAt = new Date().toLocaleString()
       this.user.skills = JSON.stringify(this.user.skills)
       this.mailingListUser = {
@@ -247,63 +247,47 @@ export default {
         createdAt: this.user.createdAt
       }
       this.clean()
-      db.collection('2018-2019 Attendees').doc(this.user.email).set(this.user, { merge: true })
-        .then(function () {
-          console.log('Document successfully written!')
-        })
-        .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
-      db.collection('Mailing List').doc(this.user.email).set(this.mailingListUser, { merge: true })
-        .then(function () {
-          console.log('Document successfully written!')
-        })
-        .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+      try {
+        await db.collection('2018-2019 Attendees').doc(this.user.email).set(this.user, { merge: true })
+        await db.collection('Mailing List').doc(this.user.email).set(this.mailingListUser, { merge: true })
+        console.log('Documents successfully written!')
+      } catch (e) { console.log(`ERROR writing document: ${e}`) }
     },
-    handleSubmit () {
-      this.submitActive = false
-      this.$validator.validateAll().then((result) => {
-        if (!result) {
+    async handleSubmit () {
+      this.submitActive = false // TODO: make this play a load animation
+      try {
+        const validationResult = await this.$validator.validateAll()
+        if (!validationResult) {
           console.log('Not Valid')
           this.submitActive = true
         } else {
           if (this.user.VenmoPswd === process.env.VENMO_PSWD) {
             this.user.paid = 'VENMO'
-            this.createAttendee()
+            await this.createAttendee()
           } else {
-            stripe.createToken(card).then((result2) => {
-              if (result2.error) {
-                // Inform the user if there was an error.
-                let errorElement = document.getElementById('card-errors')
-                errorElement.textContent = result2.error.message
-                this.submitActive = true
-              } else {
-                const data = {
-                  email: this.user.email,
-                  stripeToken: result2.token.id
-                }
-                axios({
-                  method: 'POST',
-                  url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/stripecharge/payment`,
-                  data: qs.stringify(data),
-                  config: {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
-                }).then(response => {
-                  this.createAttendee()
-                })
-                  .catch(e => {
-                    console.log(e)
-                  })
+            const stripeToken = await stripe.createToken(card)
+            if (stripeToken.error) {
+              // Inform the user if there was an error.
+              let errorElement = document.getElementById('card-errors')
+              errorElement.textContent = stripeToken.error.message
+              this.submitActive = true
+            } else {
+              const data = {
+                email: this.user.email,
+                stripeToken: stripeToken.token.id
               }
-            }).catch(e => {
-              console.log(e)
-            })
+              await axios({method: 'POST',
+                url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/stripecharge/payment`,
+                data: qs.stringify(data),
+                config: {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+              })
+              await this.createAttendee()
+            }
           }
         }
-      })
+      } catch (e) { console.log(`ERROR in submission: ${e}`) }
     },
-    createAttendee () {
+    async createAttendee () {
       const content = `
         <div style="text-align:center">
           <img alt="Engineering Conference" style="width:50%;" src="http://www.engineeringconferenceuci.com/static/img/thumbnail.png" />
@@ -319,19 +303,16 @@ export default {
           <a href="https://www.facebook.com/EConferenceUCI"><img alt="Facebook" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/social-media-outline-3/60/Social-01-Facebook-Outline-128.png" /></a>
           <a href="https://twitter.com/@EConferenceUCI"><img alt="Twitter" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-twitter-outline-128.png" /></a>
           <a href="https://instagram.com/EConferenceUCI"><img alt="Instagram" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/materia-social-free/24/038_011_instagram_mobile_photo_network_android_material-128.png" /></a>
-        </div>
-      `
-      axios.post(`https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/attendeeEmailConfirmation`, {
-        to_email: this.user.email,
-        from_email: 'engineeringconferenceuci@gmail.com',
-        subject: 'Engineering Conference (1 ticket purchased)',
-        content: content
-      })
-        .then(response => {})
-        .catch(e => {
-          console.log(e)
+        </div>`
+      try {
+        await axios.post(`https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/attendeeEmailConfirmation`, {
+          to_email: this.user.email,
+          from_email: 'engineeringconferenceuci@gmail.com',
+          subject: 'Engineering Conference (1 ticket purchased)',
+          content: content
         })
-      this.addUser()
+      } catch (e) { console.log(`ERROR sending Email: ${e}`) }
+      await this.addUser()
       this.showModal()
     },
     showModal () {
@@ -351,10 +332,10 @@ export default {
       this.isTermsModalVisible = false
     },
     clean () {
-      Object.keys(this.user).filter(propName => !this.user[propName])
-        .map(propName => delete this.user[propName])
-      Object.keys(this.mailingListUser).filter(propName => !this.mailingListUser[propName])
-        .map(propName => delete this.mailingListUser[propName])
+      ['user', 'mailingListUser'].map(element => {
+        Object.keys(this[element]).filter(propName => !this[element][propName])
+          .map(propName => delete this[element][propName])
+      })
     }
   }
 }
