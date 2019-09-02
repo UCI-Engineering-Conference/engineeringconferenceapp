@@ -142,7 +142,7 @@
           <div id="card-errors" role="alert"></div>
         </div>
 
-      <button :disabled="!submitActive" class="submit-button"><span>Submit</span></button>
+      <button :disabled="loading" class="submit-button"><span>Submit</span></button>
       </form>
 
       <termsModal
@@ -165,9 +165,8 @@ import modal from './ApplicationModal.vue'
 import termsModal from './TermsModal.vue'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
 import generalContent from '../../static/GeneralContent.json'
-import { db } from '../main'
 import axios from 'axios'
-import qs from 'qs'
+import {FIREBASE_COLLECTIONS} from '../utils/constants'
 
 // eslint-disable-next-line
 let stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY)
@@ -214,15 +213,14 @@ export default {
       gender: ApplicationOptions['Gender'],
       committee: ApplicationOptions['Committee'],
       generalContent: generalContent,
-      submitActive: true,
-      user: {major: '', school: '', class: '', diet: '', gender: '', committee: '', paid: 'CARD', skills: {}},
-      mailingListUser: {}
+      loading: false,
+      user: {major: '', school: '', class: '', diet: '', gender: '', committee: '', paid: 'CARD', skills: {}, stripeToken: ''}
     }
   },
   mounted () {
     card = elements.create('card', {style: style})
     card.mount(this.$refs.card)
-    card.addEventListener('change', function (event) {
+    card.addEventListener('change', (event) => {
       let displayError = document.getElementById('card-errors')
       if (event.error) {
         displayError.textContent = event.error.message
@@ -236,106 +234,71 @@ export default {
     card.destroy()
   },
   methods: {
-    async addUser () {
-      this.user.createdAt = new Date().toLocaleString()
-      this.user.skills = JSON.stringify(this.user.skills)
-      this.mailingListUser = {
-        firstname: this.user.firstname,
-        lastname: this.user.lastname,
-        email: this.user.email,
-        phone: this.user.phone,
-        createdAt: this.user.createdAt
-      }
-      this.clean()
-      try {
-        await db.collection('2018-2019 Attendees').doc(this.user.email).set(this.user, { merge: true })
-        await db.collection('Mailing List').doc(this.user.email).set(this.mailingListUser, { merge: true })
-        console.log('Documents successfully written!')
-      } catch (e) { console.log(`ERROR writing document: ${e}`) }
-    },
     async handleSubmit () {
-      this.submitActive = false // TODO: make this play a load animation
+      this.loading = true // TODO: make this play a load animation
       try {
-        const validationResult = await this.$validator.validateAll()
-        if (!validationResult) {
-          console.log('Not Valid')
-          this.submitActive = true
-        } else {
-          if (this.user.VenmoPswd === process.env.VENMO_PSWD) {
-            this.user.paid = 'VENMO'
-            await this.createAttendee()
-          } else {
-            const stripeToken = await stripe.createToken(card)
-            if (stripeToken.error) {
-              // Inform the user if there was an error.
-              let errorElement = document.getElementById('card-errors')
-              errorElement.textContent = stripeToken.error.message
-              this.submitActive = true
-            } else {
-              const data = {
-                email: this.user.email,
-                stripeToken: stripeToken.token.id
-              }
-              await axios({method: 'POST',
-                url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/stripecharge/payment`,
-                data: qs.stringify(data),
-                config: {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
-              })
-              await this.createAttendee()
-            }
-          }
+        const {valid, message} = await this.validateInput()
+        if (!valid) {
+          console.log(message)
+          this.loading = false
+          return
         }
-      } catch (e) { console.log(`ERROR in submission: ${e}`) }
-    },
-    async createAttendee () {
-      const content = `
-        <div style="text-align:center">
-          <img alt="Engineering Conference" style="width:50%;" src="http://www.engineeringconferenceuci.com/static/img/thumbnail.png" />
-        </div>
-        <div style="padding:5px;margin-top:10px;background-color: #65D25C;">
-        </div>
-        <p><b>Amazing,</b></p>
-        <p>This is the official ticket receipt for <b>${this.user.firstname} ${this.user.lastname}</b> to attend Engineering Conference on <b>${generalContent.Date}</b>.</p>
-        <p></p>
-        <p>Cheers,</p>
-        <p><b>UCI Engineering Conference</b></p>
-        <div style="background-color: #65D25C;padding: 20px;color: #FFFFFF; text-align:center">
-          <a href="https://www.facebook.com/EConferenceUCI"><img alt="Facebook" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/social-media-outline-3/60/Social-01-Facebook-Outline-128.png" /></a>
-          <a href="https://twitter.com/@EConferenceUCI"><img alt="Twitter" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-twitter-outline-128.png" /></a>
-          <a href="https://instagram.com/EConferenceUCI"><img alt="Instagram" style="display:inline-block; padding:10px;width:25px;" src="https://cdn4.iconfinder.com/data/icons/materia-social-free/24/038_011_instagram_mobile_photo_network_android_material-128.png" /></a>
-        </div>`
-      try {
-        await axios.post(`https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/attendeeEmailConfirmation`, {
-          to_email: this.user.email,
-          from_email: 'engineeringconferenceuci@gmail.com',
-          subject: 'Engineering Conference (1 ticket purchased)',
-          content: content
+        this.user.createdAt = new Date().toLocaleString()
+        this.user.skills = JSON.stringify(this.user.skills)
+        const postData = {
+          applicant: this.user,
+          date: generalContent.Date,
+          FIREBASE_COLLECTIONS
+        }
+        console.log(postData)
+        const response = await axios({
+          method: 'POST',
+          url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/applicationSubmission`,
+          data: JSON.stringify(postData),
+          config: {headers: {'Content-Type': 'application/json'}}
         })
-      } catch (e) { console.log(`ERROR sending Email: ${e}`) }
-      await this.addUser()
-      this.showModal()
+        console.log(response)
+        // this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
+        // card.clear()
+        // this.showModal()
+      } catch (e) {
+        console.log(`ERROR in submission: ${e}`)
+      } finally {
+        this.loading = false
+      }
+    },
+    async validateInput () {
+      const validationResult = await this.$validator.validateAll()
+      if (!validationResult) {
+        return {valid: false, message: 'Missing Fields in Input'}
+      }
+
+      if (this.user.VenmoPswd === process.env.VENMO_PSWD) {
+        this.user.paid = 'VENMO'
+      } else {
+        const stripeToken = await stripe.createToken(card)
+        if (stripeToken.error) {
+          // Inform the user if there was an error.
+          let errorElement = document.getElementById('card-errors')
+          errorElement.textContent = stripeToken.error.message
+          return {valid: false, message: `ERROR: ${JSON.stringify(stripeToken.error)}`}
+        }
+        this.user.paid = 'CARD'
+        this.user.stripeToken = stripeToken.token.id
+      }
+      return {valid: true, message: ''}
     },
     showModal () {
       this.isModalVisible = true
     },
     closeModal () {
       this.isModalVisible = false
-      this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
-      this.mailingListUser = {}
-      this.submitActive = true
-      card.clear()
     },
     showTermsModal () {
       this.isTermsModalVisible = true
     },
     closeTermsModal () {
       this.isTermsModalVisible = false
-    },
-    clean () {
-      ['user', 'mailingListUser'].map(element => {
-        Object.keys(this[element]).filter(propName => !this[element][propName])
-          .map(propName => delete this[element][propName])
-      })
     }
   }
 }
