@@ -11,7 +11,11 @@
         <router-link to="/gallery">Gallery</router-link>
       </div>
     </div>
+    <div id="flash-alerts">
+      <flash-message transitionName="slide-fade"></flash-message>
+    </div>
     <router-view/>
+
     <modal v-show="isModalVisible" @close="closeModal">
       <h2 slot="header">Amazing!</h2>
       <p slot ="body">You're official registered for UCI Engineering Conference! We'll be in touch with you soon regarding the status of your application.</p>
@@ -43,6 +47,8 @@
 <script>
 import VeeValidate from 'vee-validate'
 import modal from './components/SecretPageModal.vue'
+require('vue-flash-message/dist/vue-flash-message.min.css')
+
 export default {
   name: 'App',
   components: {
@@ -105,6 +111,7 @@ export default {
     --light-green-color: #A2E49D;
     --white-color: #FFFFFF;
     --error-color: #fa755a;
+    --light-error-color: #ffac9c;
   }
   #app {
   font-family: 'Source Sans Pro', sans-serif;
@@ -125,6 +132,31 @@ export default {
   text-align: right;
   background-color: var(--white-color);
   z-index: 10;
+}
+#flash-alerts {
+  position: sticky;
+  top:115px;
+  left:0;
+  height: 60px;
+  width: auto;
+  z-index: 10;
+}
+
+.flash__message.success{color:var(--white-color);background-color:var(--light-green-color);border-color:var(--green-color)}
+.flash__message.error{color:var(--white-color);background-color:var(--light-error-color);border-color:var(--error-color)}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateY(10px);
+  opacity: 0;
 }
 
 button {

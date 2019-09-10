@@ -7,6 +7,9 @@ import VueLongPress from 'vue-long-press-directive'
 import { TableComponent, TableColumn } from 'vue-table-component'
 import {Tabs, Tab} from 'vue-tabs-component'
 import VueApexCharts from 'vue-apexcharts'
+import VueFlashMessage from 'vue-flash-message'
+import { CircleSpinner } from 'vue-spinners'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import VueFire from 'vuefire'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -40,10 +43,13 @@ Vue.component('table-column', TableColumn)
 Vue.component('tabs', Tabs)
 Vue.component('tab', Tab)
 Vue.component('apexchart', VueApexCharts)
+Vue.component('circle-spin', CircleSpinner)
+Vue.component('pulse-loader', PulseLoader)
 
 Vue.use(VeeValidate)
 Vue.use(VueLongPress, { duration: 1000 })
 Vue.use(VueApexCharts)
+Vue.use(VueFlashMessage)
 Vue.use(VueFire)
 Vue.use(Vuex)
 Vue.use(VueGAPI, process.env.GOOGLE_API_CREDENTIALS)

@@ -1,5 +1,5 @@
 // test: wt create applicationSubmission.js -s STRIPE_SECRET_KEY=sk_test_1ahZKHfOFP9F46qtDuvWIG13 -s SENDGRID_API_KEY=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 -s FIREBASE_API_KEY=AIzaSyAa84HFXn_wl20ORM4HlfgXRMOo4U2gFAo
-//  curl -d '{"body": {"applicant": {"firstname": "Nik", "lastname": "Hammon", "email": "nhammon@uci.edu", "phone": "8192587833", "createdAt": "09-01-2019", "stripeToken": "tok_visa", "paid": "STRIPE"}, "date": "09/01", "FIREBASE_COLLECTIONS": {"ATTENDEES": "2019-2020 Attendees", "MAILING_LIST": "Mailing List"}} }' -H "Content-Type: application/json" -X POST https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/applicationSubmission
+//  curl -d '{"applicant": {"firstname": "Nik", "lastname": "Hammon", "email": "nhammon@uci.edu", "phone": "8192587833", "createdAt": "09-01-2019", "stripeToken": "tok_visa", "paid": "CARD"}, "CONFIG": {"CONFERENCE_DATE": "09/01", "TICKET_PRICE": "2605"}, "FIREBASE_COLLECTIONS": {"ATTENDEES": "2019-2020 Attendees", "MAILING_LIST": "Mailing List"}}' -H "Content-Type: application/json" -X POST https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/applicationSubmission
 /* eslint semi: "error" */
 'use latest';
 
@@ -15,40 +15,47 @@ const stripe = require('stripe');
 const sendgrid = require('sendgrid');
 const helper = sendgrid.mail;
 const EC_EMAIL = 'EngineeringConferenceUCI@gmail.com';
-const EMAIL_SUBJECT = 'Engineering Conference (1 ticket purchased)';
+const EMAIL_SUBJECT = 'UCI Engineering Conference (1 ticket purchased)';
+const STRIPE_CURRENCY = 'usd';
+const STRIPE_DESCRIPTION = 'Engineering Conference (1 ticket)';
 
 const applicationSubmissionHandler = async (ctx, cb) => {
-  let response = {};
-  try {
-    const {applicant, date, FIREBASE_COLLECTIONS} = JSON.parse(ctx.body_raw);
-    const STRIPE_SECRET_KEY = ctx.secrets.STRIPE_SECRET_KEY;
-    const SENDGRID_API_KEY = ctx.secrets.SENDGRID_API_KEY;
-    const FIREBASE_API_KEY = ctx.secrets.FIREBASE_API_KEY;
-    const db = intializeDB(FIREBASE_API_KEY);
-    const {valid, message} = await validateInput(db, applicant, FIREBASE_COLLECTIONS);
-    if (!valid) {
-      cb(null, {status: 400, message});
-    }
-    if (applicant.paid === 'CARD') await createStripeCharge(STRIPE_SECRET_KEY, applicant);
-    await sendEmail(SENDGRID_API_KEY, applicant, date);
-    await addApplicantToFirebase(db, applicant, FIREBASE_COLLECTIONS);
-    response = {status: 200, message: 'Success'};
-  } catch (err) {
-    response = {status: 500, message: `ERROR: ${err}`};
+  let response = await submitApplication(ctx);
+  if (response.invalid) {
+    cb(null, {status: 400, msg: response.invalid.msg});
+  } else if (response.error) {
+    cb(null, {status: 500, msg: response.error.msg});
+  } else {
+    cb(null, {status: 200, msg: response.ok.msg});
   }
-  cb(null, response);
 };
 
-const intializeDB = (FIREBASE_API_KEY) => {
-  FIREBASE_CONFIG['apiKey'] = FIREBASE_API_KEY;
+const submitApplication = async (ctx) => {
+  console.log('Attempting to submit an application..');
+  try {
+    const {applicant, CONFIG, FIREBASE_COLLECTIONS} = JSON.parse(ctx.body_raw);
+    const db = intializeDB(ctx);
+    const {valid, message} = await validateInput(db, applicant, FIREBASE_COLLECTIONS);
+    if (!valid) {
+      return {invalid: {msg: message}};
+    }
+    if (applicant.paid === 'CARD') await createStripeCharge(ctx, applicant, CONFIG);
+    await sendEmail(ctx, applicant, CONFIG);
+    await addApplicantToFirebase(db, applicant, FIREBASE_COLLECTIONS);
+  } catch (err) {
+    return {error: {msg: `ERROR: ${err}`}};
+  }
+  return {ok: {msg: 'Successfully submitted application'}};
+};
+
+const intializeDB = (ctx) => {
+  FIREBASE_CONFIG['apiKey'] = ctx.secrets.FIREBASE_API_KEY;
   const firebaseApp = (!firebase.apps.length) ? firebase.initializeApp(FIREBASE_CONFIG) : firebase.apps[0];
-  const db = firebaseApp.firestore();
-  const settings = {timestampsInSnapshots: true};
-  db.settings(settings);
-  return db;
+  return firebaseApp.firestore();
 };
 
 const addApplicantToFirebase = async (db, applicant, collections) => {
+  console.log('Adding Applicant to Firebase');
   let mailingListApplicant = {
     firstname: applicant.firstname,
     lastname: applicant.lastname,
@@ -62,32 +69,33 @@ const addApplicantToFirebase = async (db, applicant, collections) => {
   await db.collection(collections.MAILING_LIST).doc(applicant.email).set(mailingListApplicant, { merge: true });
 };
 
-const createStripeCharge = async (STRIPE_SECRET_KEY, applicant) => {
+const createStripeCharge = async (ctx, applicant, CONFIG) => {
+  console.log('Creating Stripe Charge');
   const customerCreateParams = {
     email: applicant.email,
     source: applicant.stripeToken
   };
 
-  const stripeCustomer = await stripe(STRIPE_SECRET_KEY).customers.create(customerCreateParams);
+  const stripeCustomer = await stripe(ctx.secrets.STRIPE_SECRET_KEY).customers.create(customerCreateParams);
 
   const chargeCreateParams = {
-    amount: '2605',
-    currency: 'usd',
+    amount: CONFIG.TICKET_PRICE,
+    currency: STRIPE_CURRENCY,
     customer: stripeCustomer.id,
-    description: 'Engineering Conference (1 ticket)'
+    description: STRIPE_DESCRIPTION
   };
-  await stripe(STRIPE_SECRET_KEY).charges.create(chargeCreateParams);
+  await stripe(ctx.secrets.STRIPE_SECRET_KEY).charges.create(chargeCreateParams);
 };
 
-const buildEmailBody = (firstname, lastname, date) => {
+const buildEmailBody = (firstname, lastname, CONFIG) => {
   return `
   <div style="text-align:center">
-    <img alt="Engineering Conference" style="width:50%;" src="http://www.engineeringconferenceuci.com/static/img/thumbnail.png" />
+    <img alt="Engineering Conference" style="widinvali://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/applicationSubmissionth:50%;" src="http://www.engineeringconferenceuci.com/static/img/thumbnail.png" />
   </div>
   <div style="padding:5px;margin-top:10px;background-color: #65D25C;">
   </div>
   <p><b>Amazing,</b></p>
-  <p>This is the official ticket receipt for <b>${firstname} ${lastname}</b> to attend Engineering Conference on <b>${date}</b>.</p>
+  <p>This is the official ticket receipt for <b>${firstname} ${lastname}</b> to attend Engineering Conference on <b>${CONFIG.CONFERENCE_DATE}</b>.</p>
   <p></p>
   <p>Cheers,</p>
   <p><b>UCI Engineering Conference</b></p>
@@ -98,14 +106,15 @@ const buildEmailBody = (firstname, lastname, date) => {
   </div>`;
 };
 
-const sendEmail = async (SENDGRID_API_KEY, applicant, date) => {
+const sendEmail = async (ctx, applicant, CONFIG) => {
+  console.log('Sending Applicant Email');
   const mail = new helper.Mail(
     new helper.Email(EC_EMAIL),
     EMAIL_SUBJECT,
     new helper.Email(applicant.email),
-    new helper.Content('text/html', buildEmailBody(applicant.firstname, applicant.lastname, date))
+    new helper.Content('text/html', buildEmailBody(applicant.firstname, applicant.lastname, CONFIG))
   );
-  const sg = sendgrid(SENDGRID_API_KEY);
+  const sg = sendgrid(ctx.secrets.SENDGRID_API_KEY);
   const request = sg.emptyRequest({
     method: 'POST',
     path: '/v3/mail/send',
@@ -115,6 +124,7 @@ const sendEmail = async (SENDGRID_API_KEY, applicant, date) => {
 };
 
 const validateInput = async (db, applicant, collections) => {
+  console.log('Validating Input..');
   const doc = await db.collection(collections.ATTENDEES).doc(applicant.email).get();
   if (doc.exists) {
     return {valid: false, message: 'You have already registered for Engineering Conference'};

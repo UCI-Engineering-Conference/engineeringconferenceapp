@@ -142,7 +142,7 @@
           <div id="card-errors" role="alert"></div>
         </div>
 
-      <button :disabled="loading" class="submit-button"><span>Submit</span></button>
+      <button :disabled="loading" class="submit-button"><pulse-loader size="10px" color="#FFF" :loading="loading"></pulse-loader><span v-if="!loading">Submit</span></button>
       </form>
 
       <termsModal
@@ -150,24 +150,20 @@
         @close="closeTermsModal"
       />
 
-      <modal v-show="isModalVisible" @close="closeModal">
-        <h2 slot="header">Amazing!</h2>
-        <p slot ="body">You're officially registered for UCI Engineering Conference!</p>
-      </modal>
       <p class="termsAndConditions">By clicking 'Submit' I agree to the <a @click="showTermsModal">Terms and Conditions</a>.</p>
-      <p class="termsAndConditions">** The additional transaction fee will bring the total ticket cost to $26.05.</p>
+      <p class="termsAndConditions">** The additional transaction fee will bring the total ticket cost to ${{generalContent.Price/100}}</p>
     </div>
   </div>
 </template>
 
 <script>
-import modal from './ApplicationModal.vue'
 import termsModal from './TermsModal.vue'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
 import generalContent from '../../static/GeneralContent.json'
 import axios from 'axios'
 import {FIREBASE_COLLECTIONS} from '../utils/constants'
 
+const SUCCESS_MESSAGE = `You're officially registered for UCI Engineering Conference!`
 // eslint-disable-next-line
 let stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY)
 let elements = stripe.elements()
@@ -191,7 +187,6 @@ let style = {
 
 export default {
   components: {
-    modal,
     termsModal
   },
   watch: {
@@ -201,7 +196,6 @@ export default {
   },
   data () {
     return {
-      isModalVisible: false,
       isTermsModalVisible: false,
       fullCommittees: ApplicationOptions['FullCommittee'],
       schools: ApplicationOptions['School'],
@@ -235,10 +229,11 @@ export default {
   },
   methods: {
     async handleSubmit () {
-      this.loading = true // TODO: make this play a load animation
+      this.loading = true
       try {
         const {valid, message} = await this.validateInput()
         if (!valid) {
+          this.flash(message, 'error', {timeout: 3000})
           console.log(message)
           this.loading = false
           return
@@ -247,22 +242,30 @@ export default {
         this.user.skills = JSON.stringify(this.user.skills)
         const postData = {
           applicant: this.user,
-          date: generalContent.Date,
+          CONFIG: {
+            CONFERENCE_DATE: generalContent.Date,
+            TICKET_PRICE: generalContent.Price
+          },
           FIREBASE_COLLECTIONS
         }
-        console.log(postData)
         const response = await axios({
           method: 'POST',
           url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/applicationSubmission`,
           data: JSON.stringify(postData),
           config: {headers: {'Content-Type': 'application/json'}}
         })
-        console.log(response)
-        // this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
-        // card.clear()
-        // this.showModal()
+        if (response.data.status === 200) {
+          this.flash(SUCCESS_MESSAGE, 'success', {timeout: 3000})
+          this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
+          card.clear()
+        } else if (response.data.status === 400) {
+          this.flash(response.data.msg, 'info', {timeout: 3000})
+        } else {
+          this.flash(response.data.msg, 'error', {timeout: 3000})
+        }
       } catch (e) {
         console.log(`ERROR in submission: ${e}`)
+        this.flash(`Error: ${e}`)
       } finally {
         this.loading = false
       }
@@ -281,18 +284,12 @@ export default {
           // Inform the user if there was an error.
           let errorElement = document.getElementById('card-errors')
           errorElement.textContent = stripeToken.error.message
-          return {valid: false, message: `ERROR: ${JSON.stringify(stripeToken.error)}`}
+          return {valid: false, message: 'Card not Valid'}
         }
         this.user.paid = 'CARD'
         this.user.stripeToken = stripeToken.token.id
       }
       return {valid: true, message: ''}
-    },
-    showModal () {
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
     },
     showTermsModal () {
       this.isTermsModalVisible = true
