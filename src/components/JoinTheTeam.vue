@@ -109,26 +109,17 @@
         </div>
         <button class="submit-button" @click="postJoin"><span>Submit</span></button>
       </div>
-      <modal v-show="isModalVisible" @close="closeModal">
-        <h2 slot="header">All Done!</h2>
-        <p slot ="body">Thank you for applying to be on the EC team. Our leadership will contact you as soon as they are available to set up an interview.</p>
-      </modal>
     </div>
   </div>
 </template>
 
 <script>
-import modal from './ApplicationModal.vue'
 import PositionInfo from '../../static/positioninfo.json'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
 import { db, storage } from '../main'
 export default {
-  components: {
-    modal
-  },
   data () {
     return {
-      isModalVisible: false,
       positionInfo: PositionInfo,
       classes: ApplicationOptions['Class'],
       user: { teamInterest: true, class: '', position: '', subposition: '' }, // the rest is added by the form input fields
@@ -176,19 +167,12 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.addUser()
-          this.showModal()
           this.handleFileUploadSubmit('resume')
           this.handleFileUploadSubmit('transcript')
         } else {
           console.log('Not valid')
         }
       })
-    },
-    showModal () {
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
     },
     clean () {
       for (let propName in this.user) {

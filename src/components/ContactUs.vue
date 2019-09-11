@@ -26,25 +26,14 @@
     </div>
     <button class="submit-button" @click="postMessage"><span>Submit</span></button>
   </div>
-
-  <modal v-show="isModalVisible" @close="closeModal">
-    <h2 slot="header">Thank you!</h2>
-    <p slot ="body">Engineering Conference takes every message sent to us into consideration. If necessary, we'll get back to as soon as we can!</p>
-  </modal>
-
 </div>
 </template>
 
 <script>
-import modal from './ApplicationModal.vue'
 import { db } from '../main'
 export default {
-  components: {
-    modal
-  },
   data () {
     return {
-      isModalVisible: false,
       user: {
         firstname: '',
         lastname: '',
@@ -64,17 +53,10 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.addUser()
-          this.showModal()
         } else {
           console.log('Not valid')
         }
       })
-    },
-    showModal () {
-      this.isModalVisible = true
-    },
-    closeModal () {
-      this.isModalVisible = false
     },
     clean () {
       Object.keys(this.user).filter(propName => !this.user[propName])
