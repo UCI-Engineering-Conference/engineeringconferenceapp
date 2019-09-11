@@ -1,7 +1,6 @@
 <template>
   <div>
     <link href="/../../static/stripe.css" rel="stylesheet">
-
     <div class="page-header">
       <p>Engineering Conference Application</p>
     </div>
