@@ -4,6 +4,7 @@ node_modules/
 /y/
 /static/Gallery/
 /config/prod.env.js
+/src/webtasks/ecSecrets.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

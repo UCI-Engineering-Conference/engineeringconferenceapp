@@ -24,43 +24,68 @@
       <textarea type="text" v-model="user.message" v-validate="'required'" name="message"></textarea>
       <span class="alert">{{ errors.first('message') }}</span>
     </div>
-    <button class="submit-button" @click="postMessage"><span>Submit</span></button>
+         <button :disabled="loading" class="submit-button" @click="handleSubmit"><pulse-loader size="10px" color="#FFF" :loading="loading"></pulse-loader><span v-if="!loading">Submit</span></button>
   </div>
 </div>
 </template>
 
 <script>
-import { db } from '../main'
+import {FIREBASE_COLLECTIONS} from '../utils/constants'
+const utils = require('../utils/utils')
+
+const SUCCESS_MESSAGE = `Thank you for sending us your message. Our team will get back to you soon!`
+
 export default {
   data () {
     return {
       user: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        message: '',
-        createdAt: ''
-      }
+      },
+      loading: false
     }
   },
   methods: {
-    addUser () {
-      this.user.createdAt = new Date().toLocaleString()
-      this.clean()
-      db.collection('Messages').add(this.user)
-    },
-    postMessage () {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.addUser()
-        } else {
-          console.log('Not valid')
+    async handleSubmit () {
+      this.loading = true
+      try {
+        const {valid, message} = await this.validateInput()
+        if (!valid) {
+          this.flash(message, 'error', {timeout: 3000})
+          console.log(message)
+          this.loading = false
+          return
         }
-      })
+        this.user.createdAt = new Date().toLocaleString()
+        const postData = {
+          applicant: this.user,
+          CONFIG: {
+          },
+          FIREBASE_COLLECTIONS
+        }
+        await utils.httpPost('contactMessage', postData)
+        this.flash(SUCCESS_MESSAGE, 'success', {timeout: 3000})
+        this.user = {}
+      } catch (e) {
+        if (e.response) {
+          console.log(`Form submission failed: ${(e.response.data.invalid || e.response.data.error).msg}`)
+          if (e.response.status === 400) {
+            this.flash(e.response.data.invalid.msg, 'info', {timeout: 3000})
+          } else {
+            this.flash(e.response.data.error.msg, 'error', {timeout: 3000})
+          }
+        } else {
+          console.log('Nothing recieved from server..')
+          this.flash(`No response: ${e}`, 'error', {timeout: 3000})
+        }
+      } finally {
+        this.loading = false
+      }
     },
-    clean () {
-      Object.keys(this.user).filter(propName => !this.user[propName])
-        .map(propName => delete this.user[propName])
+    async validateInput () {
+      const validationResult = await this.$validator.validateAll()
+      if (!validationResult) {
+        return {valid: false, message: 'Missing Fields in Input'}
+      }
+      return {valid: true, message: ''}
     }
   }
 }
@@ -78,7 +103,7 @@ export default {
     padding: 10px;
     border-radius: 5px;
     font-weight: 700;
-    color: var(--white-color);
+    color: var(--black-color);
     border: 2px solid var(--black-color);
   }
   input {
