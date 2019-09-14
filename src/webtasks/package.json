@@ -1,7 +1,16 @@
 {
+  "name": "wt-ec-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
   "dependencies": {
-    "stripe": "6.19.0",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "webtask-tools": "^3.2.0",
+    "firebase": "^5.0.1",
     "sendgrid": "4.7.0",
-    "firebase": "^5.0.1"
+    "stripe": "6.19.0"
   }
 }

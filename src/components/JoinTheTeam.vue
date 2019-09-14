@@ -107,7 +107,7 @@
           <input type="file" id="transcript" accept="image/*,.txt,.doc,.docx,.pdf" v-validate="'required'" name="transcript"/>
           <span class="alert">{{ errors.first('transcript') }}</span>
         </div>
-        <button class="submit-button" @click="postJoin"><span>Submit</span></button>
+        <button :disabled="loading" class="submit-button" @click="handleSubmit"><pulse-loader size="10px" color="#FFF" :loading="loading"></pulse-loader><span v-if="!loading">Submit</span></button>
       </div>
     </div>
   </div>
@@ -116,41 +116,66 @@
 <script>
 import PositionInfo from '../../static/positioninfo.json'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
-import { db, storage } from '../main'
+import { storage } from '../main'
+import {FIREBASE_COLLECTIONS} from '../utils/constants'
+const utils = require('../utils/utils')
+
+const SUCCESS_MESSAGE = `Thank you for your interest in joining our team. We will reach out to you shortly about an interview`
+
 export default {
   data () {
     return {
       positionInfo: PositionInfo,
       classes: ApplicationOptions['Class'],
       user: { teamInterest: true, class: '', position: '', subposition: '' }, // the rest is added by the form input fields
-      mailingListUser: {}
+      loading: false
     }
   },
   methods: {
-    addUser () {
-      this.user.createdAt = new Date().toLocaleString()
-      this.mailingListUser = {
-        firstname: this.user.firstname,
-        lastname: this.user.lastname,
-        email: this.user.email,
-        phone: this.user.phone,
-        createdAt: this.user.createdAt
+    async handleSubmit () {
+      this.loading = true
+      try {
+        const {valid, message} = await this.validateInput()
+        if (!valid) {
+          this.flash(message, 'error', {timeout: 3000})
+          console.log(message)
+          this.loading = false
+          return
+        }
+        this.user.createdAt = new Date().toLocaleString()
+        const postData = {
+          applicant: this.user,
+          CONFIG: {
+          },
+          FIREBASE_COLLECTIONS
+        }
+        await utils.httpPost('teamApp', postData)
+        this.handleFileUploadSubmit('resume')
+        this.handleFileUploadSubmit('transcript')
+        this.flash(SUCCESS_MESSAGE, 'success', {timeout: 3000})
+        this.user = {class: '', position: '', subposition: ''}
+      } catch (e) {
+        if (e.response) {
+          console.log(`Form submission failed: ${(e.response.data.invalid || e.response.data.error).msg}`)
+          if (e.response.status === 400) {
+            this.flash(e.response.data.invalid.msg, 'info', {timeout: 3000})
+          } else {
+            this.flash(e.response.data.error.msg, 'error', {timeout: 3000})
+          }
+        } else {
+          console.log('Nothing recieved from server..')
+          this.flash(`No response: ${e}`, 'error', {timeout: 3000})
+        }
+      } finally {
+        this.loading = false
       }
-      this.clean()
-      db.collection('2019-2020 Team Interest List').doc(this.user.email).set(this.user, { merge: true })
-        .then(function () {
-          console.log('Document successfully written!')
-        })
-        .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
-      db.collection('Mailing List').doc(this.user.email).set(this.mailingListUser, { merge: true })
-        .then(function () {
-          console.log('Document successfully written!')
-        })
-        .catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+    },
+    async validateInput () {
+      const validationResult = await this.$validator.validateAll()
+      if (!validationResult) {
+        return {valid: false, message: 'Missing Fields in Input'}
+      }
+      return {valid: true, message: ''}
     },
     handleFileUploadSubmit (filetype) {
       let selectedFile = document.getElementById(filetype).files[0]
@@ -173,13 +198,6 @@ export default {
           console.log('Not valid')
         }
       })
-    },
-    clean () {
-      for (let propName in this.user) {
-        if (this.user[propName] === '') {
-          delete this.user[propName]
-        }
-      }
     }
   }
 }

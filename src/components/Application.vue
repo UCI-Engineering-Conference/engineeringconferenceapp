@@ -159,8 +159,8 @@
 import termsModal from './TermsModal.vue'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
 import generalContent from '../../static/GeneralContent.json'
-import axios from 'axios'
 import {FIREBASE_COLLECTIONS} from '../utils/constants'
+const utils = require('../utils/utils')
 
 const SUCCESS_MESSAGE = `You're officially registered for UCI Engineering Conference!`
 // eslint-disable-next-line
@@ -247,24 +247,22 @@ export default {
           },
           FIREBASE_COLLECTIONS
         }
-        const response = await axios({
-          method: 'POST',
-          url: `https://wt-ec93f04fb278b9f3f2b7a660e2425240-0.sandbox.auth0-extend.com/applicationSubmission`,
-          data: JSON.stringify(postData),
-          config: {headers: {'Content-Type': 'application/json'}}
-        })
-        if (response.data.status === 200) {
-          this.flash(SUCCESS_MESSAGE, 'success', {timeout: 3000})
-          this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
-          card.clear()
-        } else if (response.data.status === 400) {
-          this.flash(response.data.msg, 'info', {timeout: 3000})
-        } else {
-          this.flash(response.data.msg, 'error', {timeout: 3000})
-        }
+        await utils.httpPost('attendeeApp', postData)
+        this.flash(SUCCESS_MESSAGE, 'success', {timeout: 3000})
+        this.user = {major: '', school: '', class: '', diet: '', paid: 'CARD', skills: {}}
+        card.clear()
       } catch (e) {
-        console.log(`ERROR in submission: ${e}`)
-        this.flash(`Error: ${e}`)
+        if (e.response) {
+          console.log(`Form submission failed: ${(e.response.data.invalid || e.response.data.error).msg}`)
+          if (e.response.status === 400) {
+            this.flash(e.response.data.invalid.msg, 'info', {timeout: 3000})
+          } else {
+            this.flash(e.response.data.error.msg, 'error', {timeout: 3000})
+          }
+        } else {
+          console.log('Nothing recieved from server..')
+          this.flash(`No response: ${e}`, 'error', {timeout: 3000})
+        }
       } finally {
         this.loading = false
       }
