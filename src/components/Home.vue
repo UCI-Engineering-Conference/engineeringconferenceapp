@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isRecruitmentOpen" class="recruitment-banner">
-      <h3 style="margin:0;">Engineering Conference is now recruiting for Fall 2019!</h3>
+      <h3 style="margin:0;">Engineering Conference is now Recruiting for Fall 2019!</h3>
       <router-link to="/jointheteam" tag="button" style="width:150px;height:40px;font-size:20px;" class="submit-button recruitment-button"><span>APPLY NOW</span></router-link>
     </div>
     <div class="main-video">
@@ -148,6 +148,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -372,4 +373,5 @@ a:hover {
 @media only screen and (min-width: 1200px) {
 
 }
+
 </style>
