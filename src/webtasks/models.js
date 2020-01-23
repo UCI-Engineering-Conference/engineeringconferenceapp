@@ -43,8 +43,21 @@ const createContactMessage = async (body, secrets) => {
   }
   return {ok: {msg: 'Successfully submitted application'}};
 };
+
+const retrieveFirebaseCollection = async (query, secrets) => {
+  let attendeeList;
+  try {
+    const db = utils.initializeDB(secrets);
+    attendeeList = await utils.getFirebaseCollection(secrets, db, query.Collection);
+  } catch (err) {
+    return { error: {msg: `ERROR: ${err}`}};
+  }
+  return {ok: {msg: 'Successfully retrieved applicant list', attendeeList }};
+};
+
 module.exports = {
   createAttendee,
   createTeamApplicant,
-  createContactMessage
+  createContactMessage,
+  retrieveFirebaseCollection
 };
