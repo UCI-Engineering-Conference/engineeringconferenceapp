@@ -31,6 +31,12 @@ const getFirebaseCollection = async (secrets, db, collection) => {
   return snapshot.docs.map(doc => doc.data());
 };
 
+const getFirebaseCollection = async (secrets, db, collection) => {
+  console.log('Retriveing collection from firebase..');
+  const snapshot = await db.collection(collection).get();
+  return snapshot.docs.map(doc => doc.data()); 
+};
+
 const createFirebaseDoc = async (secrets, db, applicant, collection, mailingListCollection) => {
   console.log('Creating documents in firebase..')
   await firebase.auth().signInWithEmailAndPassword(constants.EC_EMAIL, secrets.EC_PASSWORD)

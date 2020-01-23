@@ -50,7 +50,7 @@ const retrieveFirebaseCollection = async (query, secrets) => {
     const db = utils.initializeDB(secrets);
     attendeeList = await utils.getFirebaseCollection(secrets, db, query.Collection);
   } catch (err) {
-    return { error: {msg: `ERROR: ${err}`}};
+    return {error: {msg: `ERROR: ${err}`}};
   }
   return {ok: {msg: 'Successfully retrieved applicant list', attendeeList }};
 
