@@ -1,199 +1,138 @@
 <template>
-<div class="contact-page">
-  <div class="page-header">
-    <p>Contact Us</p>
+  <div>
+    <div class="container mb-5">
+      <div class="row text-center">
+        <div class="m-auto">
+          <div class="mt-5 mb-5"></div>
+          <div class="m-auto">
+            <h4 class="mb-5">Contact 📞</h4>
+            <div v-for="(data, index) in team_email" :key="index">
+              <p>For urgent questions or comments, please email us at <br>
+                <a class="btn btn-md btn-secondary mt-3" style="color: white; border-radius: 0px !important;" v-bind:href="'mailto:' + data.email">{{ data.email }}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div id="social" class="m-auto">
+          <div class="mt-5">
+            <a class="facebookBtn smGlobalBtn" href="https://www.facebook.com/EConferenceUCI/"></a>
+            <a class="twitterBtn smGlobalBtn" href="https://twitter.com/EConferenceUCI"></a>
+            <a class="instagramBtn smGlobalBtn" href="https://www.instagram.com/econferenceuci/"></a>
+            <a class="linkedinBtn smGlobalBtn" href="https://www.linkedin.com/in/uciengineeringconference/"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3"></div>
+    <Map></Map>
   </div>
-  <div class="form-input">
-    <div class="item-a">
-      <label>First Name <b>*</b></label>
-      <input type="text" v-model="user.firstname" v-validate="'required'" name="first name">
-      <span class="alert">{{ errors.first('first name') }}</span>
-    </div>
-    <div class="item-b">
-      <label>Last Name <b>*</b></label>
-      <input type="text" v-model="user.lastname" v-validate="'required'" name="last name">
-      <span class="alert">{{ errors.first('last name') }}</span>
-    </div>
-    <div class="item-c">
-      <label>Email <b>*</b></label>
-      <input type="text" v-model="user.email" v-validate="'required|email'" name="email">
-      <span class="alert">{{ errors.first('email') }}</span>
-    </div>
-    <div class="item-d">
-      <label class="message-label">Write your message for Engineering Conference here. <b>*</b></label>
-      <textarea type="text" v-model="user.message" v-validate="'required'" name="message"></textarea>
-      <span class="alert">{{ errors.first('message') }}</span>
-    </div>
-         <button :disabled="loading" class="submit-button" @click="handleSubmit"><pulse-loader size="10px" color="#FFF" :loading="loading"></pulse-loader><span v-if="!loading">Submit</span></button>
-  </div>
-</div>
+
 </template>
 
 <script>
-import {FIREBASE_COLLECTIONS} from '../utils/constants'
-const utils = require('../utils/utils')
-
-const SUCCESS_MESSAGE = `Thank you for sending us your message. Our team will get back to you soon!`
-
+import TeamEmail from '../../static/TeamEmail.json'
+import Map from './Map.vue'
 export default {
   data () {
     return {
-      user: {
-      },
-      loading: false
+      team_email: TeamEmail
     }
   },
-  methods: {
-    async handleSubmit () {
-      this.loading = true
-      try {
-        const {valid, message} = await this.validateInput()
-        if (!valid) {
-          this.flash(message, 'error', {timeout: 3000})
-          console.log(message)
-          this.loading = false
-          return
-        }
-        this.user.createdAt = new Date().toLocaleString()
-        const postData = {
-          applicant: this.user,
-          CONFIG: {
-          },
-          FIREBASE_COLLECTIONS
-        }
-        await utils.httpPost('contactMessage', postData)
-        this.flash(SUCCESS_MESSAGE, 'success', {timeout: 3000})
-        this.user = {}
-      } catch (e) {
-        if (e.response) {
-          console.log(`Form submission failed: ${(e.response.data.invalid || e.response.data.error).msg}`)
-          if (e.response.status === 400) {
-            this.flash(e.response.data.invalid.msg, 'info', {timeout: 3000})
-          } else {
-            this.flash(e.response.data.error.msg, 'error', {timeout: 3000})
-          }
-        } else {
-          console.log('Nothing recieved from server..')
-          this.flash(`No response: ${e}`, 'error', {timeout: 3000})
-        }
-      } finally {
-        this.loading = false
-      }
-    },
-    async validateInput () {
-      const validationResult = await this.$validator.validateAll()
-      if (!validationResult) {
-        return {valid: false, message: 'Missing Fields in Input'}
-      }
-      return {valid: true, message: ''}
-    }
+  components: {
+    'Map': Map
   }
 }
 </script>
 
-<style scoped>
-  b {
-    color: red;
-  }
-  input, label {
-    display: block;
-    margin: auto;
-  }
-  input, textarea, select {
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: 700;
-    color: var(--black-color);
-    border: 2px solid var(--black-color);
-  }
-  input {
-    width: calc(100% - 40px);
+<style>
+  @import '../../static/style.css';
+</style>
+
+<style>
+  @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+  #social {
+    margin: 20px 10px;
     text-align: center;
   }
-  textarea {
-    width: 200px;
-    height: 100px;
-    resize: none;
-    text-align: left;
-  }
-  select {
-    width: calc(100% - 17px);
-  }
-  label {
-    color: var(--white-color);
-    font-size: 20px;
-    font-weight: 300;
-    padding: 6px;
+
+  .smGlobalBtn{ /* global button class */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 2px 2px #999;
+    padding: 0px;
+    text-decoration: none;
     text-align: center;
-  }
-  .message-label {
-    font-size: 16px;
-  }
-  .item-a {
-    grid-area: item-a;
-  }
-  .item-b {
-    grid-area: item-b;
-  }
-  .item-c {
-    grid-area: item-c;
-  }
-  .item-d {
-    grid-area: item-d;
-  }
-  .submit-button {
-    grid-area: item-e;
-    border-radius: 5px;
-    width: calc(100% - 10px);
-    margin-top: 16px;
-    margin-bottom: 40px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 50px;
+    border-radius: 25px;
+    -moz-border-radius:25px;
+    -webkit-border-radius:25px;
   }
 
-  .form-input {
-    display: grid;
-    grid-template-columns: 250px;
-    grid-template-areas:
-      "item-a"
-      "item-b"
-      "item-c"
-      "item-d"
-      "item-e";
-    justify-content: center;
-  }
-  .contact-page {
-    background-color: var(--light-black-color);
-  }
-  .page-header {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
-      url(/static/page-headers/contact-us.jpg);
+  /* facebook button class*/
+  .facebookBtn{
+    background: #4060A5;
   }
 
-@media only screen and (min-width: 520px) {
-  .form-input {
-    grid-template-columns: 250px 250px;
-    grid-template-areas:
-      "item-a item-b"
-      "item-c item-c"
-      "item-d item-d"
-      "item-e item-e";
+  .facebookBtn:before{ /* use :before to add the relevant icons */
+    font-family: "FontAwesome";
+    content: "\f09a"; /* add facebook icon */
   }
-  input {
-    width: calc(100% - 40px);
+
+  .facebookBtn:hover{
+    color: #4060A5;
+    background: #fff;
   }
-  textarea {
-    width: 460px;
-    height: 100px;
-    text-align: left;
+
+  /* twitter button class*/
+  .twitterBtn{
+    background: #00ABE3;
   }
-  select {
-    width: calc(100% - 17px);
+
+  .twitterBtn:before{
+    font-family: "FontAwesome";
+    content: "\f099"; /* add twitter icon */
   }
-  label {
-    text-align: left;
+
+  .twitterBtn:hover{
+    color: #00ABE3;
+    background: #fff;
   }
-  .message-label {
-    font-size: 16px;
+
+  /* google plus button class*/
+  .instagramBtn{
+    background: #e64522;
   }
-}
+
+  .instagramBtn:before{
+    font-family: "FontAwesome";
+    content: "\f16d"; /* add googleplus icon */
+  }
+
+  .instagramBtn:hover{
+    color: #e64522;
+    background: #fff;
+  }
+
+  /* linkedin button class*/
+  .linkedinBtn{
+    background: #0094BC;
+  }
+
+  .linkedinBtn:before{
+    font-family: "FontAwesome";
+    content: "\f0e1"; /* add linkedin icon */
+  }
+
+  .linkedinBtn:hover{
+    color: #0094BC;
+    background: #fff;
+  }
 </style>

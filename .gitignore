@@ -3,6 +3,9 @@ node_modules/
 /dist/
 /y/
 /static/Gallery/
+/static/img
+/static/memberpics
+/static/misc-pics
 /config/prod.env.js
 /src/webtasks/ecSecrets.txt
 npm-debug.log*

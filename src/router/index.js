@@ -4,14 +4,18 @@ import Router from 'vue-router'
 const routerOptions = [
   { path: '/', component: 'Home' },
   { path: '/about', component: 'About' },
-  { path: '/meettheteam', component: 'MeetTheTeam' },
-  { path: '/schedule', component: 'ConferenceSchedule' },
+  { path: '/faq', component: 'FAQ' },
+  { path: '/ourteam', component: 'OurTeam' },
+  { path: '/schedule', component: 'Schedule' },
   { path: '/sponsors', component: 'Sponsors' },
   { path: '/contact', component: 'ContactUs' },
   { path: '/papersandprojects', component: 'PapersandProjects' },
   { path: '/gallery', component: 'Gallery' },
   { path: '/secretpagebeard', component: 'SecretPage' },
   { path: '/jointheteam', component: 'JoinTheTeam' },
+  { path: '/success', component: 'Success' },
+  { path: '/error', component: 'Error' },
+  { path: '/info', component: 'Info' },
   { path: '/application', component: 'Application' }, // TODO : Uncomment when application goes live
   { path: '*', component: 'Home' }
 ]

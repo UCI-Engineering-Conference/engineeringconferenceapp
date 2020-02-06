@@ -1,15 +1,85 @@
 [
   {
-    "year": "2019",
-    "general": [
-      "school-of-engineering.png", "boeing_rgbblue_large.png", "siemens-logo.png", "ansys.png", "henselphelps.png", "interwest.png", "navy.png", "asuci.png", "aem.png", "school-of-computer-science.png", "urop.png", "antmedia.png", "school-of-physical-sciences.png", "redbull.png", "yerba.png", "double-tree.png"
+    "year": "Previous Year",
+    "companies": [
+      {
+        "image": "RedBull.png",
+        "link": "https://www.redbull.com/us-en/"
+      },
+      {
+        "image": "Boeing.png",
+        "link": "https://www.boeing.com/"
+      },
+      {
+        "image": "Siemens.png",
+        "link": "https://new.siemens.com/us/en.html"
+      },
+      {
+        "image": "HenselPhelps.png",
+        "link": "https://www.henselphelps.com/"
+      },
+      {
+        "image": "DoubleTree.png",
+        "link": "https://www.hilton.com/en/doubletree/"
+      },
+      {
+        "image": "InterwestConsulting.png",
+        "link": "http://www.interwestgrp.com/"
+      },
+      {
+        "image": "YerbaMate.png",
+        "link": "https://guayaki.com/yerba-mate/"
+      },
+      {
+        "image": "ASUCI.png",
+        "link": "https://www.asuci.uci.edu/"
+      },
+      {
+        "image": "UROP.png",
+        "link": "https://www.urop.uci.edu/"
+      },
+      {
+        "image": "UCIComputerScience.png",
+        "link": "https://www.ics.uci.edu/"
+      },
+      {
+        "image": "UCIEngineering.png",
+        "link": "http://engineering.uci.edu/"
+      },
+      {
+        "image": "UCIPhysicalSciences.png",
+        "link": "https://ps.uci.edu/"
+      },
+      {
+        "image": "AntMedia.png",
+        "link": "https://www.studentcenter.uci.edu/AntMedia/"
+      },
+      {
+        "image": "ANSYS.png",
+        "link": "https://www.ansys.com/"
+      },
+      {
+        "image": "AmericasNavy.png",
+        "link": "https://www.navy.com/"
+      }
     ]
   },
   {
-    "year": "2018",
-    "general": [
-      "school-of-engineering.png", "school-of-computer-science.png", "school-of-physical-sciences.png", "ansys.png"
-    , "tgif.png", "aem.png", "asuci.png", "redbull.png", "urop.png", "antreprenuer-center.png", "double-tree.png"
+    "year": "This Year",
+    "companies": [
+      {
+        "image": "",
+        "link": ""
+      },
+      {
+        "image": "",
+        "link": ""
+      },
+      {
+        "image": "",
+        "link": ""
+      }
     ]
   }
 ]
+

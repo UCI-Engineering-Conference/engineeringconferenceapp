@@ -8,6 +8,14 @@
     ]
   },
   {
+    "title": "Refunds & Donation",
+    "conditions":
+    [
+      "Upon payment, refunds are not valid.",
+      "$25.00 of each ticket proceed goes to charity."
+    ]
+  },
+  {
     "title": "Conference Conduct",
     "conditions":
     [
@@ -30,6 +38,7 @@
     "conditions":
     [
       "There will be photography and videography during the duration of the conference.",
+      "Photography and videography can be accessible to the public.",
       "Basic Information in registration process will be used for statistical reasons."
     ]
   },
@@ -70,5 +79,13 @@
       [
         "BOEING trademark used with permission."
       ]
+  },
+  {
+    "title": "Other",
+    "conditions":
+    [
+      "UCI Engineering Conference is affiliated with UCI Henry Samueli School of Engineering.",
+      "All other policies not mentioned are identical to the policies of UCI Henry Samueli School of Engineering."
+    ]
   }
 ]

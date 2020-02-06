@@ -1,227 +1,245 @@
 [
   {
-    "day": "Day 1",
+    "label": "Day 1",
+    "date": "February 15, 2020",
     "events": [
       {
         "name": "Registration",
-        "location": "Hotel Lobby",
+        "location": "Division of Continuing Education",
         "description": "Get Badges and Participant Packet",
         "start": "8:00am",
         "end": "8:30am"
       },
       {
         "name": "Opening Ceremony",
-        "location": "Hotel Conference Room",
-        "description": "Guest Speakers and Introduction to the Conference",
+        "location": "Division of Continuing Education",
+        "description": "Keynote Speakers and Introduction to the Conference",
         "start": "9:00am",
         "end": "10:30am"
       },
       {
         "name": "Lobbying & Merging",
-        "location": "Committee Rooms",
+        "location": "Division of Continuing Education",
         "description": "Break into committees and meet your team",
         "start": "10:30am",
         "end": "11:30am"
       },
       {
-        "name": "Career Fair",
-        "location": "Hotel Lobby",
-        "description": "Opportunity to pass on your resume to engineering companies",
+        "name": "Project Forecasting",
+        "location": "Division of Continuing Education",
+        "description": "Opportunity to discuss initial project ideas",
         "start": "11:30am",
         "end": "12:30pm"
       },
       {
         "name": "Lunch Break",
-        "location": "Hotel Conference Room",
-        "description": "Enjoy a lunch provided by Double Tree by Hilton",
+        "location": "Division of Continuing Education",
+        "description": "Enjoy lunch",
         "start": "12:30pm",
         "end": "1:30pm"
       },
       {
-        "name": "Technical Training I",
-        "location": "Training Rooms",
-        "description": "Learn skills from ANSYS and other companies to get an official certification",
+        "name": "Panel - Professional",
+        "location": "Division of Continuing Education",
+        "description": "Join the discussion and interactive with industry professionals",
         "start": "1:30pm",
-        "end": "3:30pm"
+        "end": "3:00pm"
       },
       {
         "name": "Networking Break",
-        "location": "Hotel Lobby",
+        "location": "Division of Continuing Education",
         "description": "Enjoy a coffee break and meet the students and faculty of EC",
-        "start": "3:30pm",
-        "end": "4:00pm"
+        "start": "3:00pm",
+        "end": "3:30pm"
       },
       {
-        "name": "Technical Training II",
-        "location": "Training Rooms",
-        "description": "Engage in a mock debate hosted by our chairs board",
-        "start": "4:00pm",
-        "end": "7:00pm"
+        "name": "Technical Training",
+        "location": "Division of Continuing Education",
+        "description": "Learn engineering programs with industry professionals",
+        "start": "3:30pm",
+        "end": "5:30pm"
       },
       {
         "name": "Dinner Break",
-        "location": "Committee Rooms",
-        "description": "Enjoy a dinner provided by Double Tree by Hilton",
-        "start": "7:00pm",
-        "end": "8:00pm"
+        "location": "Division of Continuing Education",
+        "description": "Enjoy dinner",
+        "start": "5:30pm",
+        "end": "6:30pm"
       },
       {
-        "name": "Project Forecasting",
-        "location": "Committee Rooms",
-        "description": "Brainstorm ideas with your team",
-        "start": "8:00pm",
-        "end": "9:00pm"
+        "name": "Panel - Instructive",
+        "location": "Division of Continuing Education",
+        "description": "Join the discussion and interactive with industry professionals",
+        "start": "6:30pm",
+        "end": "7:30pm"
+      },
+      {
+        "name": "Research Session",
+        "location": "Division of Continuing Education",
+        "description": "Determine the helpful resources to be used for your design",
+        "start": "7:30pm",
+        "end": "9:30pm"
       }
     ]
   },
   {
-    "day": "Day 2",
+    "label": "Day 2",
+    "date": "February 16, 2020",
     "events": [
       {
         "name": "Registration",
-        "location": "Hotel Lobby",
+        "location": "Division of Continuing Education",
         "description": "Get Badges and refreshments",
         "start": "8:30am",
         "end": "9:00am"
       },
       {
         "name": "Debate Workshop",
-        "location": "Committee Rooms",
+        "location": "Division of Continuing Education",
         "description": "Training in formal debate",
         "start": "9:00am",
         "end": "10:30am"
       },
       {
-        "name": "Research Session",
-        "location": "Committee Rooms",
-        "description": "Determine the helpful resources to be used for your design",
+        "name": "Prototyping Session",
+        "location": "Division of Continuing Education",
+        "description": "Solidify project ideas",
         "start": "10:30am",
-        "end": "12:30am"
+        "end": "12:30pm"
       },
       {
         "name": "Lunch Break",
-        "location": "Hotel Conference Room",
-        "description": "Enjoy a lunch provided by Double Tree by Hilton",
+        "location": "Division of Continuing Education",
+        "description": "Enjoy lunch",
         "start": "12:30pm",
         "end": "1:30pm"
       },
       {
-        "name": "Design Session",
-        "location": "Committee Rooms",
+        "name": "Design Session l",
+        "location": "Division of Continuing Education",
         "description": "Begin working on your research paper",
         "start": "1:30pm",
         "end": "3:30pm"
       },
       {
-        "name": "Analysis Session",
-        "location": "Committee Rooms",
-        "description": "Learn the fundamentals of design engineering",
+        "name": "Design Session ll",
+        "location": "Division of Continuing Education",
+        "description": "Solidify the design report",
         "start": "3:30pm",
         "end": "5:30pm"
       },
       {
         "name": "Dinner Break",
-        "location": "Hotel Conference Room",
-        "description": "Enjoy a dinner provided by Double Tree by Hilton",
+        "location": "Division of Continuing Education",
+        "description": "Enjoy dinner",
         "start": "5:30pm",
         "end": "6:30pm"
       },
       {
-        "name": "Evaluation Session",
-        "location": "Committee Rooms",
-        "description": "Revise your research paper",
+        "name": "Analysis Session",
+        "location": "Division of Continuing Education",
+        "description": "Revise and finalize the design report",
         "start": "6:30pm",
-        "end": "8:30pm"
+        "end": "7:30pm"
       },
       {
-        "name": "Presentation Session",
-        "location": "Committee Rooms",
-        "description": "Practice presenting the slides created to explain your design",
+        "name": "Internal Debate",
+        "location": "Division of Continuing Education",
+        "description": "Present your project and debate with your peers for most sustainable solutions",
         "start": "8:30pm",
         "end": "9:30pm"
       }
     ]
   },
   {
-    "day": "Day 3",
+    "label": "Day 3",
+    "date": "February 17, 2020",
     "events": [
       {
         "name": "Registration",
-        "location": "Hotel Lobby",
+        "location": "*To Be Determined",
         "description": "Get badges and refreshments",
         "start": "8:30am",
         "end": "9:00am"
       },
       {
-        "name": "Panel Debate",
-        "location": "Debate Rooms",
-        "description": "Debate against the others in your committee",
+        "name": "Career Fair",
+        "location": "*To Be Determined",
+        "description": "Network and connect with industry professionals",
         "start": "9:00am",
         "end": "11:00am"
       },
       {
-        "name": "Panel Voting",
-        "location": "Debate Rooms",
-        "description": "Vote on the teams that will be moving on.",
+        "name": "Evaluation Session",
+        "location": "*To Be Determined",
+        "description": "Evaluate project with EC Executive members",
         "start": "11:00am",
-        "end": "11:30am"
-      },
-      {
-        "name": "Lunch Break",
-        "location": "Hotel Conference Room",
-        "description": "Enjoy a lunch provided by Double Tree by Hilton.",
-        "start": "11:30am",
         "end": "12:30pm"
       },
       {
-        "name": "Integration I",
-        "location": "Debate Rooms",
-        "description": "Work with the teams that progressed to design and even greater system.",
+        "name": "Lunch Break",
+        "location": "*To Be Determined",
+        "description": "Enjoy lunch",
         "start": "12:30pm",
-        "end": "3:00pm"
+        "end": "1:30pm"
       },
       {
-        "name": "Networking Break",
-        "location": "Hotel Lobby",
-        "description": "One last calm before the final debate sessions.",
-        "start": "3:00pm",
+        "name": "Integration I",
+        "location": "*To Be Determined",
+        "description": "Work with the teams that progressed to design and even greater system.",
+        "start": "1:30pm",
+        "end": "3:30pm"
+      },
+      {
+        "name": "Panel - Industrial",
+        "location": "*To Be Determined",
+        "description": "Join the discussion and interactive with industry professionals",
+        "start": "1:30pm",
         "end": "3:30pm"
       },
       {
         "name": "Integration II",
-        "location": "Debate Rooms",
+        "location": "*To Be Determined",
         "description": "Work with the teams that progressed to design and even greater system.",
         "start": "3:30pm",
-        "end": "5:30pm"
+        "end": "6:00pm"
+      },
+      {
+        "name": "Panel - Contemporary",
+        "location": "*To Be Determined",
+        "description": "Join the discussion and interactive with industry professionals",
+        "start": "3:30pm",
+        "end": "6:00pm"
       },
       {
         "name": "Dinner Break",
-        "location": "Hotel Conference Room",
-        "description": "Enjoy a dinner provided by the Double Tree by Hilton.",
-        "start": "5:30pm",
-        "end": "6:30pm"
+        "location": "*To Be Determined",
+        "description": "Enjoy dinner",
+        "start": "6:00pm",
+        "end": "7:00pm"
       },
       {
         "name": "Final Debate",
-        "location": "Hotel Conference Room",
-        "description": "Work with the teams that progressed to design and even greater system.",
-        "start": "6:30pm",
-        "end": "7:30pm"
-      },
-      {
-        "name": "Final Voting",
-        "location": "Hotel Conference Room",
-        "description": "All committees decide on the overall winner.",
-        "start": "7:30pm",
+        "location": "*To Be Determined",
+        "description": "Two finalist teams debate for their solutions.",
+        "start": "7:00pm",
         "end": "8:00pm"
       },
       {
-        "name": "Closing Ceremony",
-        "location": "Hotel Conference Room",
-        "description": "Reflect on your accomplishments of the past three days.",
+        "name": "Final Voting",
+        "location": "*To Be Determined",
+        "description": "All committees decide on the overall winner.",
         "start": "8:00pm",
         "end": "9:00pm"
+      },
+      {
+        "name": "Closing Ceremony",
+        "location": "*To Be Determined",
+        "description": "Reflect on your accomplishments of the past three days.",
+        "start": "9:00pm",
+        "end": "9:30pm"
       }
     ]
   }
 ]
+

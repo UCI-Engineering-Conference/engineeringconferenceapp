@@ -28,9 +28,9 @@
     "Male", "Female", "Other"
   ],
   "Committee": [
-    "MAE", "EECS", "CBEMS", "CEE"
+    "Air Mover", "Carbon Storer", "Membrain", "Pycontrol"
   ],
   "FullCommittee": [
-    
+
   ]
 }

@@ -10,15 +10,9 @@
       },
       {
         "name": "Myriam Khalil",
-        "position": "VP External",
+        "position": "Vice President",
         "img": "Myriam-Khalil.png",
         "linkedIn": "https://www.linkedin.com/in/myriam-khalil-8a9460165/"
-      },
-      {
-        "name": "Daniela Uriostegui",
-        "position": "VP Internal",
-        "img": "Daniela-Uriostegui.png",
-        "linkedIn": "https://www.linkedin.com/in/daniela-uriostegui-9004a5187/"
       }
     ],
     "chairs": [
@@ -33,24 +27,12 @@
         "position": "MAE Chair",
         "img": "Thomas-Slagle.jpg",
         "linkedIn": "https://www.linkedin.com/in/thomasslagle99/"
-      },
-      {
-        "name": "Kevin Fang",
-        "position": "CBME Chair",
-        "img": "Kevin-Fang.jpg",
-        "linkedIn": "https://www.linkedin.com/in/kevin-fang-299608173"
-      },
-      {
-        "name": "Asem Alkhatib",
-        "position": "Outreach Chair",
-        "img": "Asem-Alkhatib.jpg",
-        "linkedIn": "https://www.linkedin.com/in/mohammad-asem-alkhatib/"
       }
     ],
     "others": [
       {
-        "name": "Euressa-Cosmiano",
-        "position": "Operational Engineer",
+        "name": "Euressa Cosmiano",
+        "position": "Head of Operations",
         "img": "Euressa-Cosmiano.png",
         "linkedIn": "https://www.linkedin.com/in/euressa-cosmiano-3b1a9b183"
       },
@@ -67,6 +49,12 @@
         "linkedIn": "https://www.linkedin.com/in/mathew-lim-616718141/"
       },
       {
+        "name": "Asem Alkhatib",
+        "position": "Outreach",
+        "img": "Asem-Alkhatib.jpg",
+        "linkedIn": "https://www.linkedin.com/in/mohammad-asem-alkhatib/"
+      },
+      {
         "name": "Tommy Seo",
         "position": "Website Developer",
         "img": "Tommy-Seo.jpg",
@@ -81,16 +69,16 @@
     ],
     "advisers": [
       {
-        "name": "Dr. Hamed Youssefpour",
+        "name": "Dr. David Copp",
         "position": "Faculty Advisor",
-        "img": "Hamed-Youssefpour.png",
-        "linkedIn": "https://www.linkedin.com/in/hamed-youssefpour-a3a7a552/"
+        "img": "Placeholder.png",
+        "linkedIn": "https://www.linkedin.com/in/davidacopp/"
       },
       {
-        "name": "Dr. Natascha Buswell",
+        "name": "Dr. Jack Brouwer",
         "position": "Faculty Advisor",
-        "img": "Natascha-Buswell.png",
-        "linkedIn": "https://www.linkedin.com/in/natascha-buswell-69102a66/"
+        "img": "Placeholder.png",
+        "linkedIn": "http://engineering.uci.edu/users/jack-brouwer"
       },
       {
         "name": "Mazen Nader Alkhatib",
@@ -155,12 +143,6 @@
         "position": "Outreach Member",
         "img": "Abdullah-Jawhar.png",
         "linkedIn": "https://www.linkedin.com/in/abdullah-jawhar-4777a6172/"
-      },
-      {
-        "name": "Daniela Uriostegui",
-        "position": "Head of Event Planning",
-        "img": "Daniela-Uriostegui.png",
-        "linkedIn": ""
       },
       {
         "name": "Jesus Reyes",

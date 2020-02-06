@@ -1,51 +1,52 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link class="nav-logo" to="/"><img src="/static/img/thumbnail.png"/></router-link>
-      <div class="nav-link">
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/meettheteam">Meet the Team</router-link>
-        <router-link to="/schedule">Schedule</router-link>
-        <router-link to="/sponsors">Partners</router-link>
-        <router-link to="/gallery">Gallery</router-link>
-      </div>
-    </div>
-    <div id="flash-alerts">
-      <flash-message transitionName="slide-fade"></flash-message>
+    <div class="fixed-navbar nav">
+      <b-navbar toggleable="lg" type="light fixed-top" variant="white">
+        <b-navbar-brand><img src="../static/img/thumbnail.png" alt="logo" class="home-logo"></b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav id="menu">
+            <b-nav-item>
+              <router-link to="/" class="nav-link" id="nav-link-1">Home</router-link>
+            </b-nav-item>
+            <b-nav-item>
+              <div >
+                <router-link to="/schedule" class="nav-link" id="nav-link-2">Schedule</router-link>
+              </div>
+            </b-nav-item>
+            <b-nav-item>
+              <div >
+                <router-link to="/faq" class="nav-link" id="nav-link-3">FAQ</router-link>
+              </div>
+            </b-nav-item>
+            <b-nav-item>
+              <router-link to="/ourteam" class="nav-link">Our Team</router-link>
+            </b-nav-item>
+            <b-nav-item>
+              <router-link to="/contact" class="nav-link">Contact</router-link>
+            </b-nav-item>
+          </b-navbar-nav>
+
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <router-link to="/application"><b-button squared variant="light" size="md" style="border: 2px solid #65d25c; color: black">Apply Now</b-button></router-link>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
     </div>
     <router-view/>
-
-    <modal v-show="isModalVisible" @close="closeModal">
-      <h2 slot="header">Amazing!</h2>
-      <p slot ="body">You're official registered for UCI Engineering Conference! We'll be in touch with you soon regarding the status of your application.</p>
-    </modal>
+<!--        <b-navbar type="light fixed-bottom">-->
+<!--          <b-navbar-nav class="ml-auto">-->
+<!--            <button class="btn btn-main-md" type="submit">Feb 25-27</button>-->
+<!--          </b-navbar-nav>-->
+<!--        </b-navbar>-->
     <footer id="footer">
-      <div class="footer-icon">
-        <a href="mailto:EngineeringConferenceUCI@gmail.com"><font-awesome-icon icon="envelope" /></a>
-        <a href="https://www.facebook.com/EConferenceUCI"><font-awesome-icon :icon="['fab', 'facebook']" /></a>
-        <a href="https://twitter.com/@EConferenceUCI"><font-awesome-icon :icon="['fab', 'twitter']" /></a>
-        <a href="https://instagram.com/EConferenceUCI"><font-awesome-icon :icon="['fab', 'instagram']" /></a>
-      </div>
-      <div class="footer-link">
-        <div class="footer-apply-link" v-if="isApplicationOpen">
-          <router-link to="/application">Apply Now</router-link>
-        </div>
-        <div class="other-footer-links">
-          <router-link to="/contact">Contact Us</router-link>
-          <router-link to="/papersandprojects">Papers</router-link>
-          <router-link to="/papersandprojects">Projects</router-link>
-          <router-link to="/jointheteam">Join the Team</router-link>
-        </div>
-      </div>
-      <!--TODO: Delete SecretPageModal-->
-      <p>&copy;UCI Engineering Conference</p>
+      <p class="text-center">&copy;UCIEngineeringConference2020</p>
     </footer>
   </div>
 </template>
 
 <script>
-import VeeValidate from 'vee-validate'
 import modal from './components/SecretPageModal.vue'
 require('vue-flash-message/dist/vue-flash-message.min.css')
 
@@ -58,32 +59,6 @@ export default {
     isApplicationOpen () {
       return this.$store.state.applicationOpen
     }
-  },
-  created: function () {
-    VeeValidate.Validator.extend('is_uci_email', {
-      // Custom validation message
-      getMessage: (field) => `The ${field} must be an @uci.edu email.`,
-      // Custom validation rule
-      validate: (value) => new Promise(resolve => {
-        const reg = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(uci)\.edu$/i
-        resolve({
-          valid: value && reg.test(value)
-        })
-      })
-    })
-    // TODO: is_open_committee currently not being used
-    VeeValidate.Validator.extend('is_open_committee', {
-      // Custom validation message
-      getMessage: (field) => `The tickets for this ${field} have been sold out.`,
-      // Custom validation rule
-      validate: (value) => new Promise(resolve => {
-        // TODO: Add Committee Restrictions
-        let closedCommittees = []
-        resolve({
-          valid: !(closedCommittees.indexOf(value) > -1)
-        })
-      })
-    })
   },
   data () {
     return {
@@ -101,7 +76,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700');
   :root {
     --page-header-bg: 0.3;
@@ -113,50 +88,25 @@ export default {
     --error-color: #fa755a;
     --light-error-color: #ffac9c;
   }
-  #app {
-  font-family: 'Source Sans Pro', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: var(--black-color);
-  background-color: var(--white-color);
-}
-#nav {
+/*  #app {*/
+/*  font-family: 'Source Sans Pro', sans-serif;*/
+/*  -webkit-font-smoothing: antialiased;*/
+/*  -moz-osx-font-smoothing: grayscale;*/
+/*  text-align: center;*/
+/*  color: var(--black-color);*/
+/*  background-color: var(--white-color);*/
+/*}*/
+#navi {
   position: sticky;
   top:0;
   left:0;
-  height: 60px;
+  height: 50px;
   width: auto;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   box-shadow: 0 6px 7px -7px rgba(0,0,0,.6);
   text-align: right;
-  background-color: var(--white-color);
+  background-color: #ffffff;
   z-index: 10;
-}
-#flash-alerts {
-  position: sticky;
-  top:115px;
-  left:0;
-  height: 60px;
-  width: auto;
-  z-index: 10;
-}
-
-.flash__message.success{color:var(--white-color);background-color:var(--light-green-color);border-color:var(--green-color)}
-.flash__message.error{color:var(--white-color);background-color:var(--light-error-color);border-color:var(--error-color)}
-
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateY(10px);
-  opacity: 0;
 }
 
 button {
@@ -170,29 +120,28 @@ ul {
   list-style: none;
   padding: 0;
 }
-.alert {
-  color: var(--error-color);
-}
 
-#nav .nav-link a {
+#navi .navi-link a {
   text-decoration: none;
   font-size: 2.9vw;
   font-weight: 400;
   padding: 2px;
-  color: var(--black-color);
+  color: #808080;
   position:relative;
-  top: 30px;
+  top: 20px;
 }
-#nav .nav-link a:hover {
+#navi .navi-link a:hover {
   cursor: pointer;
   border-bottom: 3px solid rgba(101, 210, 92, .7);
 }
-#nav .nav-link .router-link-exact-active {
+#navi .navi-link .router-link-exact-active {
   border-bottom: 3px solid var(--green-color);
 }
-#nav .nav-logo img {
+#navi .navi-logo img {
   float: left;
-  height: 50px;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 #footer {
   background-color: var(--black-color);
@@ -211,9 +160,6 @@ ul {
   transition: all 500ms ease;
 }
 
-.footer-icon {
-  padding: 8px;
-}
 #footer .footer-link .other-footer-links a{
   font-size: 3.2vw;
   padding: 8px;
@@ -319,14 +265,14 @@ ul {
     }
   }
   @media only screen and (min-width: 420px) {
-    #nav .nav-link a {
+    #navi .navi-link a {
       font-size: 3vw;
       padding: 3px;
     }
-    #nav .nav-link a:hover {
+    #navi .navi-link a:hover {
       border-bottom: 5px solid rgba(101, 210, 92, .7);
     }
-    #nav .nav-link .router-link-exact-active {
+    #navi .navi-link .router-link-exact-active {
       border-bottom: 5px solid var(--green-color);
     }
     #footer .footer-icon a {
@@ -353,15 +299,17 @@ ul {
     #footer .footer-link .footer-apply-link a {
       font-size: 32px;
     }
-    #nav .nav-link a {
+    #navi .navi-link a {
       font-size: 18px;
       padding: 8px;
-      top: 60px;
+      top: 64px;
     }
-    #nav .nav-logo img {
-      height:100px;
+    #navi .navi-logo img {
+      height:80px;
+      margin-top: 10px;
+      margin-left: 10px;
     }
-    #nav {
+    #navi {
       height: 100px;
     }
   }

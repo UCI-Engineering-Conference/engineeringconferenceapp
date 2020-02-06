@@ -29,6 +29,11 @@ import Close from 'vue-material-design-icons/Close.vue'
 import ChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+
 library.add(faEnvelope, faFacebook, faTwitter, faInstagram)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

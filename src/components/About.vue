@@ -1,122 +1,46 @@
 <template>
- <div>
-  <section style="overflow:hidden;">
-    <div class="page-header">
-      <p>About</p>
+  <div class="container">
+
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+          <div class="card-body d-flex flex-column align-items-start">
+            <strong class="d-inline-block mb-2 text-primary">Our Mission</strong>
+            <p class="card-text mb-auto">To provide students with a hands-on experience to solve contemporary problems through education, collaboration, and debate, while investing in sustainable solutions.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+          <div class="card-body d-flex flex-column align-items-start">
+            <strong class="d-inline-block mb-2 text-success">Our Vision</strong>
+            <p class="card-text mb-auto">We aim to develop under-resourced communities and be universally recognized for empowering students to envision their future careers as global leaders.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <h1>What even is an Engineering Conference?</h1>
-    <p>We're so glad you asked. Here are some of the question that students normally have. But don't hesitate to  <router-link to="/contact">ask us your own</router-link>!</p>
-    <div class="faq-card">
-      <ul class="faq-grid">
-        <li v-for="(data, index) in faqList" :key="index">
-          <img class="faq-image" :src="imgPreUrl(data.img)"/>
-          <div class="faq-title">{{ data.title }}</div>
-          <div class="faq-description">{{ data.description }}</div>
-        </li>
-      </ul>
+    <div class="col-md-8 blog-main">
+      <div class="blog-post mb-4">
+        <h2 class="blog-post-title">Philanthropy</h2>
+        <p>Imagine what would happen if the money you spent on Engineering Conference was used to build projects that helped the planet?</p>
+        <hr>
+        <blockquote>
+          <p class="display-4">Well, we do. <strong>33% of each proceed goes to charity.</strong></p>
+        </blockquote>
+        <br>
+        <p>In the past we've raised over enough money to give over <b>six full one-year scholarships</b> to students in developing countries through UMR, in addition to support building a distribution system in Maventibao, Madagascar that makes water more accessible for the people who live there. Engineers in our organization are <b>big on philanthropy</b> and we pick the projects that prove it.</p>
+      </div>
     </div>
-    <div class="img-strip-wrapper">
-      <ul class="img-strip">
-        <li v-for="img in image_strip.delegates2" v-bind:key="img">
-          <img :src="miscImgPreUrl(img)">
-        </li>
-      </ul>
-    </div>
-  </section>
- </div>
+  </div>
 </template>
-<script>
-import FAQList from '../../static/FAQList.json'
-import ImageStrip from '../../static/ImageStrips.json'
-export default {
-  data () {
-    return {
-      faqList: FAQList,
-      imgLocation: '/static/faqpics/',
-      miscImgLoc: '/static/misc-pics/',
-      image_strip: ImageStrip
-    }
-  },
-  methods: {
-    imgPreUrl (img) {
-      return this.imgLocation.concat(img)
-    },
-    miscImgPreUrl (img) {
-      return this.miscImgLoc.concat(img)
-    }
+
+<style>
+  @import '../../static/style.css';
+</style>
+
+<style>
+  .card {
+    border-radius: 0px !important;
   }
-}
-</script>
-<style scoped>
-  p a {
-    text-decoration: none;
-    color: var(--green-color);
-  }
-  p a:hover {
-    text-decoration: underline;
-  }
-  .faq-title {
-    font-size: 14px;
-    padding: 5px 0;
-  }
-  .faq-description {
-    font-size: 11px;
-    padding:10px;
-  }
-  .faq-image {
-    width: 300px;
-  }
-  .faq-grid li {
-    width: 300px;
-    color: var(--light-black-color);
-    margin: 20px auto;
-    background: rgba(255, 255, 255, 0.8) url("/static/img/ecgraphic.png") no-repeat;
-    background-size: 50%;
-    background-blend-mode: lighten;
-  }
-  .faq-grid li:nth-child(odd) {
-    background-position: right;
-  }
-  .page-header {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, var(--page-header-bg)), rgba(0, 0, 0, var(--page-header-bg))),
-      url(/static/page-headers/about.jpg);
-  }
-  @media only screen and (min-width: 660px) {
-    .faq-image {
-      width: 300px;
-      vertical-align: middle;
-      float:right;
-      margin-left: 10px
-    }
-    .faq-grid li {
-      width: 600px;
-      margin: 30px 20px;
-      text-align: right;
-      display: inline-block;
-    }
-    .faq-grid li:nth-child(odd) {
-      text-align:left;
-    }
-    .faq-grid li:nth-child(odd) .faq-image {
-      float:left;
-      margin-left:0px;
-      margin-right: 10px;
-    }
-  }
-  @media only screen and (min-width: 1000px) {
-    .faq-title {
-      font-size: 22px;
-      padding: 10px 0;
-    }
-    .faq-description {
-      font-size: 18px;
-    }
-    .faq-image {
-      width: 300px;
-    }
-    .faq-grid li {
-      width: 970px;
-    }
-  }
+
 </style>

@@ -100,9 +100,14 @@
 </div>
 </template>
 
+<style>
+  @import '../../static/style.css';
+</style>
+
 <script>
-import { db, storage } from '../main'
+import { storage } from '../main'
 const constants = require('../utils/constants.js')
+const utils = require('../../src/utils/utils')
 export default {
   data () {
     return {
@@ -132,7 +137,13 @@ export default {
      * Counts up attendees by major and year then adds them to graphs,
      * Creates dict for team balancing and adds all attendees to an export sheet
      */
-    refresh () {
+    async refresh () {
+      try {
+        this.applicants = (await utils.httpGet('ecCollection', {Collection: '2019-2020 Attendees'})).ok.attendeeList
+      } catch (e) {
+        console.log(`Error: ${e}`)
+      }
+
       this.getStatistics()
       this.getApplicants()
     },
@@ -285,10 +296,10 @@ export default {
   },
   firestore () {
     return {
-      applicants: db.collection('2018-2019 Attendees'),
-      messages: db.collection('Messages'),
-      mailingList: db.collection('Mailing List'),
-      teamInterestList: db.collection('2019-2020 Team Interest List')
+      // applicants: db.collection('2019-2020 Attendees')
+      // messages: db.collection('Messages'),
+      // mailingList: db.collection('Mailing List'),
+      // teamInterestList: db.collection('2019-2020 Team Interest List')
     }
   }
 }
