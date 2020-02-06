@@ -38,4 +38,11 @@ module.exports = async (app) => {
     const responseCode = response.error ? 500 : response.invalid ? 400 : 200;
     res.status(responseCode).send(response);
   });
+  
+  app.get('/ecCollection', async (req, res) => {
+    console.log('Attempting to retrieve applicants..');
+    const response = await models.retrieveFirebaseCollection(req.query, req.webtaskContext.secrets);
+    const responseCode = response.error ? 500 : response.invalid ? 400 : 200;
+    res.status(responseCode).send(response);
+  });
 };
