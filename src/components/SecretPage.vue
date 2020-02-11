@@ -4,7 +4,7 @@
 <link href="/../../static/tabs-component.css" rel="stylesheet">
 
   <br/>
-  <button @click="refresh">Refresh</button>
+  <button :disabled="this.refreshDisabled" @click="refresh">Refresh</button>
   <button :disabled="this.$isAuthenticated()" @click="login">Login</button>
   <button :disabled="!this.$isAuthenticated()" @click="exportToSheets">Export</button>
   <button :disabled="!this.$isAuthenticated()" @click="balanceTeams">Balance Teams</button>
@@ -24,6 +24,7 @@
         >
           <table-column show="firstname" label="First Name"></table-column>
           <table-column show="lastname" label="Last Name"></table-column>
+          <table-column show="gender" label="Gender"></table-column>
           <table-column show="paid" label="Payment Method"></table-column>
           <table-column show="email" label="Email"></table-column>
           <table-column show="phone" label="Phone"></table-column>
@@ -31,6 +32,7 @@
           <table-column show="otherDiet" label="Other Diet"></table-column>
           <table-column show="school" label="School"></table-column>
           <table-column show="major" label="Major"></table-column>
+          <table-column show="committee" label="Committee"></table-column>
           <table-column show="skills" label="Skills"></table-column>
           <table-column show="class" label="Class"></table-column>
           <table-column show="linkedin" label="LinkedIn"></table-column>
@@ -66,6 +68,8 @@
         <div class="charts">
           <apexchart width="350px" type="pie" :options="majorChartOptions" :series="majorSeries"></apexchart>
           <apexchart width="350px" type="pie" :options="classChartOptions" :series="classSeries"></apexchart>
+          <apexchart width="350px" type="pie" :options="committeeChartOptions" :series="committeeSeries"></apexchart>
+          <apexchart width="350px" type="pie" :options="genderChartOptions" :series="genderSeries"></apexchart>
         </div>
 
       </tab>
@@ -111,6 +115,7 @@ const utils = require('../../src/utils/utils')
 export default {
   data () {
     return {
+      refreshDisabled: false,
       venmoPswd: process.env.VENMO_PSWD,
       justPaid: {},
       applicants: [],
@@ -129,6 +134,16 @@ export default {
       classChartOptions: {
         labels: ['Fresh', 'Soph', 'Jun', 'Sen', 'SupSen'],
         title: {text: 'EC by Class', style: {color: '#3D3D3D'}}
+      },
+      committeeSeries: [0, 0, 0, 0],
+      committeeChartOptions: {
+        labels: ['Air Mover', 'Membrain', 'Pycontrol', 'Carbon Storer'],
+        title: {text: 'EC by Committee', style: {color: '#3D3D3D'}}
+      },
+      genderSeries: [0, 0, 0],
+      genderChartOptions: {
+        labels: ['Male', 'Female', 'Other'],
+        title: {text: 'EC by Gender', style: {color: '#3D3D3D'}}
       }
     }
   },
@@ -139,13 +154,15 @@ export default {
      */
     async refresh () {
       try {
+        this.refreshDisabled = true
         this.applicants = (await utils.httpGet('ecCollection', {Collection: '2019-2020 Attendees'})).ok.attendeeList
+        this.getStatistics()
+        this.getApplicants()
       } catch (e) {
         console.log(`Error: ${e}`)
+      } finally {
+        this.refreshDisabled = false
       }
-
-      this.getStatistics()
-      this.getApplicants()
     },
     /*
      * Logs into google api
@@ -278,11 +295,15 @@ export default {
       this.numberOfApps = 0
       this.classSeries = new Array(5).fill(0)
       this.majorSeries = new Array(5).fill(0)
+      this.committeeSeries = new Array(4).fill(0)
+      this.genderSeries = new Array(3).fill(0)
       for (let student of this.applicants) {
         this.numberOfApps++
         const majorFamily = this.convertMajorToFamily(student.major)
         this.majorSeries[constants.SERIES_DATA.MAJOR_NUM[majorFamily]] += 1
         this.classSeries[constants.SERIES_DATA.CLASS_NUM[student.class]] += 1
+        this.committeeSeries[constants.SERIES_DATA.COMMITTEE_NUM[student.committee]] += 1
+        this.genderSeries[constants.SERIES_DATA.GENDER_NUM[student.gender]] += 1
       }
     },
     getApplicants () {
@@ -290,7 +311,7 @@ export default {
       this.attendeeSheet = [constants.ATTENDEE_SHEET_ROW1]
       for (let student of this.applicants) {
         this.applicantsDict[student.email] = student
-        this.attendeeSheet.push([student.firstname, student.lastname, student.email, student.paid, student.phone, student.diet, student.otherDiet, student.school, student.major, 100, student.class, student.linkedin, student.message])//, student.createdAt])
+        this.attendeeSheet.push([student.firstname, student.lastname, student.email, student.gender, student.paid, student.phone, student.diet, student.otherDiet, student.school, student.major, student.committee, student.class, student.linkedin, student.message, student.createdAt])
       }
     }
   },

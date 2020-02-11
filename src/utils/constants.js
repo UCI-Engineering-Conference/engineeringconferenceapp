@@ -1,7 +1,7 @@
-const ATTENDEE_SHEET_ROW1 = ['First Name', 'Last Name', 'Email', 'Payment Method', 'Phone', 'Diet', 'Other Diet', 'School', 'Major', 'Skills', 'Class', 'LinkedIn', 'Message', 'Date']
+const ATTENDEE_SHEET_ROW1 = ['First Name', 'Last Name', 'Email', 'Gender', 'Payment Method', 'Phone', 'Diet', 'Other Diet', 'School', 'Major', 'Committee', 'Class', 'LinkedIn', 'Message', 'Date']
 const COMMITTEE_SHEET_ROW1 = ['First Name', 'LastName', 'Major', 'Class']
 const GOOGLE_SHEETS = Object.freeze({
-  ATTENDEE_SHEET: '1YHuhH_LpC4XuaG2-uSgQFJaRE7QD1DLPLKLpEOiFHaQ',
+  ATTENDEE_SHEET: '12Z68EZSwW70Cfk9v9Emi3sJQ5IDAlPHwL55hgbkvY70',
   ATTENDANCE_SHEET: '1L3ugTVFEfVQGNOZ8z-pMH10RFDkfYxfOjy9_nwba5WI',
   TEAM_BALANCING_SHEET: '1Aw62VGnf-6b2PlaEsLEi8-tPDnymyFah_bEgcQrmGaQ'
 })
@@ -32,9 +32,24 @@ const CLASS_NUM = Object.freeze({
   'Super Senior': 4
 })
 
+const COMMITTEE_NUM = Object.freeze({
+  'Air Mover': 0,
+  'Membrain': 1,
+  'Pycontrol': 2,
+  'Carbon Storer': 3
+})
+
+const GENDER_NUM = Object.freeze({
+  'Male': 0,
+  'Female': 1,
+  'Other': 2
+})
+
 const SERIES_DATA = Object.freeze({
   CLASS_NUM,
-  MAJOR_NUM
+  MAJOR_NUM,
+  COMMITTEE_NUM,
+  GENDER_NUM
 })
 
 const FIREBASE_COLLECTIONS = Object.freeze({
