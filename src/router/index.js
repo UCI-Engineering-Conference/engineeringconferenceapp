@@ -16,7 +16,7 @@ const routerOptions = [
   { path: '/success', component: 'Success' },
   { path: '/error', component: 'Error' },
   { path: '/info', component: 'Info' },
-  { path: '/application', component: 'Application' }, // TODO : Uncomment when application goes live
+  // { path: '/application', component: 'Application' }, // TODO : Uncomment when application goes live
   { path: '*', component: 'Home' }
 ]
 

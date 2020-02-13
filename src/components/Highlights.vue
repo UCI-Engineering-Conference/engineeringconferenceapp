@@ -7,7 +7,7 @@
             <h2>Past Highlights</h2>
             <div class="mb-3">
               <p class="display-4">
-                <span style="color: #65d25c"><b>230</b></span> Engineers
+                <span style="color: #65d25c"><b>400</b></span> Engineers
               </p>
               <p class="display-4">
                 <span style="color: #65d25c"><b>3</b></span> Days

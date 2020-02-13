@@ -1,6 +1,24 @@
 <template>
   <section class="section about">
     <div class="container">
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              <strong class="d-inline-block mb-2 text-primary">Our Mission</strong>
+              <p class="card-text mb-auto">To provide students with a hands-on experience to solve contemporary problems through education, collaboration, and debate, while investing in sustainable solutions.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              <strong class="d-inline-block mb-2 text-success">Our Vision</strong>
+              <p class="card-text mb-auto">We aim to develop under-resourced communities and be universally recognized for empowering students to envision their future careers as global leaders.</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 mb-3 align-self-center">
           <div class="responsive">

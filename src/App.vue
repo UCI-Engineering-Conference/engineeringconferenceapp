@@ -29,7 +29,8 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <router-link to="/application"><b-button squared variant="light" size="md" style="border: 2px solid #65d25c; color: black">Apply Now</b-button></router-link>
+            <button type="button" class="btn btn-secondary btn-lg" disabled>SOLD OUT</button>
+<!--            <router-link to="/application"><b-button squared variant="light" size="md" style="border: 2px solid #65d25c; color: black">Apply Now</b-button></router-link>-->
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>

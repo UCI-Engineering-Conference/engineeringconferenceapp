@@ -12,7 +12,9 @@
       </div>
     </div>
   </section>
-  <img src="../../static/img/Sponsors.jpg" height="90%" width="100%">
+  <div style="padding: 20px 10vw 20px 10vw;">
+  <img src="../../static/img/Sponsors_2019-2020_enhanced.jpg" height="90%" width="100%">
+  </div>
   </section>
 </template>
 

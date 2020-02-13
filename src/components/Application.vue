@@ -1,4 +1,12 @@
 <template>
+  <div>
+    <div class="d-flex align-items-center p-3 mb-3 text-white-50 box-shadow it pb-3">
+      <div class="text-center m-auto">
+        <div class="lh-100">
+          <h6 class="mb-0 text-white">If you are experiencing any issues, please visit the Contact Page</h6>
+        </div>
+      </div>
+    </div>
   <div class="container">
     <h3 class="text-center mb-3">Application</h3>
     <form @submit.prevent="handleSubmit">
@@ -221,14 +229,30 @@
       </div>
     </form>
   </div>
-
+    <MiniGallery></MiniGallery>
+  </div>
 </template>
 
 <style>
   @import '../../static/style.css';
+  .it {
+    background-color: #65d25c;
+  }
+  .btn-outline-success {
+    border-radius: 0px;
+    border: 1px solid white;
+    background: #65D25C;
+    color: #fff;
+  }
+
+  .btn-outline-success:hover {
+    color: #fff;
+    border: 1px dashed white;
+  }
 </style>
 
 <script>
+import MiniGallery from './MiniGallery.vue'
 import ApplicationOptions from '../../static/ApplicationOptions.json'
 import generalContent from '../../static/GeneralContent.json'
 import TermsList from '../../static/TermsList.json'
@@ -255,6 +279,9 @@ let style = {
   }
 }
 export default {
+  components: {
+    'MiniGallery': MiniGallery
+  },
   watch: {
     'user.school': function () {
       this.user.major = ''

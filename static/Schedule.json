@@ -7,57 +7,50 @@
         "name": "Registration",
         "location": "Division of Continuing Education",
         "description": "Get Badges and Participant Packet",
-        "start": "8:00am",
-        "end": "8:30am"
+        "start": "8:30am",
+        "end": "9:00am"
       },
       {
-        "name": "Opening Ceremony",
+        "name": "Information Session",
         "location": "Division of Continuing Education",
-        "description": "Keynote Speakers and Introduction to the Conference",
+        "description": "Introduction to the Conference",
         "start": "9:00am",
-        "end": "10:30am"
+        "end": "10:00am"
       },
       {
-        "name": "Lobbying & Merging",
+        "name": "Research Session I",
         "location": "Division of Continuing Education",
         "description": "Break into committees and meet your team",
-        "start": "10:30am",
-        "end": "11:30am"
-      },
-      {
-        "name": "Project Forecasting",
-        "location": "Division of Continuing Education",
-        "description": "Opportunity to discuss initial project ideas",
-        "start": "11:30am",
-        "end": "12:30pm"
+        "start": "10:00am",
+        "end": "12:00am"
       },
       {
         "name": "Lunch Break",
         "location": "Division of Continuing Education",
         "description": "Enjoy lunch",
-        "start": "12:30pm",
-        "end": "1:30pm"
+        "start": "12:00pm",
+        "end": "1:00pm"
       },
       {
-        "name": "Panel - Professional",
+        "name": "Debate Workshop",
         "location": "Division of Continuing Education",
         "description": "Join the discussion and interactive with industry professionals",
-        "start": "1:30pm",
-        "end": "3:00pm"
+        "start": "1:00pm",
+        "end": "2:30pm"
       },
       {
         "name": "Networking Break",
         "location": "Division of Continuing Education",
         "description": "Enjoy a coffee break and meet the students and faculty of EC",
-        "start": "3:00pm",
-        "end": "3:30pm"
+        "start": "2:30pm",
+        "end": "3:00pm"
       },
       {
-        "name": "Technical Training",
+        "name": "Design Session I",
         "location": "Division of Continuing Education",
         "description": "Learn engineering programs with industry professionals",
-        "start": "3:30pm",
-        "end": "5:30pm"
+        "start": "3:00pm",
+        "end": "5:00pm"
       },
       {
         "name": "Dinner Break",
@@ -67,20 +60,13 @@
         "end": "6:30pm"
       },
       {
-        "name": "Panel - Instructive",
+        "name": "Design Session II",
         "location": "Division of Continuing Education",
-        "description": "Join the discussion and interactive with industry professionals",
-        "start": "6:30pm",
-        "end": "7:30pm"
-      },
-      {
-        "name": "Research Session",
-        "location": "Division of Continuing Education",
-        "description": "Determine the helpful resources to be used for your design",
-        "start": "7:30pm",
-        "end": "9:30pm"
+        "description": "Learn engineering programs with industry professionals",
+        "start": "6:00pm",
+        "end": "8:30pm"
       }
-    ]
+      ]
   },
   {
     "label": "Day 2",
@@ -94,17 +80,17 @@
         "end": "9:00am"
       },
       {
-        "name": "Debate Workshop",
+        "name": "Training Session",
         "location": "Division of Continuing Education",
         "description": "Training in formal debate",
         "start": "9:00am",
-        "end": "10:30am"
+        "end": "11:00am"
       },
       {
-        "name": "Prototyping Session",
+        "name": "Design Session III",
         "location": "Division of Continuing Education",
         "description": "Solidify project ideas",
-        "start": "10:30am",
+        "start": "11:00am",
         "end": "12:30pm"
       },
       {
@@ -115,35 +101,42 @@
         "end": "1:30pm"
       },
       {
-        "name": "Design Session l",
+        "name": "Design Session IV",
         "location": "Division of Continuing Education",
         "description": "Begin working on your research paper",
         "start": "1:30pm",
-        "end": "3:30pm"
-      },
-      {
-        "name": "Design Session ll",
-        "location": "Division of Continuing Education",
-        "description": "Solidify the design report",
-        "start": "3:30pm",
-        "end": "5:30pm"
+        "end": "5:00pm"
       },
       {
         "name": "Dinner Break",
         "location": "Division of Continuing Education",
-        "description": "Enjoy dinner",
-        "start": "5:30pm",
-        "end": "6:30pm"
+        "description": "Solidify the design report",
+        "start": "5:00pm",
+        "end": "6:00pm"
       },
       {
-        "name": "Analysis Session",
+        "name": "Committee Debate",
+        "location": "Division of Continuing Education",
+        "description": "Enjoy dinner",
+        "start": "6:00pm",
+        "end": "8:00pm"
+      },
+      {
+        "name": "Committee Debate",
         "location": "Division of Continuing Education",
         "description": "Revise and finalize the design report",
-        "start": "6:30pm",
-        "end": "7:30pm"
+        "start": "6:00pm",
+        "end": "8:00pm"
       },
       {
-        "name": "Internal Debate",
+        "name": "Committee Voting",
+        "location": "Division of Continuing Education",
+        "description": "Present your project and debate with your peers for most sustainable solutions",
+        "start": "8:00pm",
+        "end": "8:30pm"
+      },
+      {
+        "name": "Evaluation Session",
         "location": "Division of Continuing Education",
         "description": "Present your project and debate with your peers for most sustainable solutions",
         "start": "8:30pm",
@@ -157,87 +150,73 @@
     "events": [
       {
         "name": "Registration",
-        "location": "*To Be Determined",
+        "location": "Courtyard by Marriott",
+        "description": "Get badges and refreshments",
+        "start": "8:30am",
+        "end": "9:00am"
+      },
+      {
+        "name": "Opening Ceremony",
+        "location": "Courtyard by Marriott",
         "description": "Get badges and refreshments",
         "start": "8:30am",
         "end": "9:00am"
       },
       {
         "name": "Career Fair",
-        "location": "*To Be Determined",
+        "location": "Courtyard by Marriott",
         "description": "Network and connect with industry professionals",
         "start": "9:00am",
-        "end": "11:00am"
-      },
-      {
-        "name": "Evaluation Session",
-        "location": "*To Be Determined",
-        "description": "Evaluate project with EC Executive members",
-        "start": "11:00am",
-        "end": "12:30pm"
+        "end": "10:30am"
       },
       {
         "name": "Lunch Break",
-        "location": "*To Be Determined",
+        "location": "Courtyard by Marriott",
         "description": "Enjoy lunch",
         "start": "12:30pm",
         "end": "1:30pm"
       },
       {
-        "name": "Integration I",
-        "location": "*To Be Determined",
+        "name": "Panel Discussion",
+        "location": "Courtyard by Marriott",
         "description": "Work with the teams that progressed to design and even greater system.",
         "start": "1:30pm",
         "end": "3:30pm"
       },
       {
-        "name": "Panel - Industrial",
-        "location": "*To Be Determined",
-        "description": "Join the discussion and interactive with industry professionals",
-        "start": "1:30pm",
-        "end": "3:30pm"
-      },
-      {
-        "name": "Integration II",
-        "location": "*To Be Determined",
-        "description": "Work with the teams that progressed to design and even greater system.",
-        "start": "3:30pm",
-        "end": "6:00pm"
-      },
-      {
-        "name": "Panel - Contemporary",
-        "location": "*To Be Determined",
+        "name": "Network Break",
+        "location": "Courtyard by Marriott",
         "description": "Join the discussion and interactive with industry professionals",
         "start": "3:30pm",
+        "end": "4:00pm"
+      },
+      {
+        "name": "Final Debate",
+        "location": "Courtyard by Marriott",
+        "description": "Two finalist teams debate for their solutions.",
+        "start": "4:00pm",
         "end": "6:00pm"
       },
       {
         "name": "Dinner Break",
-        "location": "*To Be Determined",
+        "location": "Courtyard by Marriott",
         "description": "Enjoy dinner",
         "start": "6:00pm",
         "end": "7:00pm"
       },
       {
-        "name": "Final Debate",
-        "location": "*To Be Determined",
-        "description": "Two finalist teams debate for their solutions.",
-        "start": "7:00pm",
-        "end": "8:00pm"
-      },
-      {
         "name": "Final Voting",
-        "location": "*To Be Determined",
-        "description": "All committees decide on the overall winner.",
-        "start": "8:00pm",
-        "end": "9:00pm"
+        "location": "Courtyard by Marriott",
+        "description": "Join the discussion and interactive with industry professionals",
+        "start": "7:00pm",
+        "end": "7:30pm"
       },
       {
-        "name": "Closing Ceremony",
-        "location": "*To Be Determined",
-        "description": "Reflect on your accomplishments of the past three days.",
-        "start": "9:00pm",
-        "end": "9:30pm"
+        "name": "Awards Ceremony",
+        "location": "Courtyard by Marriott",
+        "description": "",
+        "start": "7:30pm",
+        "end": "8:30pm"
       }
     ]
   }
