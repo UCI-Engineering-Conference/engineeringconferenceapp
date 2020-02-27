@@ -55,7 +55,7 @@ const SERIES_DATA = Object.freeze({
 const FIREBASE_COLLECTIONS = Object.freeze({
   ATTENDEES: '2019-2020 Attendees',
   MAILING_LIST: 'Mailing List',
-  TEAM_INTEREST_LIST: '2019-2020 Team Interest List',
+  TEAM_INTEREST_LIST: '2020-2021 Team Interest List',
   MESSAGES: 'Messages'
 })
 

@@ -45,14 +45,14 @@ const createContactMessage = async (body, secrets) => {
 };
 
 const retrieveFirebaseCollection = async (query, secrets) => {
-  let attendeeList;
+  let collectionList;
   try {
     const db = utils.initializeDB(secrets);
-    attendeeList = await utils.getFirebaseCollection(secrets, db, query.Collection);
+    collectionList = await utils.getFirebaseCollection(secrets, db, query.Collection);
   } catch (err) {
     return {error: {msg: `ERROR: ${err}`}};
   }
-  return {ok: {msg: 'Successfully retrieved applicant list', attendeeList }};
+  return {ok: {msg: 'Successfully retrieved firebase collection', collectionList }};
 
 };
 

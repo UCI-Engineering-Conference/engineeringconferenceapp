@@ -147,6 +147,7 @@ export default {
       }
     }
   },
+
   methods: {
     /*
      * Counts up attendees by major and year then adds them to graphs,
@@ -155,7 +156,8 @@ export default {
     async refresh () {
       try {
         this.refreshDisabled = true
-        this.applicants = (await utils.httpGet('ecCollection', {Collection: '2019-2020 Attendees'})).ok.attendeeList
+        this.applicants = (await utils.httpGet('ecCollection', {Collection: constants.FIREBASE_COLLECTIONS.ATTENDEES})).ok.collectionList
+        this.teamInterestList = (await utils.httpGet('ecCollection', {Collection: constants.FIREBASE_COLLECTIONS.TEAM_INTEREST_LIST})).ok.collectionList
         this.getStatistics()
         this.getApplicants()
       } catch (e) {
@@ -173,21 +175,25 @@ export default {
         this.$login()
       }
     },
+
     async downloadDocs (row) {
       await Promise.all([`resume/${row.data.email}-resume`, `transcript/${row.data.email}-transcript`].map(this.openURL))
     },
+
     async openURL (name) {
       try {
         const url = await storage.ref().child(name).getDownloadURL()
         window.open(url)
       } catch (err) { console.log(`Failed to open ${name} due to ${err.code}`) }
     },
+
     async exportToSheets () {
       try {
         const gapi = await this.$getGapiClient()
         this.writeToSpreadSheets(gapi, constants.GOOGLE_SHEETS.ATTENDEE_SHEET, 'A1', this.attendeeSheet)
       } catch (err) { console.log(`Google API Client ERROR: ${err}`) }
     },
+
     async balanceTeams () {
       try {
         const gapi = await this.$getGapiClient()
@@ -220,6 +226,7 @@ export default {
         }))
       } catch (err) { console.log(`Balance Teams Failed: ${err}`) }
     },
+
     sortByMajorClass (sizeOfCommittees, committee, majorsInCommittee) {
       let numberOfCommittees = parseInt(Object.keys(committee).length / sizeOfCommittees)
       if (numberOfCommittees === 0 && Object.keys(committee).length > 0) numberOfCommittees++
@@ -228,6 +235,7 @@ export default {
       let sortedMajorClass = this.concatArrays(sortedMajors)
       return this.createListFromSorted(sortedMajorClass, numberOfCommittees)
     },
+
     sortedByMajor (students, majors) {
       let major = []
       for (let i = 0; i < majors.length; i++) major.push([])
@@ -238,6 +246,7 @@ export default {
       }
       return major
     },
+
     sortedByClass (students) {
       let grade = [[], [], [], []]
       for (let student in students) {
@@ -249,11 +258,13 @@ export default {
       // TODO: use lodash .flatten
       return this.concatArrays(grade)
     },
+
     concatArrays (arr) {
       let sortedTeam = arr[arr.length - 1]
       for (let i = arr.length - 2; i >= 0; i--) sortedTeam = sortedTeam.concat(arr[i])
       return sortedTeam
     },
+
     createListFromSorted (sortedList, committees) {
       let committeeList = []
       for (let i = 0; i < committees; i++) committeeList.push([])
@@ -265,6 +276,7 @@ export default {
       }
       return committeeList
     },
+
     buildCommitteeSheet (committeeList) {
       let sheet = [constants.COMMITTEE_SHEET_ROW1]
       committeeList.map((currCommittee, idx) => {
@@ -273,6 +285,7 @@ export default {
       })
       return sheet
     },
+
     async writeToSpreadSheets (gapi, spreadsheetId, range, values) {
       try {
         const response = await gapi.client.sheets.spreadsheets.values.batchUpdate({
@@ -288,9 +301,11 @@ export default {
         console.log(`${response.result.totalUpdatedCells} cells updated.`)
       } catch (err) { console.log(`Batch Update Failed: ${err}`) }
     },
+
     convertMajorToFamily (major) {
       return Object.keys(constants.ENG_MAJORS).filter(family => constants.ENG_MAJORS[family].includes(major))[0] || 'OTHER'
     },
+
     getStatistics () {
       this.numberOfApps = 0
       this.classSeries = new Array(5).fill(0)
@@ -306,6 +321,7 @@ export default {
         this.genderSeries[constants.SERIES_DATA.GENDER_NUM[student.gender]] += 1
       }
     },
+
     getApplicants () {
       this.applicantsDict = {}
       this.attendeeSheet = [constants.ATTENDEE_SHEET_ROW1]
@@ -313,14 +329,6 @@ export default {
         this.applicantsDict[student.email] = student
         this.attendeeSheet.push([student.firstname, student.lastname, student.email, student.gender, student.paid, student.phone, student.diet, student.otherDiet, student.school, student.major, student.committee, student.class, student.linkedin, student.message, student.createdAt])
       }
-    }
-  },
-  firestore () {
-    return {
-      // applicants: db.collection('2019-2020 Attendees')
-      // messages: db.collection('Messages'),
-      // mailingList: db.collection('Mailing List'),
-      // teamInterestList: db.collection('2019-2020 Team Interest List')
     }
   }
 }
